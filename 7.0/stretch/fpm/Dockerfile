@@ -2,7 +2,7 @@ FROM php:7.0-fpm-stretch
 
 MAINTAINER Tobias Schifftner <ts@ambimax.de>
 
-COPY --from=builder /usr/bin/mhsendmail /usr/bin/mhsendmail
+COPY --from=builder /builder/mhsendmail      /usr/local/bin/mhsendmail
 
 # Install dependencies
 RUN apt-get update \

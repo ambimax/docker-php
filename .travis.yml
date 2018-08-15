@@ -63,8 +63,8 @@ script:
   - PHP_VERSION_LONG=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
 
   - |
-    if [[ "$VERSION" != "PHP_VERSION_SHORT" ]]; then
-      echo "WRONG PHP VERSION"
+    if [[ "$VERSION" != "$PHP_VERSION_SHORT" ]]; then
+      echo "WRONG PHP VERSION: $VERSION =! $PHP_VERSION_SHORT ($PHP_VERSION_LONG)"
       exit 1
     fi
 

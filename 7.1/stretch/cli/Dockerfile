@@ -1,4 +1,4 @@
-FROM php:7.0-cli-stretch
+FROM php:7.1-cli-stretch
 
 MAINTAINER Tobias Schifftner <ts@ambimax.de>
 

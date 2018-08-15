@@ -12,6 +12,8 @@ env:
     - VERSION=7.0 VARIANT=stretch/fpm
     - VERSION=7.1 VARIANT=stretch/cli
     - VERSION=7.1 VARIANT=stretch/fpm
+    - VERSION=7.2 VARIANT=stretch/cli
+    - VERSION=7.2 VARIANT=stretch/fpm
 
 install:
   - git clone https://github.com/docker-library/official-images.git ~/official-images
@@ -57,7 +59,14 @@ script:
       ${DOCKER} php -m | grep 'mcrypt'
     fi
 
-#  - version=$(${DOCKER} php --version)
+  - PHP_VERSION_SHORT=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3)
+  - PHP_VERSION_LONG=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
+
+  - |
+    if [[ "$VERSION" != "$PHP_VERSION_SHORT" ]]; then
+      echo "WRONG PHP VERSION: $VERSION =! $PHP_VERSION_SHORT ($PHP_VERSION_LONG)"
+      exit 1
+    fi
 
   # Check php extensions
   - ${DOCKER} php -m | grep 'apcu'
@@ -114,6 +123,7 @@ after_script:
   - docker images
 
 before_deploy:
+  - docker tag $image $image:${PHP_VERSION_LONG}
   - docker tag $image $image:$(git rev-parse --short HEAD)
   - docker tag $image $image:latest
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"

@@ -2,10 +2,16 @@
 
 [![Build Status](https://travis-ci.org/ambimax/docker-php.svg?branch=master)](https://travis-ci.org/ambimax/docker-php)
 
+Repository for generating php docker images used for Magento and other php projects.
+
 ## Docker Images
 
- - php7.0-stretch-cli
- - php7.0-stretch-fpm
+ - [php7.0-stretch-cli](https://hub.docker.com/r/ambimax/php7.0-cli-stretch/)
+ - [php7.0-stretch-fpm](https://hub.docker.com/r/ambimax/php7.0-cli-fpm/)
+ - [php7.1-stretch-cli](https://hub.docker.com/r/ambimax/php7.1-cli-stretch/)
+ - [php7.1-stretch-fpm](https://hub.docker.com/r/ambimax/php7.1-cli-fpm/)
+ - [php7.2-stretch-cli](https://hub.docker.com/r/ambimax/php7.2-cli-stretch/)
+ - [php7.2-stretch-fpm](https://hub.docker.com/r/ambimax/php7.2-cli-fpm/)
 
 ## PHP Modules
 
@@ -31,7 +37,7 @@
  - libxml
  - lzf
  - mbstring
- - mcrypt
+ - mcrypt _(Deprecated and removed in php7.2)_
  - memcached
  - mysqli
  - mysqlnd

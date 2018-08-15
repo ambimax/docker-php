@@ -15,7 +15,6 @@ RUN apt-get update \
     libfreetype6-dev \
     libicu-dev \
     libjpeg62-turbo-dev \
-    libmcrypt-dev \
     libpng-dev \
     libxslt1-dev \
     sudo \
@@ -53,7 +52,6 @@ RUN docker-php-ext-configure \
       gettext \
       intl \
       mbstring \
-      mcrypt \
       mysqli \
       opcache \
       pdo_mysql \

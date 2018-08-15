@@ -23,7 +23,7 @@ before_script:
   - (cd builder && travis_retry docker build --pull --cache-from "$image_builder" -t "$image_builder" --target builder .)
   - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
   - cd "$VERSION/$VARIANT"
-  - DISTRO=$(dirname "$VARIANT"); TYPE=$(basename "$VARIANT"); image="ambimax/php-${VERSION}-${TYPE}-${DISTRO}"
+  - DISTRO=$(dirname "$VARIANT"); TYPE=$(basename "$VARIANT"); image="ambimax/php${VERSION}-${TYPE}-${DISTRO}"
   - docker pull "$image" || true
   - export DOCKER="docker run $image"
 
@@ -45,6 +45,13 @@ script:
       ${DOCKER} /usr/local/bin/composer --version
       ${DOCKER} /usr/local/bin/n98-magerun --version
       ${DOCKER} test -e /usr/local/bin/mhsendmail
+    fi
+
+
+  # mcrypt is deprecated and removed in php 7.2
+  - |
+    if [[ $VERSION = "7.0" ]] || [[ $VERSION = "7.1" ]]; then
+      ${DOCKER} php -m | grep 'mcrypt'
     fi
 
 #  - version=$(${DOCKER} php --version)
@@ -70,7 +77,6 @@ script:
   - ${DOCKER} php -m | grep 'libxml'
   - ${DOCKER} php -m | grep 'lzf'
   - ${DOCKER} php -m | grep 'mbstring'
-  - ${DOCKER} php -m | grep 'mcrypt'
   - ${DOCKER} php -m | grep 'memcached'
   - ${DOCKER} php -m | grep 'mysqli'
   - ${DOCKER} php -m | grep 'mysqlnd'

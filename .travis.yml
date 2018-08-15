@@ -59,10 +59,10 @@ script:
       ${DOCKER} php -m | grep 'mcrypt'
     fi
 
-  - shortVersion=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3)
-  - fullVersion=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
+  - PHP_VERSION_SHORT=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3)
+  - PHP_VERSION_LONG=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
 
-  - [[ "$VERSION" == "$shortVersion" ]] && echo "checked for proper php version"
+  - [ "$VERSION" = "$PHP_VERSION_SHORT" ] && echo "checked for proper php version"
 
   # Check php extensions
   - ${DOCKER} php -m | grep 'apcu'
@@ -119,7 +119,7 @@ after_script:
   - docker images
 
 before_deploy:
-  - docker tag $image $image:$fullVersion
+  - docker tag $image $image:${PHP_VERSION_LONG}
   - docker tag $image $image:$(git rev-parse --short HEAD)
   - docker tag $image $image:latest
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"

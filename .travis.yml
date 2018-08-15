@@ -18,10 +18,13 @@ install:
 
 before_script:
   - env | sort
-  - (cd builder && docker build --tag=builder --target builder .)
+  - image_builder="ambimax/php-builder"
+  - docker pull "$image_builder" || true
+  - (cd builder && travis_retry docker build --pull --cache-from "$image_builder" -t "$image_builder" --target builder .)
   - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
   - cd "$VERSION/$VARIANT"
-  - slash='/'; image="php${VERSION}-${VARIANT//$slash/-}"
+  - slash='/'; image="ambimax/php${VERSION}-${VARIANT//$slash/-}"
+  - docker pull "$image" || true
   - export DOCKER="docker run $image"
 
 script:
@@ -29,7 +32,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      docker build -t "$image" .
+      travis_retry docker build --pull --cache-from "$image" -t "$image" .
       ~/official-images/test/run.sh "$image"
     )
 
@@ -102,12 +105,12 @@ after_script:
   - docker images
 
 before_deploy:
+  - docker tag $image $image:$(git rev-parse --short HEAD)
+  - docker tag $image $image:latest
   - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
-  - pip install docker-ci-deploy==0.3.0
 
 deploy:
   provider: script
-  script: docker-ci-deploy --tag $(git rev-parse --short HEAD) --tag latest "$image"
+  script: docker push "$image" && docker push "$image_builder"
   on:
     branch: master
-#    condition: $TRAVIS_PULL_REQUEST = "false"

@@ -22,7 +22,12 @@ RUN apt-get update \
     mysql-client \
     git \
     redis-tools \
-  && pecl install \
+#
+# Cleanup
+  && rm -rf /var/lib/apt/lists/*
+
+# Install php extensions
+RUN pecl install \
     apcu \
     igbinary \
 #    imagick \
@@ -31,16 +36,19 @@ RUN apt-get update \
     redis \
 #
 # Install Xdebug (but don't enable)
-  && pecl install -o -f xdebug \
+  && pecl install -o -f xdebug
+
 #
 # Configure the gd library
-  && docker-php-ext-configure \
+RUN docker-php-ext-configure \
     gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 #
 # Install required PHP extensions
   && docker-php-ext-install \
       bcmath \
+      calendar \
       dom \
+      exif \
       gd \
       gettext \
       intl \
@@ -52,21 +60,23 @@ RUN apt-get update \
       soap \
       sockets \
       tidy \
+      xmlrpc \
       xsl \
       zip \
   && docker-php-ext-enable \
     apcu \
+    igbinary \
     lzf \
+    memcached \
+    redis \
     tidy \
-#
-# Cleanup
-  && rm -rf /var/lib/apt/lists/*
+    xmlrpc
+
 
 ENV PHP_ENABLE_XDEBUG false
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY php.ini /usr/local/etc/php/conf.d/zz-php.ini
-
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh

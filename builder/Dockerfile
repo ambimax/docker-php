@@ -16,5 +16,6 @@ RUN curl -sS -o /builder/n98-magerun https://files.magerun.net/n98-magerun-1.101
   && chmod +x /builder/n98-magerun
 
 # mhsendmail
-RUN curl -sS -o /builder/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
+RUN wget -O /builder/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
+  && echo "be5acdc8ce3f380dcb9d02caed77c845affa9a447d0860961529b699dcd0c613  /builder/mhsendmail" | sha256sum -c - \
   && chmod +x /builder/mhsendmail

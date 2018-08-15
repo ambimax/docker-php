@@ -32,8 +32,16 @@ script:
     )
 
   # Check packages
-  - ${DOCKER} git --version
-  - ${DOCKER} mysql --version
+  - |
+    if [[ $VARIANT = *"cli"* ]]; then
+      ${DOCKER} git --version
+      ${DOCKER} mysql --version
+      ${DOCKER} redis-cli -v
+      ${DOCKER} /usr/local/bin/composer --version
+      ${DOCKER} /usr/local/bin/n98-magerun --version
+      ${DOCKER} test -e /usr/local/bin/mhsendmail
+    fi
+
 #  - version=$(${DOCKER} php --version)
 
   # Check php extensions

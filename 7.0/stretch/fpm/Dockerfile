@@ -17,7 +17,12 @@ RUN apt-get update \
     libpng-dev \
     libxslt1-dev \
     sudo \
-  && pecl install \
+#
+# Cleanup
+  && rm -rf /var/lib/apt/lists/*
+
+# Install php extensions
+RUN pecl install \
     apcu \
     igbinary \
 #    imagick \
@@ -26,16 +31,19 @@ RUN apt-get update \
     redis \
 #
 # Install Xdebug (but don't enable)
-  && pecl install -o -f xdebug \
+  && pecl install -o -f xdebug
+
 #
 # Configure the gd library
-  && docker-php-ext-configure \
+RUN docker-php-ext-configure \
     gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 #
 # Install required PHP extensions
   && docker-php-ext-install \
       bcmath \
+      calendar \
       dom \
+      exif \
       gd \
       gettext \
       intl \
@@ -47,11 +55,18 @@ RUN apt-get update \
       soap \
       sockets \
       tidy \
+      xmlrpc \
       xsl \
       zip \
-#
-# Cleanup
-  && rm -rf /var/lib/apt/lists/*
+  && docker-php-ext-enable \
+    apcu \
+    igbinary \
+    lzf \
+    memcached \
+    redis \
+    tidy \
+    xmlrpc
+
 
 ENV PHP_ENABLE_XDEBUG false
 
@@ -60,7 +75,9 @@ COPY php.ini /usr/local/etc/php/conf.d/zz-php.ini
 COPY php-fpm.conf /usr/local/etc/
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 WORKDIR /var/www/htdocs

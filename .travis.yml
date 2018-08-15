@@ -1,0 +1,111 @@
+sudo: required
+services: docker
+
+env:
+  global:
+    - secure: "W+SI8PJ5NIr2jSc8w1QZKNMXW6syKIUQeODS3MOJpIPax6a57ww7BPhZCm2ybjMN5F1gtwWIZoUGaYt/j5HWilV7gy5sfD9WZ7HDv2ow8qUCVXib2Ur9OwWN0c4IDKZaEj3mQnFEVVk7GcWWtQSRVqAAMBUTrH7ljzPRcF450LwCREt6dYTCRmRudXSdm6Q5RJCqsu2Csf2dqLpCmBAO/aiRaIAAu4SpK9zr30jSbF/NgD9IUwEMfKKcIq6nhSie/VlgM0JIUI15TRzc+np+lZQ1m67ggbufpe4CDtPHgIgfFSIXVGbS0K4C5ZMHO0XosM53qch1sHD5FDF+fFjUZQt4r/4lmdiDqEwdR7XiziSL9GhKXlc60KJxs11ZPTkWRe21AewPdvN8Pjn8MDgmJ30M+v+YUG2uFVcbLrosXgDPWgjbeNHlK2NqBN4iht/npnDCntYGSc6FjQ/Vcec6P64XaxgXJcvotGnkYfH7P7NDzrBMQ7Lb0LgKTiZ5N2N9q5uWyml34GhKN57tmCpSABdKr8Gnb9zvBzJdqVgbjH6xfVNjQkl2Bc67cu4vmRcT9kPAmXhfIeSxNE+WMMnDJYAVir3a93QXpP+2tH5xIn5bG8dNmzTm2TNJ/5UscbTRaOS0Fugq44mal9OAMhBzne6SyGWNoJvTL3iWTWol2vo="
+    - secure: "Njnia+aL8KAT+4pEUE0U8UNHBYqj94fABdNSyNHddRkUOSS0oqpBZ32vh6QMTCyVvJJTvyiT3HAlfyRKgej0gbENdGUpFgEJBN4q2NpDioeCO8GHUtcOBFpocIHmdhe4LHXdSutCqRCX5gsmynpyOKhOYIq9xIMbd6HdRIVYzgVtIb19quxV2sLkWQGqapuqhYcOaymzNpoKkVamnH5petos+AmW6Aa6T0hcgHFQTChwDcL3BDn0i+MLrGowd2WLenAySpGtezPmt/6ZqA4XwbZCyhw5jqzx7FHipVrYBOTANJ6JP/xUFm984FunIz5eLbxRBkxnweiBiW9JqYhhaYB5kH2CvpYRAWLtjZDbRzs7DDlfHyqWWYmSXJWBWOrgEIop25nDggPs65rVyGghhRKg4SiE54F+m/hM7DGyjniyVD/lxcL//1kXSgXV5ggauvKOYftXjV9ZeuRY8L4iYQJYXZuhVf2mRUGDiMQ1d7MBfuyKJ+uhxCPnIOlgk6ozTSFz18vqtAC8gjdIt4ilpc1ehbQlOtrTZSjyF4OfaR4FNIW4FSjBbNn2Wo9T/jBEzYPINt/OaXgjXGQhTX89a1JoIHPpTnEp5RjuLGhapteaohJrRyZ78jVU/UE+Jt1pnZGlLagEpgkkImP5oHvjcq/y/LAbNTK8/NRKOAyDgj4="
+    - DEBUG=true
+
+  matrix:
+    - VERSION=7.0 VARIANT=stretch/cli
+    - VERSION=7.0 VARIANT=stretch/fpm
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+before_script:
+  - env | sort
+  - (cd builder && docker build --tag=builder --target builder .)
+  - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
+  - cd "$VERSION/$VARIANT"
+  - slash='/'; image="php${VERSION}-${VARIANT//$slash/-}"
+  - export DOCKER="docker run $image"
+
+script:
+  - |
+    (
+      set -Eeuo pipefail
+      set -x
+      docker build -t "$image" .
+      ~/official-images/test/run.sh "$image"
+    )
+
+  # Check packages
+  - |
+    if [[ $VARIANT = *"cli"* ]]; then
+      ${DOCKER} git --version
+      ${DOCKER} mysql --version
+      ${DOCKER} redis-cli -v
+      ${DOCKER} /usr/local/bin/composer --version
+      ${DOCKER} /usr/local/bin/n98-magerun --version
+      ${DOCKER} test -e /usr/local/bin/mhsendmail
+    fi
+
+#  - version=$(${DOCKER} php --version)
+
+  # Check php extensions
+  - ${DOCKER} php -m | grep 'apcu'
+  - ${DOCKER} php -m | grep 'bcmath'
+  - ${DOCKER} php -m | grep 'calendar'
+  - ${DOCKER} php -m | grep 'ctype'
+  - ${DOCKER} php -m | grep 'curl'
+  - ${DOCKER} php -m | grep 'dom'
+  - ${DOCKER} php -m | grep 'exif'
+  - ${DOCKER} php -m | grep 'fileinfo'
+  - ${DOCKER} php -m | grep 'ftp'
+  - ${DOCKER} php -m | grep 'gd'
+  - ${DOCKER} php -m | grep 'gettext'
+  - ${DOCKER} php -m | grep 'hash'
+  - ${DOCKER} php -m | grep 'iconv'
+  - ${DOCKER} php -m | grep 'igbinary'
+#  - ${DOCKER} php -m | grep 'imagick'
+  - ${DOCKER} php -m | grep 'intl'
+  - ${DOCKER} php -m | grep 'json'
+  - ${DOCKER} php -m | grep 'libxml'
+  - ${DOCKER} php -m | grep 'lzf'
+  - ${DOCKER} php -m | grep 'mbstring'
+  - ${DOCKER} php -m | grep 'mcrypt'
+  - ${DOCKER} php -m | grep 'memcached'
+  - ${DOCKER} php -m | grep 'mysqli'
+  - ${DOCKER} php -m | grep 'mysqlnd'
+  - ${DOCKER} php -m | grep 'openssl'
+  - ${DOCKER} php -m | grep 'PDO'
+  - ${DOCKER} php -m | grep 'pdo_mysql'
+  - ${DOCKER} php -m | grep 'pdo_sqlite'
+  - ${DOCKER} php -m | grep 'Phar'
+  - ${DOCKER} php -m | grep 'redis'
+  - ${DOCKER} php -m | grep 'Reflection'
+  - ${DOCKER} php -m | grep 'session'
+  - ${DOCKER} php -m | grep 'SimpleXML'
+  - ${DOCKER} php -m | grep 'soap'
+  - ${DOCKER} php -m | grep 'sockets'
+  - ${DOCKER} php -m | grep 'SPL'
+  - ${DOCKER} php -m | grep 'sqlite3'
+  - ${DOCKER} php -m | grep 'standard'
+  - ${DOCKER} php -m | grep 'tidy'
+  - ${DOCKER} php -m | grep 'tokenizer'
+  - ${DOCKER} php -m | grep 'xml'
+  - ${DOCKER} php -m | grep 'xmlreader'
+  - ${DOCKER} php -m | grep 'xmlrpc'
+  - ${DOCKER} php -m | grep 'xmlwriter'
+  - ${DOCKER} php -m | grep 'xsl'
+  - ${DOCKER} php -m | grep 'Zend OPcache'
+  - ${DOCKER} php -m | grep 'zip'
+  - ${DOCKER} php -m | grep 'zlib'
+
+  # check php.ini
+
+after_script:
+  - docker images
+
+before_deploy:
+  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+  - pip install docker-ci-deploy==0.3.0
+
+deploy:
+  provider: script
+  script: docker-ci-deploy --tag $(git rev-parse --short HEAD) --tag latest "$image"
+  on:
+    branch: master
+#    condition: $TRAVIS_PULL_REQUEST = "false"

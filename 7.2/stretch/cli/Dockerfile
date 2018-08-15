@@ -2,9 +2,9 @@ FROM php:7.2-cli-stretch
 
 MAINTAINER Tobias Schifftner <ts@ambimax.de>
 
-COPY --from=builder /builder/composer       /usr/local/bin/composer
-COPY --from=builder /builder/n98-magerun    /usr/local/bin/n98-magerun
-COPY --from=builder /builder/mhsendmail     /usr/local/bin/mhsendmail
+COPY --from=ambimax/php-builder /builder/composer       /usr/local/bin/composer
+COPY --from=ambimax/php-builder /builder/n98-magerun    /usr/local/bin/n98-magerun
+COPY --from=ambimax/php-builder /builder/mhsendmail     /usr/local/bin/mhsendmail
 
 # Install dependencies
 RUN apt-get update \

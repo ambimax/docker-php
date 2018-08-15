@@ -10,3 +10,7 @@ docker build --tag=builder --file=builder/Dockerfile --target builder .
 # PHP 7.1
 (cd 7.1/stretch/cli && docker build -t php7.1-cli-stretch .)
 (cd 7.1/stretch/fpm && docker build -t php7.1-fpm-stretch .)
+
+# PHP 7.2
+(cd 7.2/stretch/cli && docker build -t php7.2-cli-stretch .)
+(cd 7.2/stretch/fpm && docker build -t php7.2-fpm-stretch .)

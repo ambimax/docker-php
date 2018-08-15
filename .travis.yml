@@ -23,7 +23,7 @@ before_script:
   - (cd builder && travis_retry docker build --pull --cache-from "$image_builder" -t "$image_builder" --target builder .)
   - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
   - cd "$VERSION/$VARIANT"
-  - slash='/'; image="ambimax/php${VERSION}-${VARIANT//$slash/-}"
+  - TYPE=$(dirname "$VARIANT"); DISTRO=$(basename "$VARIANT"); image="ambimax/php-${VERSION}-${TYPE}-${DISTRO}"
   - docker pull "$image" || true
   - export DOCKER="docker run $image"
 

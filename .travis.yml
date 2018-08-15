@@ -32,7 +32,7 @@ script:
     (
       set -Eeuo pipefail
       set -x
-      travis_retry docker build --pull --cache-from "$image" -t "$image" .
+      docker build --pull --cache-from "$image" -t "$image" .
       ~/official-images/test/run.sh "$image"
     )
 

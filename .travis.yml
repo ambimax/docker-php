@@ -62,7 +62,7 @@ script:
   - PHP_VERSION_SHORT=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3)
   - PHP_VERSION_LONG=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
 
-  - [ "$VERSION" = "$PHP_VERSION_SHORT" ] && echo "checked for proper php version"
+#  - [ "$VERSION" = "$PHP_VERSION_SHORT" ] && echo "checked for proper php version"
 
   # Check php extensions
   - ${DOCKER} php -m | grep 'apcu'

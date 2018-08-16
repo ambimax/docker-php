@@ -5,6 +5,8 @@ MAINTAINER Tobias Schifftner <ts@ambimax.de>
 COPY --from=ambimax/php-builder /builder/composer       /usr/local/bin/composer
 COPY --from=ambimax/php-builder /builder/n98-magerun    /usr/local/bin/n98-magerun
 COPY --from=ambimax/php-builder /builder/mhsendmail     /usr/local/bin/mhsendmail
+COPY --from=ambimax/php-builder /builder/modman         /usr/local/bin/modman
+COPY --from=ambimax/php-builder /builder/zettr          /usr/local/bin/zettr
 
 # Install dependencies
 RUN apt-get update \

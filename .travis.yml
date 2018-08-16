@@ -44,6 +44,7 @@ script:
   # Check packages
   - |
     if [[ $VARIANT = *"cli"* ]]; then
+      echo "Testing cli addons"
       ${DOCKER} git --version
       ${DOCKER} mysql --version
       ${DOCKER} redis-cli -v
@@ -58,6 +59,7 @@ script:
   # mcrypt is deprecated and removed in php 7.2
   - |
     if [[ $VERSION = "7.0" ]] || [[ $VERSION = "7.1" ]]; then
+      echo "Testing mcrypt"
       ${DOCKER} php -m | grep 'mcrypt'
     fi
 

@@ -21,7 +21,11 @@ RUN wget -O /builder/mhsendmail https://github.com/mailhog/mhsendmail/releases/d
   && chmod +x /builder/mhsendmail
 
 # zettr
-# n98-magerun
 RUN curl -sS -o /builder/zettr https://raw.githubusercontent.com/tschifftner/zettr/master/zettr.phar \
   && echo "527dcabc6b080bdaa65d253d1982ffdb7b5b337d5df3ad285b93f13ee256fc55  /builder/zettr" | sha256sum -c - \
   && chmod +x /builder/zettr
+
+# modman
+RUN curl -sS -o /builder/modman https://raw.githubusercontent.com/colinmollenhour/modman/master/modman \
+  && echo "6db573ade6802408fa7a509d8fa045b7cdf57d703e89d0b93e457dc2466b5176  /builder/modman" | sha256sum -c - \
+  && chmod +x /builder/modman

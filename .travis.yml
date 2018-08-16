@@ -50,6 +50,8 @@ script:
       ${DOCKER} /usr/local/bin/composer --version
       ${DOCKER} /usr/local/bin/n98-magerun --version
       ${DOCKER} test -e /usr/local/bin/mhsendmail
+      ${DOCKER} /usr/local/bin/modman --version
+      ${DOCKER} /usr/local/bin/zettr --version
     fi
 
 

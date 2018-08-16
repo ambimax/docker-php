@@ -73,8 +73,10 @@ Repository for generating php docker images used for Magento and other php proje
 fpm does not contain the following tools:
 
  - git
+ - modman
  - mysql-client
  - redis-cli
+ - zettr
 
 ## Environment Variables
 

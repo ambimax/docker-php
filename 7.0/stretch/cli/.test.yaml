@@ -19,7 +19,7 @@ commandTests:
     args: ["--version"]
     expectedOutput:
       - PHP
-      - 7.0.31
+      - 7.0.
       - cli
       - OPcache
 

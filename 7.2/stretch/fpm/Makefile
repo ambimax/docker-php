@@ -1,4 +1,4 @@
-NAME	= ambimax/php7.0-fpm-stretch
+NAME	= ambimax/php7.2-fpm-stretch
 TAG		= $(shell git rev-parse --short HEAD)
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest

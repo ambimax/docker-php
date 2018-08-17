@@ -10,6 +10,10 @@ env:
   matrix:
     - VARIANT: 7.0/stretch/cli
     - VARIANT: 7.0/stretch/fpm
+    - VARIANT: 7.1/stretch/cli
+    - VARIANT: 7.1/stretch/fpm
+    - VARIANT: 7.2/stretch/cli
+    - VARIANT: 7.2/stretch/fpm
 
 
 install:

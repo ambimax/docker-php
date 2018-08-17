@@ -1,7 +1,10 @@
-NAME	= ambimax/php7.0-fpm-stretch
+NAME	= ambimax/php7.1-cli-stretch
 TAG		= $(shell git rev-parse --short HEAD)
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
+
+prepare:
+	@docker pull ${NAME}
 
 build:
 	@docker build --pull --cache-from "${NAME}" -t "${IMG}" .
@@ -17,4 +20,4 @@ push:
 	@docker push ${NAME}
 
 login:
-	@docker login -u "${DOCKER_USER}" -p "${DOCKER_PASSWORD}"
+	@docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"

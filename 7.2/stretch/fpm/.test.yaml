@@ -20,7 +20,7 @@ commandTests:
     args: ["--version"]
     expectedOutput:
       - PHP
-      - 7.0.
+      - 7.2.
       - cli
       - OPcache
 
@@ -57,7 +57,6 @@ commandTests:
       - libxml
       - lzf
       - mbstring
-      - mcrypt
       - memcached
       - mysqli
       - mysqlnd
@@ -110,7 +109,6 @@ commandTests:
       - libxml
       - lzf
       - mbstring
-      - mcrypt
       - memcached
       - mysqli
       - mysqlnd

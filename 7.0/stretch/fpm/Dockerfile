@@ -1,8 +1,24 @@
+FROM alpine AS builder
+
+RUN apk add --update \
+  curl \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir -p /builder
+
+# mhsendmail
+RUN wget -O /builder/mhsendmail https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 \
+  && echo "be5acdc8ce3f380dcb9d02caed77c845affa9a447d0860961529b699dcd0c613  /builder/mhsendmail" | sha256sum -c - \
+  && chmod +x /builder/mhsendmail
+
+
+
+
+
 FROM php:7.0-fpm-stretch
 
-MAINTAINER Tobias Schifftner <ts@ambimax.de>
+LABEL maintainer="Tobias Schifftner <ts@ambimax.de>"
 
-COPY --from=ambimax/php-builder /builder/mhsendmail      /usr/local/bin/mhsendmail
+COPY --from=builder /builder/mhsendmail      /usr/local/bin/mhsendmail
 
 # Install dependencies
 RUN apt-get update \

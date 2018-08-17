@@ -8,132 +8,37 @@ env:
     - secure: "YFoyj4uSY26ymcKXcdDSbbHEMj6ZNyF5I4tP5FPG2054/hNF4haI7rtgLoxgik2GtJN0vu9lQqQ46SmvIsK3RTU22WaHFSOqNozaEshXSgjzkVzulTSqKWoCPyN6TNr0ffsXxwr/m2VtUHUHfhxFfXFCL++Am9nlggHpaY1Bf2N8KJ/OroHAAyo2uHfH4PrFsgODNb6hCNkX++kOZK5rZ+oYkNeAxOzJnlrHldkRLSGLFElJSHUs7a9xHYqrSeowlVXqOlEehG9zldx1szECFhoBrgKLOhitq+iDLVG9sUd0jVRit9Gzrr2BNpzBGqJyvF07SOwd/rvu9sWyioCaY7QOMzU6DjkixLLnFAVOXtZazWQ8EdjSUSSpZLwjMwYO7G2J0uFKoJ+dMQAM91OLxYAC+5njhI72wrt7YNeRe3SriognSwOEL6jRDOX/IfedEhWMkjJCc4axD5Ap6MNufhU1KHi/20ZtJwoeGjZVKSlUfkT3wEI3jBpf79IdGe67RsMnijHNz6N3FPud2lPnOh68jDaQG1pKHMWrzKL0QlpIf+k4iqL0zpEuebcLlV6lGTuZVun4oNhY7iVI53+29R02Ol7seSSfML6sXc26/2OTj5XoWIR7YNmxmVJ/gruuypvDRXq6Z2zkHsz0aE5JIvY+MhsWSU35JRghATha178="
 
   matrix:
-    - VERSION=7.0 VARIANT=stretch/cli
-    - VERSION=7.0 VARIANT=stretch/fpm
-    - VERSION=7.1 VARIANT=stretch/cli
-    - VERSION=7.1 VARIANT=stretch/fpm
-    - VERSION=7.2 VARIANT=stretch/cli
-    - VERSION=7.2 VARIANT=stretch/fpm
+    - VARIANT: 7.0/stretch/cli
+    - VARIANT: 7.0/stretch/fpm
+
 
 install:
+  - curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 && chmod +x container-structure-test-linux-amd64 && sudo mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
   - git clone https://github.com/docker-library/official-images.git ~/official-images
+  - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
 
 before_script:
-  - env | sort
-  - image_builder="ambimax/php-builder"
-  - DISTRO=$(dirname "$VARIANT"); TYPE=$(basename "$VARIANT"); image="ambimax/php${VERSION}-${TYPE}-${DISTRO}"
-
-  - docker pull "$image_builder" || true
-  - (cd builder && travis_retry docker build --pull --cache-from "$image_builder" -t "$image_builder" --target builder .)
-
-  - wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
-  - docker pull "$image" || true
-  - export DOCKER="docker run $image"
-
-  - cd "$VERSION/$VARIANT"
+  - cd "$VARIANT"
 
 script:
-  - |
-    (
-      set -Eeuo pipefail
-      set -x
-      docker build --pull --cache-from "$image" -t "$image" .
-      ~/official-images/test/run.sh "$image"
-    )
+  # Build image
+  - make build
 
-  # Check packages
-  - |
-    if [[ $VARIANT = *"cli"* ]]; then
-      echo "Testing cli addons"
-      ${DOCKER} git --version
-      ${DOCKER} mysql --version
-      ${DOCKER} redis-cli -v
-      ${DOCKER} /usr/local/bin/composer --version
-      ${DOCKER} /usr/local/bin/n98-magerun --version
-      ${DOCKER} test -e /usr/local/bin/mhsendmail
-      ${DOCKER} /usr/local/bin/modman --version
-      ${DOCKER} /usr/local/bin/zettr --version
-    fi
+  # Test image
+  - make test
 
+  # Additional tests
+  - make official-test
 
-  # mcrypt is deprecated and removed in php 7.2
-  - |
-    if [[ $VERSION = "7.0" ]] || [[ $VERSION = "7.1" ]]; then
-      echo "Testing mcrypt"
-      ${DOCKER} php -m | grep 'mcrypt'
-    fi
-
-  - PHP_VERSION_SHORT=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3)
-  - PHP_VERSION_LONG=$(${DOCKER} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6)
-
-  - |
-    if [[ "$VERSION" != "$PHP_VERSION_SHORT" ]]; then
-      echo "WRONG PHP VERSION: $VERSION =! $PHP_VERSION_SHORT ($PHP_VERSION_LONG)"
-      exit 1
-    fi
-
-  # Check php extensions
-  - ${DOCKER} php -m | grep 'apcu'
-  - ${DOCKER} php -m | grep 'bcmath'
-  - ${DOCKER} php -m | grep 'calendar'
-  - ${DOCKER} php -m | grep 'ctype'
-  - ${DOCKER} php -m | grep 'curl'
-  - ${DOCKER} php -m | grep 'dom'
-  - ${DOCKER} php -m | grep 'exif'
-  - ${DOCKER} php -m | grep 'fileinfo'
-  - ${DOCKER} php -m | grep 'ftp'
-  - ${DOCKER} php -m | grep 'gd'
-  - ${DOCKER} php -m | grep 'gettext'
-  - ${DOCKER} php -m | grep 'hash'
-  - ${DOCKER} php -m | grep 'iconv'
-  - ${DOCKER} php -m | grep 'igbinary'
-#  - ${DOCKER} php -m | grep 'imagick'
-  - ${DOCKER} php -m | grep 'intl'
-  - ${DOCKER} php -m | grep 'json'
-  - ${DOCKER} php -m | grep 'libxml'
-  - ${DOCKER} php -m | grep 'lzf'
-  - ${DOCKER} php -m | grep 'mbstring'
-  - ${DOCKER} php -m | grep 'memcached'
-  - ${DOCKER} php -m | grep 'mysqli'
-  - ${DOCKER} php -m | grep 'mysqlnd'
-  - ${DOCKER} php -m | grep 'openssl'
-  - ${DOCKER} php -m | grep 'PDO'
-  - ${DOCKER} php -m | grep 'pdo_mysql'
-  - ${DOCKER} php -m | grep 'pdo_sqlite'
-  - ${DOCKER} php -m | grep 'Phar'
-  - ${DOCKER} php -m | grep 'redis'
-  - ${DOCKER} php -m | grep 'Reflection'
-  - ${DOCKER} php -m | grep 'session'
-  - ${DOCKER} php -m | grep 'SimpleXML'
-  - ${DOCKER} php -m | grep 'soap'
-  - ${DOCKER} php -m | grep 'sockets'
-  - ${DOCKER} php -m | grep 'SPL'
-  - ${DOCKER} php -m | grep 'sqlite3'
-  - ${DOCKER} php -m | grep 'standard'
-  - ${DOCKER} php -m | grep 'tidy'
-  - ${DOCKER} php -m | grep 'tokenizer'
-  - ${DOCKER} php -m | grep 'xml'
-  - ${DOCKER} php -m | grep 'xmlreader'
-  - ${DOCKER} php -m | grep 'xmlrpc'
-  - ${DOCKER} php -m | grep 'xmlwriter'
-  - ${DOCKER} php -m | grep 'xsl'
-  - ${DOCKER} php -m | grep 'Zend OPcache'
-  - ${DOCKER} php -m | grep 'zip'
-  - ${DOCKER} php -m | grep 'zlib'
-
-  # check php.ini
 
 after_script:
   - docker images
 
 before_deploy:
-  - docker tag $image $image:${PHP_VERSION_LONG}
-  - docker tag $image $image:$(git rev-parse --short HEAD)
-  - docker tag $image $image:latest
-  - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+  - make login
 
 deploy:
   provider: script
-  script: docker push "$image" && docker push "$image_builder"
+  script: make push
   on:
     branch: master

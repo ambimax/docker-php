@@ -16,7 +16,7 @@ RUN wget -O /builder/mhsendmail https://github.com/mailhog/mhsendmail/releases/d
 
 FROM php:7.1-fpm-stretch
 
-MAINTAINER Tobias Schifftner <ts@ambimax.de>
+LABEL maintainer="Tobias Schifftner <ts@ambimax.de>"
 
 COPY --from=builder /builder/mhsendmail      /usr/local/bin/mhsendmail
 

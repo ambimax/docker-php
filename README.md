@@ -90,6 +90,25 @@ fpm does not contain the following tools:
 
  - [container-structure-test](https://github.com/GoogleContainerTools/container-structure-test)
 
+## Workflow for adding changes to image
+
+ Enter desired image base path
+ 
+ ```
+ cd 7.0/stretch/cli
+ ```
+
+ Create new image:
+ 
+ ```
+ make build-image
+ ```
+ Run tests before committing any changes
+ 
+ ``` 
+ make test
+ ```
+ 
 ## License
 
 [MIT License](http://choosealicense.com/licenses/mit/)

@@ -145,3 +145,11 @@ fileExistenceTests:
     path: '/usr/local/bin/zettr'
     shouldExist: true
     isExecutableBy: 'group'
+
+
+
+fileContentTests:
+  - name: 'php.ini'
+    path: '/usr/local/etc/php/conf.d/zz-php.ini'
+    expectedContents:
+      - 'sendmail_path \= "\/usr\/local\/bin\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

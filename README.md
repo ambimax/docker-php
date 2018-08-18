@@ -73,10 +73,10 @@ Repository for generating php docker images used for Magento and other php proje
 fpm does not contain the following tools:
 
  - git
- - modman
+ - [modman](https://github.com/colinmollenhour/modman)
  - mysql-client
  - redis-cli
- - zettr
+ - [zettr](https://github.com/AOEpeople/zettr)
 
 ## Environment Variables
 
@@ -86,6 +86,29 @@ fpm does not contain the following tools:
 - `PHP_ENABLE_XDEBUG` 
    Enable XDebug
 
+## Testing
+
+ - [container-structure-test](https://github.com/GoogleContainerTools/container-structure-test)
+
+## Workflow for adding changes to image
+
+ Enter desired image base path
+ 
+ ```
+ cd 7.0/stretch/cli
+ ```
+
+ Create new image:
+ 
+ ```
+ make build-image
+ ```
+ Run tests before committing any changes
+ 
+ ``` 
+ make test
+ ```
+ 
 ## License
 
 [MIT License](http://choosealicense.com/licenses/mit/)

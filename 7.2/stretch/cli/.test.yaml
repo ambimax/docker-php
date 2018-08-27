@@ -145,6 +145,21 @@ fileExistenceTests:
     shouldExist: true
     isExecutableBy: 'group'
 
+  - name: 'phpunit5'
+    path: '/usr/local/bin/phpunit5'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpunit6'
+    path: '/usr/local/bin/phpunit6'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpunit7'
+    path: '/usr/local/bin/phpunit7'
+    shouldExist: true
+    isExecutableBy: 'group'
+
 
 
 fileContentTests:

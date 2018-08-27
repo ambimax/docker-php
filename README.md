@@ -75,6 +75,9 @@ fpm does not contain the following tools:
  - git
  - [modman](https://github.com/colinmollenhour/modman)
  - mysql-client
+ - phpunit5
+ - phpunit6
+ - phpunit7
  - redis-cli
  - [zettr](https://github.com/AOEpeople/zettr)
 

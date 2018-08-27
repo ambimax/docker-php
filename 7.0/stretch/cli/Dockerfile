@@ -30,6 +30,20 @@ RUN curl -sS -o /builder/modman https://raw.githubusercontent.com/colinmollenhou
   && echo "6db573ade6802408fa7a509d8fa045b7cdf57d703e89d0b93e457dc2466b5176  /builder/modman" | sha256sum -c - \
   && chmod +x /builder/modman
 
+# phpunit5
+RUN curl -sS -o /builder/phpunit5 https://phar.phpunit.de/phpunit-5.7.27.phar \
+  && echo "f0300a13f2653bee10b0ce24dbc8d94e65dc9be8966d822b9e455b6b294be16e  /builder/phpunit5" | sha256sum -c - \
+  && chmod +x /builder/phpunit5
+
+# phpunit6
+RUN curl -sS -o /builder/phpunit6 https://phar.phpunit.de/phpunit-6.5.12.phar \
+  && echo "3c20bd232b6cd9925af5600f12a2c2bddb8004cde58029ecb566c7886997210c  /builder/phpunit6" | sha256sum -c - \
+  && chmod +x /builder/phpunit6
+
+# phpunit7
+RUN curl -sS -o /builder/phpunit7 https://phar.phpunit.de/phpunit-7.3.2.phar \
+  && echo "9a2d8582f149b6c800487c907bebc93b3dd2f2871e16f9b9c26c618081778440  /builder/phpunit7" | sha256sum -c - \
+  && chmod +x /builder/phpunit7
 
 
 
@@ -37,12 +51,6 @@ RUN curl -sS -o /builder/modman https://raw.githubusercontent.com/colinmollenhou
 FROM php:7.0-cli-stretch
 
 LABEL maintainer="Tobias Schifftner <ts@ambimax.de>"
-
-COPY --from=builder /builder/composer       /usr/local/bin/composer
-COPY --from=builder /builder/n98-magerun    /usr/local/bin/n98-magerun
-COPY --from=builder /builder/mhsendmail     /usr/local/bin/mhsendmail
-COPY --from=builder /builder/modman         /usr/local/bin/modman
-COPY --from=builder /builder/zettr          /usr/local/bin/zettr
 
 # Install dependencies
 RUN apt-get update \
@@ -109,6 +117,16 @@ RUN docker-php-ext-configure \
     redis \
     tidy \
     xmlrpc
+
+
+COPY --from=builder /builder/composer       /usr/local/bin/composer
+COPY --from=builder /builder/n98-magerun    /usr/local/bin/n98-magerun
+COPY --from=builder /builder/mhsendmail     /usr/local/bin/mhsendmail
+COPY --from=builder /builder/modman         /usr/local/bin/modman
+COPY --from=builder /builder/zettr          /usr/local/bin/zettr
+COPY --from=builder /builder/phpunit5       /usr/local/bin/phpunit5
+COPY --from=builder /builder/phpunit6       /usr/local/bin/phpunit6
+COPY --from=builder /builder/phpunit7       /usr/local/bin/phpunit7
 
 
 ENV PHP_ENABLE_XDEBUG false

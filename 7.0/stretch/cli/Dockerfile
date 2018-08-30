@@ -46,8 +46,8 @@ RUN curl -sS -o /builder/phpunit7 https://phar.phpunit.de/phpunit-7.3.2.phar \
   && chmod +x /builder/phpunit7
 
 # codecept
-RUN curl -sS -o /builder/codecept https://codeception.com/releases/2.4.5/codecept.phar \
-  && echo "4734da21150e58f07cd4071c4c8a1a1c7b5a74927a58033c1c54e8c5ed8c3ba2  /builder/codecept" | sha256sum -c - \
+RUN curl -sS -o /builder/codecept https://codeception.com/codecept.phar \
+  && echo "e41ba47e3576e72b8bd806e11d438a6155198f183cf7efd459e5e575faf8be36  /builder/codecept" | sha256sum -c - \
   && chmod +x /builder/codecept
 
 
@@ -132,7 +132,7 @@ COPY --from=builder /builder/modman         /usr/local/bin/modman
 COPY --from=builder /builder/zettr          /usr/local/bin/zettr
 COPY --from=builder /builder/phpunit5       /usr/local/bin/phpunit5
 COPY --from=builder /builder/phpunit6       /usr/local/bin/phpunit6
-COPY --from=builder /builder/phpunit7       /usr/local/bin/phpunit7
+#COPY --from=builder /builder/phpunit7       /usr/local/bin/phpunit7
 COPY --from=builder /builder/codecept       /usr/local/bin/codecept
 
 

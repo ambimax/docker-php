@@ -78,7 +78,7 @@ cli contains also the following tools:
  - mysql-client
  - phpunit5
  - phpunit6
- - phpunit7
+ - phpunit7 _(>= php7.1)_
  - redis-cli
  - [zettr](https://github.com/AOEpeople/zettr)
 

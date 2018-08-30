@@ -118,6 +118,29 @@ commandTests:
       - zip
       - zlib
 
+  - name:  "check phpunit 5"
+    command: "phpunit5"
+    args: ["--version"]
+    expectedOutput:
+      - PHPUnit
+      - 5.7.
+      - Sebastian
+      - Bergmann
+
+  - name:  "check phpunit 6"
+    command: "phpunit6"
+    args: ["--version"]
+    expectedOutput:
+      - PHPUnit
+      - 6.5.
+      - Sebastian
+      - Bergmann
+
+  - name:  "check codeception"
+    command: "codecept"
+    expectedOutput:
+      - Codeception
+      - 2.4.
 
 
 fileExistenceTests:
@@ -153,11 +176,6 @@ fileExistenceTests:
 
   - name: 'phpunit6'
     path: '/usr/local/bin/phpunit6'
-    shouldExist: true
-    isExecutableBy: 'group'
-
-  - name: 'phpunit7'
-    path: '/usr/local/bin/phpunit7'
     shouldExist: true
     isExecutableBy: 'group'
 

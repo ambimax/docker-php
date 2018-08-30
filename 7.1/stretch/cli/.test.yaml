@@ -118,6 +118,39 @@ commandTests:
       - zip
       - zlib
 
+  - name:  "check phpunit 5"
+    command: "phpunit5"
+    args: ["--version"]
+    expectedOutput:
+      - PHPUnit
+      - 5.7.
+      - Sebastian
+      - Bergmann
+
+  - name:  "check phpunit 6"
+    command: "phpunit6"
+    args: ["--version"]
+    expectedOutput:
+      - PHPUnit
+      - 6.5.
+      - Sebastian
+      - Bergmann
+
+  - name:  "check phpunit 7"
+    command: "phpunit7"
+    args: ["--version"]
+    expectedOutput:
+      - PHPUnit
+      - 7.3.
+      - Sebastian
+      - Bergmann
+
+  - name:  "check codeception"
+    command: "codecept"
+    expectedOutput:
+      - Codeception
+      - 2.4.
+
 
 
 fileExistenceTests:

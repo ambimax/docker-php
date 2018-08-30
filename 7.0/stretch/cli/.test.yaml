@@ -136,15 +136,6 @@ commandTests:
       - Sebastian
       - Bergmann
 
-#  - name:  "check phpunit 7"
-#    command: "phpunit7"
-#    args: ["--version"]
-#    expectedOutput:
-#      - PHPUnit
-#      - 7.3.
-#      - Sebastian
-#      - Bergmann
-
   - name:  "check codeception"
     command: "codecept"
     expectedOutput:
@@ -185,11 +176,6 @@ fileExistenceTests:
 
   - name: 'phpunit6'
     path: '/usr/local/bin/phpunit6'
-    shouldExist: true
-    isExecutableBy: 'group'
-
-  - name: 'phpunit7'
-    path: '/usr/local/bin/phpunit7'
     shouldExist: true
     isExecutableBy: 'group'
 

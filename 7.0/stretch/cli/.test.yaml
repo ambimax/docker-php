@@ -161,6 +161,11 @@ fileExistenceTests:
     shouldExist: true
     isExecutableBy: 'group'
 
+  - name: 'codecept'
+    path: '/usr/local/bin/codecept'
+    shouldExist: true
+    isExecutableBy: 'group'
+
 
 
 fileContentTests:

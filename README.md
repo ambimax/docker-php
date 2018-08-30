@@ -70,8 +70,9 @@ Repository for generating php docker images used for Magento and other php proje
 
 ## Differences between CLI and FPM
 
-fpm does not contain the following tools:
+cli contains also the following tools:
 
+ - codeception
  - git
  - [modman](https://github.com/colinmollenhour/modman)
  - mysql-client

@@ -45,6 +45,11 @@ RUN curl -sS -o /builder/phpunit7 https://phar.phpunit.de/phpunit-7.3.2.phar \
   && echo "9a2d8582f149b6c800487c907bebc93b3dd2f2871e16f9b9c26c618081778440  /builder/phpunit7" | sha256sum -c - \
   && chmod +x /builder/phpunit7
 
+# codecept
+RUN curl -sS -o /builder/codecept https://codeception.com/releases/2.4.6/codecept.phar \
+  && echo "e074af54b3cdb81f8987fe8476c87c75e0d38b831b98ddfcabbe553ae783ebe3  /builder/codecept" | sha256sum -c - \
+  && chmod +x /builder/codecept
+
 
 
 
@@ -68,6 +73,7 @@ RUN apt-get update \
     mysql-client \
     git \
     redis-tools \
+    curl \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -127,6 +133,7 @@ COPY --from=builder /builder/zettr          /usr/local/bin/zettr
 COPY --from=builder /builder/phpunit5       /usr/local/bin/phpunit5
 COPY --from=builder /builder/phpunit6       /usr/local/bin/phpunit6
 COPY --from=builder /builder/phpunit7       /usr/local/bin/phpunit7
+COPY --from=builder /builder/codecept       /usr/local/bin/codecept
 
 
 ENV PHP_ENABLE_XDEBUG false

@@ -207,7 +207,7 @@ fileExistenceTests:
     isExecutableBy: 'group'
 
   - name: 'phpunit7'
-    path: '/usr/local/bin/phpunit7'
+    path: '/tools/phpunit7'
     shouldExist: true
     isExecutableBy: 'group'
 

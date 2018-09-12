@@ -1,5 +1,5 @@
 
-FROM php:7.0-cli-stretch
+FROM php:7.2-cli-stretch
 
 LABEL maintainer="Tobias Schifftner <ts@ambimax.de>"
 

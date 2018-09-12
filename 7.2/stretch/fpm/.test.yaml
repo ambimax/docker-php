@@ -141,7 +141,7 @@ commandTests:
 
 fileExistenceTests:
   - name: 'mhsendmail'
-    path: '/usr/local/bin/mhsendmail'
+    path: '/tools/mhsendmail'
     shouldExist: true
     isExecutableBy: 'group'
 
@@ -151,4 +151,4 @@ fileContentTests:
   - name: 'php.ini'
     path: '/usr/local/etc/php/conf.d/zz-php.ini'
     expectedContents:
-      - 'sendmail_path \= "\/usr\/local\/bin\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'
+      - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

@@ -122,8 +122,7 @@ commandTests:
     command: "phpunit5"
     args: ["--version"]
     expectedOutput:
-      - PHPUnit
-      - 5.7.
+      - 'PHPUnit 5'
       - Sebastian
       - Bergmann
 
@@ -131,56 +130,125 @@ commandTests:
     command: "phpunit6"
     args: ["--version"]
     expectedOutput:
-      - PHPUnit
-      - 6.5.
+      - 'PHPUnit 6'
       - Sebastian
       - Bergmann
 
   - name:  "check codeception"
     command: "codecept"
+    args: ["--version"]
     expectedOutput:
       - Codeception
-      - 2.4.
+
+  - name:  "check phpmd"
+    command: "phpmd"
+    args: ["--version"]
+    expectedOutput:
+      - PHPMD
+
+  - name:  "check phpcs2"
+    command: "phpcs2"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 2'
+
+  - name:  "check phpcs3"
+    command: "phpcs3"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 3'
+
+  - name:  "check phpcbf2"
+    command: "phpcbf2"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 2'
+
+  - name:  "check phpcbf3"
+    command: "phpcbf3"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 3'
 
 
 fileExistenceTests:
   - name: 'n98-magerun'
-    path: '/usr/local/bin/n98-magerun'
+    path: '/tools/n98-magerun'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'composer'
-    path: '/usr/local/bin/composer'
+    path: '/tools/composer'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'mhsendmail'
-    path: '/usr/local/bin/mhsendmail'
+    path: '/tools/mhsendmail'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'modman'
-    path: '/usr/local/bin/modman'
+    path: '/tools/modman'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'zettr'
-    path: '/usr/local/bin/zettr'
+    path: '/tools/zettr'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'phpunit5'
-    path: '/usr/local/bin/phpunit5'
+    path: '/tools/phpunit5'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'phpunit6'
-    path: '/usr/local/bin/phpunit6'
+    path: '/tools/phpunit6'
     shouldExist: true
     isExecutableBy: 'group'
 
   - name: 'codecept'
-    path: '/usr/local/bin/codecept'
+    path: '/tools/codecept'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpmd'
+    path: '/tools/phpmd'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcs2'
+    path: '/tools/phpcs2'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcs3'
+    path: '/tools/phpcs2'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcbf2'
+    path: '/tools/phpcbf2'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcbf3'
+    path: '/tools/phpcbf3'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'xmllint'
+    path: '/tools/xmllint'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phplint'
+    path: '/tools/phplint'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'codesniffer'
+    path: '/tools/codesniffer'
     shouldExist: true
     isExecutableBy: 'group'
 
@@ -190,4 +258,4 @@ fileContentTests:
   - name: 'php.ini'
     path: '/usr/local/etc/php/conf.d/zz-php.ini'
     expectedContents:
-      - 'sendmail_path \= "\/usr\/local\/bin\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'
+      - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

@@ -29,6 +29,7 @@ Repository for generating php docker images used for Magento and other php proje
  - ftp
  - gd
  - gettext
+ - gmp
  - hash
  - iconv
  - igbinary
@@ -46,6 +47,8 @@ Repository for generating php docker images used for Magento and other php proje
  - PDO
  - pdo_mysql
  - pdo_sqlite
+ - pdo_pgsql
+ - pgsql
  - Phar
  - posix
  - readline

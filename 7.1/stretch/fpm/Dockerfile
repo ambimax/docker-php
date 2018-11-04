@@ -9,8 +9,10 @@ ENV PATH="/tools:${PATH}"
 # Install dependencies
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
+  	libgmp-dev \
     libmemcached-dev \
     libmemcached11 \
+  	libpq-dev \
     libtidy-dev \
     libfreetype6-dev \
     libicu-dev \
@@ -47,6 +49,7 @@ RUN docker-php-ext-configure \
       dom \
       exif \
       gd \
+      gmp \
       gettext \
       intl \
       mbstring \
@@ -54,6 +57,8 @@ RUN docker-php-ext-configure \
       mysqli \
       opcache \
       pdo_mysql \
+      pdo_pgsql \
+      pgsql \
       soap \
       sockets \
       tidy \

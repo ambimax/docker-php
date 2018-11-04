@@ -48,6 +48,7 @@ commandTests:
       - ftp
       - gd
       - gettext
+      - gmp
       - hash
       - iconv
       - igbinary
@@ -64,8 +65,11 @@ commandTests:
       - openssl
       - PDO
       - pdo_mysql
+      - pdo_pgsql
       - pdo_sqlite
+      - pgsql
       - Phar
+      - readline
       - redis
       - Reflection
       - session
@@ -100,6 +104,7 @@ commandTests:
       - fileinfo
       - ftp
       - gd
+      - gmp
       - gettext
       - hash
       - iconv
@@ -117,8 +122,11 @@ commandTests:
       - openssl
       - PDO
       - pdo_mysql
+      - pdo_pgsql
       - pdo_sqlite
+      - pgsql
       - Phar
+      - readline
       - redis
       - Reflection
       - session

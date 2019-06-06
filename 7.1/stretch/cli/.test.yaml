@@ -268,3 +268,10 @@ fileContentTests:
     path: '/usr/local/etc/php/conf.d/zz-php.ini'
     expectedContents:
       - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'
+
+  - name: 'xdebug.ini'
+    path: '/etc/php/7.1/cli/conf.d/xdebug.ini'
+    expectedContents:
+      - 'xdebug.remote_enable = 1'
+      - 'xdebug.remote_port = 9000'
+      - 'xdebug.idekey = PHPSTORM'

@@ -79,8 +79,8 @@ RUN docker-php-ext-configure \
 
 ENV PHP_ENABLE_XDEBUG false
 
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-COPY php.ini /usr/local/etc/php/conf.d/zz-php.ini
+COPY xdebug.ini /etc/php/7.2/cli/conf.d/xdebug.ini
+COPY php.ini /etc/php/7.2/cli/conf.d/zz-php.ini
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh

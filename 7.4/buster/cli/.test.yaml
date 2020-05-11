@@ -1,0 +1,221 @@
+schemaVersion: "2.0.0"
+
+globalEnvVars:
+
+metadataTest:
+  env:
+    - key: PHP_ENABLE_XDEBUG
+      value: false
+  labels:
+    - key: 'maintainer'
+      value: 'Dominik Wißler <dw@ambimax.de>'
+  entrypoint: ["/usr/local/bin/entrypoint.sh"]
+  cmd: ["bash"]
+  workdir: "/var/www/htdocs"
+
+commandTests:
+  - name:  "check php version"
+    command: "php"
+    args: ["--version"]
+    expectedOutput:
+      - PHP
+      - 7.4.
+      - cli
+      - OPcache
+
+  - name:  "check git"
+    command: "git"
+    args: ["--version"]
+    expectedOutput:
+      - git version
+
+  - name:  "check mysql"
+    command: "mysql"
+    args: ["--version"]
+    expectedOutput:
+      - mysql
+
+  - name:  "check redis-cli"
+    command: "redis-cli"
+    args: ["-v"]
+    expectedOutput:
+      - redis-cli
+
+  - name:  "check composer"
+    command: "composer"
+    args: ["--version"]
+    expectedOutput:
+      - Composer version
+
+  - name:  "check composer"
+    command: "composer"
+    args: ["--version"]
+    expectedOutput:
+      - Composer version
+
+  - name:  "check php extensions"
+    command: "php"
+    args: ["-m"]
+    expectedOutput:
+      - apcu
+      - bcmath
+      - calendar
+      - ctype
+      - curl
+      - dom
+      - exif
+      - fileinfo
+      - ftp
+      - gd
+      - gettext
+      - gmp
+      - hash
+      - iconv
+      - igbinary
+#      - imagick
+      - intl
+      - json
+      - libxml
+      - lzf
+      - mbstring
+      - memcached
+      - mysqli
+      - mysqlnd
+      - openssl
+      - PDO
+      - pdo_mysql
+      - pdo_pgsql
+      - pdo_sqlite
+      - pgsql
+      - Phar
+      - readline
+      - redis
+      - Reflection
+      - session
+      - SimpleXML
+      - soap
+      - sockets
+      - SPL
+      - sqlite3
+      - standard
+      - tidy
+      - tokenizer
+      - xml
+      - xmlreader
+      - xmlrpc
+      - xmlwriter
+      - xsl
+      - Zend OPcache
+      - zip
+      - zlib
+
+  - name:  "check phpunit 8"
+    command: "phpunit8"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHPUnit 8'
+      - Sebastian
+      - Bergmann
+
+  - name:  "check phpunit 9"
+    command: "phpunit9"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHPUnit 9'
+      - Sebastian
+      - Bergmann
+
+  - name:  "check codeception"
+    command: "codecept"
+    args: ["--version"]
+    expectedOutput:
+      - Codeception
+
+  - name:  "check phpmd"
+    command: "phpmd"
+    args: ["--version"]
+    expectedOutput:
+      - PHPMD
+
+  - name:  "check phpcs3"
+    command: "phpcs3"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 3'
+
+  - name:  "check phpcbf3"
+    command: "phpcbf3"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP_CodeSniffer version 3'
+
+  - name:  "check php-cs-fixer"
+    command: "php-cs-fixer"
+    args: ["--version"]
+    expectedOutput:
+      - 'PHP CS Fixer'
+
+
+fileExistenceTests:
+  - name: 'composer'
+    path: '/tools/composer'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'mhsendmail'
+    path: '/tools/mhsendmail'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpunit8'
+    path: '/tools/phpunit8'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpunit9'
+    path: '/tools/phpunit9'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'codecept'
+    path: '/tools/codecept'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpmd'
+    path: '/tools/phpmd'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcs3'
+    path: '/tools/phpcs2'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phpcbf3'
+    path: '/tools/phpcbf3'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'xmllint'
+    path: '/tools/xmllint'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'phplint'
+    path: '/tools/phplint'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+  - name: 'codesniffer'
+    path: '/tools/codesniffer'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+
+
+fileContentTests:
+  - name: 'php.ini'
+    path: '/usr/local/etc/php/conf.d/zz-php.ini'
+    expectedContents:
+      - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

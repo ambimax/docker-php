@@ -1,0 +1,162 @@
+schemaVersion: "2.0.0"
+
+globalEnvVars:
+
+metadataTest:
+  env:
+    - key: PHP_ENABLE_XDEBUG
+      value: false
+  labels:
+    - key: 'maintainer'
+      value: 'Dominik Wißler <dw@ambimax.de>'
+  exposedPorts: ["9000"]
+  entrypoint: ["/usr/local/bin/entrypoint.sh"]
+  cmd: ["php-fpm", "-F"]
+  workdir: "/var/www/htdocs"
+
+commandTests:
+  - name:  "check php version"
+    command: "php"
+    args: ["--version"]
+    expectedOutput:
+      - PHP
+      - 7.4.
+      - cli
+      - OPcache
+
+  - name:  "check php-fpm version"
+    command: "php-fpm"
+    args: ["-v"]
+    expectedOutput:
+      - PHP
+      - 7.4.
+      - fpm-fcgi
+      - OPcache
+
+  - name:  "check php extensions"
+    command: "php"
+    args: ["-m"]
+    expectedOutput:
+      - apcu
+      - bcmath
+      - calendar
+      - ctype
+      - curl
+      - dom
+      - exif
+      - fileinfo
+      - ftp
+      - gd
+      - gettext
+      - gmp
+      - hash
+      - iconv
+      - igbinary
+#      - imagick
+      - intl
+      - json
+      - libxml
+      - lzf
+      - mbstring
+      - memcached
+      - mysqli
+      - mysqlnd
+      - openssl
+      - PDO
+      - pdo_mysql
+      - pdo_pgsql
+      - pdo_sqlite
+      - pgsql
+      - Phar
+      - readline
+      - redis
+      - Reflection
+      - session
+      - SimpleXML
+      - soap
+      - sockets
+      - SPL
+      - sqlite3
+      - standard
+      - tidy
+      - tokenizer
+      - xml
+      - xmlreader
+      - xmlrpc
+      - xmlwriter
+      - xsl
+      - Zend OPcache
+      - zip
+      - zlib
+
+  - name:  "check php-fpm extensions"
+    command: "php-fpm"
+    args: ["-m"]
+    expectedOutput:
+      - apcu
+      - bcmath
+      - calendar
+      - ctype
+      - curl
+      - dom
+      - exif
+      - fileinfo
+      - ftp
+      - gd
+      - gmp
+      - gettext
+      - hash
+      - iconv
+      - igbinary
+#      - imagick
+      - intl
+      - json
+      - libxml
+      - lzf
+      - mbstring
+      - memcached
+      - mysqli
+      - mysqlnd
+      - openssl
+      - PDO
+      - pdo_mysql
+      - pdo_pgsql
+      - pdo_sqlite
+      - pgsql
+      - Phar
+      - readline
+      - redis
+      - Reflection
+      - session
+      - SimpleXML
+      - soap
+      - sockets
+      - SPL
+      - sqlite3
+      - standard
+      - tidy
+      - tokenizer
+      - xml
+      - xmlreader
+      - xmlrpc
+      - xmlwriter
+      - xsl
+      - Zend OPcache
+      - zip
+      - zlib
+
+
+
+fileExistenceTests:
+  - name: 'mhsendmail'
+    path: '/tools/mhsendmail'
+    shouldExist: true
+    isExecutableBy: 'group'
+
+
+
+fileContentTests:
+  - name: 'php.ini'
+    path: '/usr/local/etc/php/conf.d/zz-php.ini'
+    expectedContents:
+      - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

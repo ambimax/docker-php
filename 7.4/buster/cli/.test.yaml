@@ -47,12 +47,6 @@ commandTests:
     expectedOutput:
       - Composer version
 
-  - name:  "check composer"
-    command: "composer"
-    args: ["--version"]
-    expectedOutput:
-      - Composer version
-
   - name:  "check php extensions"
     command: "php"
     args: ["-m"]

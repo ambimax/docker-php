@@ -1,4 +1,4 @@
-NAME	= ambimax/php7.2-cli-stretch
+NAME	= ambimax/php7.4-cli-buster
 TAG		= $(shell git rev-parse --short HEAD)
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest

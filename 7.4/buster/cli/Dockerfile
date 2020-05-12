@@ -3,15 +3,18 @@ FROM php:7.4-fpm-buster
 
 LABEL maintainer="Dominik Wißler <dw@ambimax.de>"
 
+COPY --from=ambimax/phptools:latest /tools/codecept /tools/codecept
+COPY --from=ambimax/phptools:latest /tools/codesniffer /tools/codesniffer
 COPY --from=ambimax/phptools:latest /tools/composer /tools/composer
 COPY --from=ambimax/phptools:latest /tools/mhsendmail /tools/mhsendmail
+COPY --from=ambimax/phptools:latest /tools/phpcbf3 /tools/phpcbf3
+COPY --from=ambimax/phptools:latest /tools/phpcs3 /tools/phpcs3
+COPY --from=ambimax/phptools:latest /tools/phplint /tools/phplint
+COPY --from=ambimax/phptools:latest /tools/phpmd /tools/phpmd
 COPY --from=ambimax/phptools:latest /tools/phpunit8 /tools/phpunit8
 COPY --from=ambimax/phptools:latest /tools/phpunit9 /tools/phpunit9
-COPY --from=ambimax/phptools:latest /tools/codecept /tools/codecept
-COPY --from=ambimax/phptools:latest /tools/phpmd /tools/phpmd
-COPY --from=ambimax/phptools:latest /tools/phpcs3 /tools/phpcs3
-COPY --from=ambimax/phptools:latest /tools/phpcbf3 /tools/phpcbf3
 COPY --from=ambimax/phptools:latest /tools/php-cs-fixer /tools/php-cs-fixer
+COPY --from=ambimax/phptools:latest /tools/xmllint /tools/xmllint
 
 ENV PATH="/tools:${PATH}"
 

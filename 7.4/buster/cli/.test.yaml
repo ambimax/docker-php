@@ -182,7 +182,7 @@ fileExistenceTests:
     isExecutableBy: 'group'
 
   - name: 'phpcs3'
-    path: '/tools/phpcs2'
+    path: '/tools/phpcs3'
     shouldExist: true
     isExecutableBy: 'group'
 

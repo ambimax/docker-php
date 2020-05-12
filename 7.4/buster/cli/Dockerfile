@@ -1,9 +1,6 @@
 
 FROM php:7.4-fpm-buster
 
-ENV TZ Europe/Berlin
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 LABEL maintainer="Dominik Wißler <dw@ambimax.de>"
 
 COPY --from=ambimax/phptools:latest /tools/composer /tools/composer
@@ -38,7 +35,7 @@ RUN apt-get update \
     graphviz \
     libxslt1-dev \
     sudo \
-    mysql-client \
+    mariadb-client \
     git \
     redis-tools \
     curl \

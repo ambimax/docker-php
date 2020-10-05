@@ -1,7 +1,7 @@
 
 FROM php:7.3-cli-buster
 
-LABEL maintainer="Dominik Wißler <dw@ambimax.de>"
+LABEL maintainer="Fabian Köhnen <fk@ambimax.de>"
 
 COPY --from=ambimax/phptools:latest /tools/codecept /tools/codecept
 COPY --from=ambimax/phptools:latest /tools/codesniffer /tools/codesniffer

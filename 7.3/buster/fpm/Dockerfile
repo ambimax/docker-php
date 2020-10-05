@@ -1,7 +1,7 @@
 
 FROM php:7.3-fpm-buster
 
-LABEL maintainer="Dominik Wißler <dw@ambimax.de>"
+LABEL maintainer="Fabian Köhnen <fk@ambimax.de>"
 
 COPY --from=ambimax/phptools:latest /tools/mhsendmail      /tools/mhsendmail
 ENV PATH="/tools:${PATH}"

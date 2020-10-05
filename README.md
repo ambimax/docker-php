@@ -93,7 +93,7 @@ cli contains also the following tools:
  - redis-cli
  - [zettr](https://github.com/AOEpeople/zettr)
 
- Since PHP 7.4 and 7.3 won't be used in magento1 some tools has been removed in this image.
+ Since PHP 7.4 and 7.3 won't be used in magento1 some tools have been removed in this image.
 
  Therefor `php7.4-cli-buster` and `php7.3-cli-buster` contains the following tools:
  * codecept

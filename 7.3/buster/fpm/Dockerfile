@@ -45,7 +45,7 @@ RUN pecl install \
 #
 # Configure the gd library
 RUN docker-php-ext-configure \
-    gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
 #
 # Install required PHP extensions
   && docker-php-ext-install \

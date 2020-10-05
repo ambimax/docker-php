@@ -50,7 +50,7 @@ RUN apt-get update \
 RUN pecl install \
     apcu \
     igbinary \
-#    imagick \
+    imagick \
     lzf \
     memcached \
     redis \

@@ -8,7 +8,7 @@ metadataTest:
       value: false
   labels:
     - key: 'maintainer'
-      value: 'Dominik Wißler <dw@ambimax.de>'
+      value: 'Fabian Köhnen <fk@ambimax.de>'
   entrypoint: ["/usr/local/bin/entrypoint.sh"]
   cmd: ["bash"]
   workdir: "/var/www/htdocs"

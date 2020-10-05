@@ -12,6 +12,8 @@ Repository for generating php docker images used for Magento and other php proje
  - [php7.1-stretch-fpm](https://hub.docker.com/r/ambimax/php7.1-fpm-stretch/)
  - [php7.2-stretch-cli](https://hub.docker.com/r/ambimax/php7.2-cli-stretch/)
  - [php7.2-stretch-fpm](https://hub.docker.com/r/ambimax/php7.2-fpm-stretch/)
+ - [php7.3-buster-cli](https://hub.docker.com/r/ambimax/php7.3-fpm-buster/)
+ - [php7.3-buster-fpm](https://hub.docker.com/r/ambimax/php7.3-cli-buster/) 
  - [php7.4-buster-cli](https://hub.docker.com/r/ambimax/php7.4-fpm-buster/)
  - [php7.4-buster-fpm](https://hub.docker.com/r/ambimax/php7.4-cli-buster/)
 
@@ -91,9 +93,9 @@ cli contains also the following tools:
  - redis-cli
  - [zettr](https://github.com/AOEpeople/zettr)
 
- Since PHP 7.4 won't be used in magento1 some tools has been removed in this image.
+ Since PHP 7.4 and 7.3 won't be used in magento1 some tools have been removed in this image.
 
- Therefor `php7.4-cli-buster` contains the following tools:
+ Therefor `php7.4-cli-buster` and `php7.3-cli-buster` contains the following tools:
  * codecept
  * composer
  * git
@@ -146,5 +148,6 @@ cli contains also the following tools:
 ## Author Information
 
  - [Tobias Schifftner](https://twitter.com/tschifftner), [ambimax® GmbH](https://www.ambimax.de)
- - Dominik Wißler, [ambimax® GmbH](https://www.ambimax.de) (`php7.4-cli-buster`, `php7.4-fpm-buster`)
+ - Dominik Wißler, [ambimax® GmbH](https://www.ambimax.de) (`php7.4-cli-buster`, `php7.4-fpm-buster`) 
+ - Fabian Köhnen, [ambimax® GmbH](https://www.ambimax.de) (`php7.3-cli-buster`, `php7.3-fpm-buster`)
  

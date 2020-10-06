@@ -26,6 +26,7 @@ RUN apt-get update \
     graphviz \
     libxslt1-dev \
     sudo \
+    libmagickwand-dev \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -34,7 +35,7 @@ RUN apt-get update \
 RUN pecl install \
     apcu \
     igbinary \
-#    imagick \
+    imagick \
     lzf \
     memcached \
     redis \

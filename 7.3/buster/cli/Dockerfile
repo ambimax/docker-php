@@ -42,6 +42,7 @@ RUN apt-get update \
     git \
     redis-tools \
     curl \
+    libmagickwand-dev \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -50,7 +51,7 @@ RUN apt-get update \
 RUN pecl install \
     apcu \
     igbinary \
-#    imagick \
+    imagick \
     lzf \
     memcached \
     redis \

@@ -26,6 +26,7 @@ RUN apt-get update \
     graphviz \
     libxslt1-dev \
     sudo \
+    libmagickwand-dev \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*

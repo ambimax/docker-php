@@ -42,6 +42,7 @@ RUN apt-get update \
     git \
     redis-tools \
     curl \
+    libmagickwand-dev \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*

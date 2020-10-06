@@ -27,6 +27,7 @@ RUN apt-get update \
     libxslt1-dev \
     sudo \
     libmagickwand-dev \
+    imagemagick \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -77,6 +78,7 @@ RUN docker-php-ext-configure \
     memcached \
     redis \
     tidy \
+    imagick \
     xmlrpc
 
 

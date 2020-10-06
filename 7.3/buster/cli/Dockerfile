@@ -43,6 +43,7 @@ RUN apt-get update \
     redis-tools \
     curl \
     libmagickwand-dev \
+    imagemagick \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -93,6 +94,7 @@ RUN docker-php-ext-configure \
     memcached \
     redis \
     tidy \
+    imagick \
     xmlrpc
 
 

@@ -8,10 +8,10 @@ env:
     - secure: "YFoyj4uSY26ymcKXcdDSbbHEMj6ZNyF5I4tP5FPG2054/hNF4haI7rtgLoxgik2GtJN0vu9lQqQ46SmvIsK3RTU22WaHFSOqNozaEshXSgjzkVzulTSqKWoCPyN6TNr0ffsXxwr/m2VtUHUHfhxFfXFCL++Am9nlggHpaY1Bf2N8KJ/OroHAAyo2uHfH4PrFsgODNb6hCNkX++kOZK5rZ+oYkNeAxOzJnlrHldkRLSGLFElJSHUs7a9xHYqrSeowlVXqOlEehG9zldx1szECFhoBrgKLOhitq+iDLVG9sUd0jVRit9Gzrr2BNpzBGqJyvF07SOwd/rvu9sWyioCaY7QOMzU6DjkixLLnFAVOXtZazWQ8EdjSUSSpZLwjMwYO7G2J0uFKoJ+dMQAM91OLxYAC+5njhI72wrt7YNeRe3SriognSwOEL6jRDOX/IfedEhWMkjJCc4axD5Ap6MNufhU1KHi/20ZtJwoeGjZVKSlUfkT3wEI3jBpf79IdGe67RsMnijHNz6N3FPud2lPnOh68jDaQG1pKHMWrzKL0QlpIf+k4iqL0zpEuebcLlV6lGTuZVun4oNhY7iVI53+29R02Ol7seSSfML6sXc26/2OTj5XoWIR7YNmxmVJ/gruuypvDRXq6Z2zkHsz0aE5JIvY+MhsWSU35JRghATha178="
 
   matrix:
-    - VARIANT: 7.0/stretch/cli
-    - VARIANT: 7.0/stretch/fpm
-    - VARIANT: 7.1/stretch/cli
-    - VARIANT: 7.1/stretch/fpm
+#    - VARIANT: 7.0/stretch/cli *OUTDATED*
+#    - VARIANT: 7.0/stretch/fpm *OUTDATED*
+#    - VARIANT: 7.1/stretch/cli *OUTDATED*
+#    - VARIANT: 7.1/stretch/fpm *OUTDATED*
     - VARIANT: 7.2/stretch/cli
     - VARIANT: 7.2/stretch/fpm
     - VARIANT: 7.3/buster/cli

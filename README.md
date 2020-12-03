@@ -6,10 +6,10 @@ Repository for generating php docker images used for Magento and other php proje
 
 ## Docker Images
 
- - [php7.0-stretch-cli](https://hub.docker.com/r/ambimax/php7.0-cli-stretch/)
- - [php7.0-stretch-fpm](https://hub.docker.com/r/ambimax/php7.0-fpm-stretch/)
- - [php7.1-stretch-cli](https://hub.docker.com/r/ambimax/php7.1-cli-stretch/)
- - [php7.1-stretch-fpm](https://hub.docker.com/r/ambimax/php7.1-fpm-stretch/)
+ - [php7.0-stretch-cli](https://hub.docker.com/r/ambimax/php7.0-cli-stretch/) *OUTDATED*
+ - [php7.0-stretch-fpm](https://hub.docker.com/r/ambimax/php7.0-fpm-stretch/) *OUTDATED*
+ - [php7.1-stretch-cli](https://hub.docker.com/r/ambimax/php7.1-cli-stretch/) *OUTDATED*
+ - [php7.1-stretch-fpm](https://hub.docker.com/r/ambimax/php7.1-fpm-stretch/) *OUTDATED*
  - [php7.2-stretch-cli](https://hub.docker.com/r/ambimax/php7.2-cli-stretch/)
  - [php7.2-stretch-fpm](https://hub.docker.com/r/ambimax/php7.2-fpm-stretch/)
  - [php7.3-buster-cli](https://hub.docker.com/r/ambimax/php7.3-fpm-buster/)
@@ -83,7 +83,8 @@ cli contains also the following tools:
  - composer
  - git
  - [modman](https://github.com/colinmollenhour/modman)
- - mysql-client
+ - mysql-client nano
+ - nano
  - phpcbf3
  - phpcs3
  - phpmd
@@ -91,6 +92,8 @@ cli contains also the following tools:
  - phpunit6
  - phpunit7 _(>= php7.1)_
  - redis-cli
+ - unzip
+ - wget
  - [zettr](https://github.com/AOEpeople/zettr)
 
  Since PHP 7.4 and 7.3 won't be used in magento1 some tools have been removed in this image.

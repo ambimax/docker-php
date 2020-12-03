@@ -47,6 +47,24 @@ commandTests:
     expectedOutput:
       - Composer version
 
+  - name:  "check wget"
+    command: "wget"
+    args: ["--version"]
+    expectedOutput:
+      - GNU Wget
+
+  - name:  "check nano"
+    command: "nano"
+    args: ["--version"]
+    expectedOutput:
+      - nano
+
+  - name:  "check unzip"
+    command: "unzip"
+    args: ["--version"]
+    expectedOutput:
+      - UnZip
+
   - name:  "check php extensions"
     command: "php"
     args: ["-m"]
@@ -88,6 +106,7 @@ commandTests:
       - session
       - SimpleXML
       - soap
+      - sodium
       - sockets
       - SPL
       - sqlite3
@@ -102,6 +121,28 @@ commandTests:
       - Zend OPcache
       - zip
       - zlib
+
+  - name:  "check php sodium has required constant"
+    command: php
+    args:
+      - -r
+      - "echo SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13;"
+    expectedOutput:
+      - 2
+
+  - name:  "check php sodium version"
+    command: php
+    args:
+      - -r
+      - "echo (SODIUM_LIBRARY_MAJOR_VERSION >= 10) ? 'true' : 'false';"
+    expectedOutput:
+      - true
+
+  - name:  "check zsh"
+    command: zsh
+    args: ["--version"]
+    expectedOutput:
+      - zsh
 
   - name:  "check phpunit 8"
     command: "phpunit8"

@@ -42,6 +42,14 @@ RUN apt-get update \
     git \
     redis-tools \
     curl \
+    wget \
+    nano \
+    unzip \
+# Install Zsh
+&& sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+    -p git \
+    -p https://github.com/zsh-users/zsh-autosuggestions \
+    -p https://github.com/zsh-users/zsh-syntax-highlighting \
 #
 # Cleanup
   && rm -rf /var/lib/apt/lists/*
@@ -91,6 +99,7 @@ RUN docker-php-ext-configure \
     lzf \
     memcached \
     redis \
+    sodium \
     tidy \
     xmlrpc
 

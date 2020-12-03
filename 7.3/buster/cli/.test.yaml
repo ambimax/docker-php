@@ -61,7 +61,7 @@ commandTests:
 
   - name:  "check unzip"
     command: "unzip"
-    args: ["--version"]
+    args: ["--help"]
     expectedOutput:
       - UnZip
 
@@ -121,14 +121,6 @@ commandTests:
       - Zend OPcache
       - zip
       - zlib
-
-  - name:  "check php sodium has required constant"
-    command: php
-    args:
-      - -r
-      - "echo SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13;"
-    expectedOutput:
-      - 2
 
   - name:  "check php sodium version"
     command: php

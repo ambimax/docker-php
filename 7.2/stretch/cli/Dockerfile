@@ -47,6 +47,7 @@ RUN pecl install \
     apcu \
     igbinary \
 #    imagick \
+    libsodium \
     lzf \
     memcached \
     redis \
@@ -104,4 +105,4 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 WORKDIR /var/www/htdocs
 
-CMD ["/bin/bash"]
+CMD ["bash"]

@@ -1,0 +1,49 @@
+on: [push]
+
+jobs:
+  dockerfile-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        WORKDIR:
+          - 7.2/stretch/cli
+          - 7.2/stretch/fpm
+          - 7.3/buster/cli
+          - 7.3/buster/fpm
+          - 7.4/buster/cli
+          - 7.4/buster/fpm
+    defaults:
+      run:
+        working-directory: ${{ matrix.WORKDIR }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Prepare environment
+        run: bash ${GITHUB_WORKSPACE}/.github/scripts/prepare-workflow.sh
+
+      - name: Build image
+        run: make build
+
+      - name: Test image
+        run: make test
+
+      - name: Additional image tests
+        run: make official-test
+
+      - name: Display all docker images
+        if: ${{ always() }}
+        run: docker images
+
+      - name: Login to Docker Registry
+        if: github.ref == 'refs/heads/master'
+        uses: Azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.DOCKER_REGISTRY }}
+          username: ${{ secrets.DOCKER_REG_USERNAME }}
+          password: ${{ secrets.DOCKER_REG_PASSWORD }}
+
+      - name: Push image
+        if: github.ref == 'refs/heads/master'
+        run: make push

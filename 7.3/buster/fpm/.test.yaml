@@ -74,6 +74,7 @@ commandTests:
       - session
       - SimpleXML
       - soap
+      - sodium
       - sockets
       - SPL
       - sqlite3
@@ -88,6 +89,14 @@ commandTests:
       - Zend OPcache
       - zip
       - zlib
+
+  - name:  "check php sodium version"
+    command: php
+    args:
+      - -r
+      - "echo (SODIUM_LIBRARY_MAJOR_VERSION >= 10) ? 'true' : 'false';"
+    expectedOutput:
+      - true
 
   - name:  "check php-fpm extensions"
     command: "php-fpm"
@@ -130,6 +139,7 @@ commandTests:
       - session
       - SimpleXML
       - soap
+      - sodium
       - sockets
       - SPL
       - sqlite3

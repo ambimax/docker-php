@@ -24,15 +24,30 @@ RUN apt-get update \
     git \
     redis-tools \
     curl \
+    wget \
+    nano \
+    unzip \
+# Install Zsh
+&& sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
+    -p git \
+    -p https://github.com/zsh-users/zsh-autosuggestions \
+    -p https://github.com/zsh-users/zsh-syntax-highlighting \
+# Install newer version of libsodium for proper Magento 2.3.2+ support
+  && wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz \
+    && tar xfvz libsodium-1.0.18.tar.gz \
+    && cd libsodium-1.0.18 \
+    && ./configure \
+    && make && make install \
 #
 # Cleanup
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* libsodium-1.0.18
 
 # Install php extensions
 RUN pecl install \
     apcu \
     igbinary \
 #    imagick \
+    libsodium \
     lzf \
     memcached \
     redis \
@@ -73,6 +88,7 @@ RUN docker-php-ext-configure \
     lzf \
     memcached \
     redis \
+    sodium \
     tidy \
     xmlrpc
 

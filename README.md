@@ -1,6 +1,6 @@
 # Docker Repository for PHP images
 
-[![Build Status](https://travis-ci.org/ambimax/docker-php.svg?branch=master)](https://travis-ci.org/ambimax/docker-php)
+![Build Status](https://github.com/ambimax/docker-php/workflows/default/badge.svg?branch=master)
 
 Repository for generating php docker images used for Magento and other php projects.
 

@@ -83,7 +83,7 @@ cli contains also the following tools:
  - composer
  - git
  - [modman](https://github.com/colinmollenhour/modman)
- - mysql-client nano
+ - mysql-client
  - nano
  - phpcbf3
  - phpcs3

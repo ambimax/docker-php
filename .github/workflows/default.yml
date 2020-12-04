@@ -6,22 +6,22 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        VARIANT:
+        WORKDIR:
           - 7.2/stretch/cli
-          - 7.2/stretch/fpm
-          - 7.3/buster/cli
-          - 7.3/buster/fpm
-          - 7.4/buster/cli
+          # - 7.2/stretch/fpm
+          # - 7.3/buster/cli
+          # - 7.3/buster/fpm
+          # - 7.4/buster/cli
           - 7.4/buster/fpm
-
+    defaults:
+      run:
+        working-directory: ${{ matrix.WORKDIR }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Prepare environment
         run: bash .github/scripts/prepare-workflow.sh
-        env:
-          WORKDIR: ${{ matrix.VARIANT }}
 
       - name: Build image
         run: make build

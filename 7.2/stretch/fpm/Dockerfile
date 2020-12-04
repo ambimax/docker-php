@@ -20,6 +20,7 @@ RUN apt-get update \
     libpng-dev \
     libxslt1-dev \
     sudo \
+    wget \
 # Install newer version of libsodium for proper Magento 2.3.2+ support
   && wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.18.tar.gz \
     && tar xfvz libsodium-1.0.18.tar.gz \

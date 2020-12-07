@@ -38,9 +38,11 @@ jobs:
 
       - name: Login to Docker Registry
         if: github.ref == 'refs/heads/master'
-        uses: Azure/docker-login@v1
+        uses: docker/login-action@v1
         with:
-          login-server: ${{ secrets.DOCKER_REGISTRY }}
+          # We push to the default registry currently. If you want to push to a different registry,
+          # uncomment the line below.
+          # login-server: ${{ secrets.DOCKER_REGISTRY }}
           username: ${{ secrets.DOCKER_REG_USERNAME }}
           password: ${{ secrets.DOCKER_REG_PASSWORD }}
 

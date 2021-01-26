@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+  schedule:
+    # Update docker images at 04:25 on Mondays
+    - cron: "25 4 * * 1"
 
 jobs:
   dockerfile-test:

@@ -1,6 +1,6 @@
 # Docker Repository for PHP images
 
-![.github/workflows/default.yml](https://github.com/ambimax/docker-php/workflows/.github/workflows/default.yml/badge.svg?branch=master)
+![Build Status](https://github.com/ambimax/docker-php/workflows/.github/workflows/default.yml/badge.svg?branch=master)
 
 Repository for generating php docker images used for Magento and other php projects.
 

@@ -53,7 +53,8 @@ RUN pecl install \
     redis \
 #
 # Install Xdebug (but don't enable)
-  && pecl install -o -f xdebug
+  && pecl install -o -f xdebug \
+  && /tools/composer global require hirak/prestissimo
 
 #
 # Configure the gd library

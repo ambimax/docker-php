@@ -53,3 +53,6 @@ jobs:
       - name: Push image
         if: github.ref == 'refs/heads/master'
         run: make push
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_REG_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_REG_PASSWORD }}

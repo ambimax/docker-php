@@ -7,14 +7,14 @@ metadataTest:
     - key: PHP_ENABLE_XDEBUG
       value: false
   labels:
-    - key: 'maintainer'
-      value: 'Tobias Schifftner <ts@ambimax.de>'
+    - key: "maintainer"
+      value: "Tobias Schifftner <ts@ambimax.de>"
   entrypoint: ["/usr/local/bin/entrypoint.sh"]
   cmd: ["bash"]
   workdir: "/var/www/htdocs"
 
 commandTests:
-  - name:  "check php version"
+  - name: "check php version"
     command: "php"
     args: ["--version"]
     expectedOutput:
@@ -23,67 +23,79 @@ commandTests:
       - cli
       - OPcache
 
-  - name:  "check git"
+  - name: "check git"
     command: "git"
     args: ["--version"]
     expectedOutput:
       - git version
 
-  - name:  "check mysql"
+  - name: "check mysql"
     command: "mysql"
     args: ["--version"]
     expectedOutput:
       - mysql
 
-  - name:  "check redis-cli"
+  - name: "check redis-cli"
     command: "redis-cli"
     args: ["-v"]
     expectedOutput:
       - redis-cli
 
-  - name:  "check composer"
+  - name: "check composer"
     command: "composer"
     args: ["--version"]
     expectedOutput:
-      - Composer version
+      - Composer version 1.
 
-  - name:  "check n98-magerun"
+  - name: "check composer"
+    command: "composer2"
+    args: ["--version"]
+    expectedOutput:
+      - Composer version 2.
+
+  - name: "check n98-magerun"
     command: "n98-magerun"
     args: ["--version"]
     expectedOutput:
-      - n98-magerun
+      - n98-magerun version 1.
 
-  - name:  "check modman"
+  - name: "check n98-magerun2"
+    command: "n98-magerun2"
+    args: ["--version"]
+    expectedOutput:
+      - n98-magerun2
+
+  - name: "check modman"
     command: "modman"
     args: ["--version"]
     expectedOutput:
       - Module Manager version
 
-  - name:  "check zettr"
+  - name: "check zettr"
     command: "zettr"
     args: ["--version"]
     expectedOutput:
       - Zettr version
 
-  - name:  "check wget"
+  - name: "check wget"
     command: "wget"
     args: ["--version"]
     expectedOutput:
       - GNU Wget
 
-  - name:  "check nano"
+  - name: "check nano"
     command: "nano"
     args: ["--version"]
     expectedOutput:
       - nano
 
-  - name:  "check unzip"
+  - name: "check unzip"
     command: "unzip"
     args: ["--help"]
     expectedOutput:
       - UnZip
 
-  - name:  "check php extensions"
+  - name: "check php extensions"
     command: "php"
     args: ["-m"]
     expectedOutput:
@@ -102,7 +114,7 @@ commandTests:
       - hash
       - iconv
       - igbinary
-#      - imagick
+      #      - imagick
       - intl
       - json
       - libxml
@@ -140,7 +152,7 @@ commandTests:
       - zip
       - zlib
 
-  - name:  "check php sodium version"
+  - name: "check php sodium version"
     command: php
     args:
       - -r
@@ -148,155 +160,152 @@ commandTests:
     expectedOutput:
       - true
 
-  - name:  "check zsh"
+  - name: "check zsh"
     command: zsh
     args: ["--version"]
     expectedOutput:
       - zsh
 
-  - name:  "check phpunit 5"
+  - name: "check phpunit 5"
     command: "phpunit5"
     args: ["--version"]
     expectedOutput:
-      - 'PHPUnit 5'
+      - "PHPUnit 5"
       - Sebastian
       - Bergmann
 
-  - name:  "check phpunit 6"
+  - name: "check phpunit 6"
     command: "phpunit6"
     args: ["--version"]
     expectedOutput:
-      - 'PHPUnit 6'
+      - "PHPUnit 6"
       - Sebastian
       - Bergmann
 
-  - name:  "check codeception"
+  - name: "check codeception"
     command: "codecept"
     args: ["--version"]
     expectedOutput:
       - Codeception
 
-  - name:  "check phpmd"
+  - name: "check phpmd"
     command: "phpmd"
     args: ["--version"]
     expectedOutput:
       - PHPMD
 
-  - name:  "check phpcs2"
+  - name: "check phpcs2"
     command: "phpcs2"
     args: ["--version"]
     expectedOutput:
-      - 'PHP_CodeSniffer version 2'
+      - "PHP_CodeSniffer version 2"
 
-  - name:  "check phpcs3"
+  - name: "check phpcs3"
     command: "phpcs3"
     args: ["--version"]
     expectedOutput:
-      - 'PHP_CodeSniffer version 3'
+      - "PHP_CodeSniffer version 3"
 
-  - name:  "check phpcbf2"
+  - name: "check phpcbf2"
     command: "phpcbf2"
     args: ["--version"]
     expectedOutput:
-      - 'PHP_CodeSniffer version 2'
+      - "PHP_CodeSniffer version 2"
 
-  - name:  "check phpcbf3"
+  - name: "check phpcbf3"
     command: "phpcbf3"
     args: ["--version"]
     expectedOutput:
-      - 'PHP_CodeSniffer version 3'
-
+      - "PHP_CodeSniffer version 3"
 
 fileExistenceTests:
-  - name: 'n98-magerun'
-    path: '/tools/n98-magerun'
+  - name: "n98-magerun"
+    path: "/tools/n98-magerun"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'composer'
-    path: '/tools/composer'
+  - name: "composer"
+    path: "/tools/composer"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'mhsendmail'
-    path: '/tools/mhsendmail'
+  - name: "mhsendmail"
+    path: "/tools/mhsendmail"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'modman'
-    path: '/tools/modman'
+  - name: "modman"
+    path: "/tools/modman"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'zettr'
-    path: '/tools/zettr'
+  - name: "zettr"
+    path: "/tools/zettr"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpunit5'
-    path: '/tools/phpunit5'
+  - name: "phpunit5"
+    path: "/tools/phpunit5"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpunit6'
-    path: '/tools/phpunit6'
+  - name: "phpunit6"
+    path: "/tools/phpunit6"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpunit7'
-    path: '/tools/phpunit7'
+  - name: "phpunit7"
+    path: "/tools/phpunit7"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'codecept'
-    path: '/tools/codecept'
+  - name: "codecept"
+    path: "/tools/codecept"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpmd'
-    path: '/tools/phpmd'
+  - name: "phpmd"
+    path: "/tools/phpmd"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpcs2'
-    path: '/tools/phpcs2'
+  - name: "phpcs2"
+    path: "/tools/phpcs2"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpcs3'
-    path: '/tools/phpcs2'
+  - name: "phpcs3"
+    path: "/tools/phpcs2"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpcbf2'
-    path: '/tools/phpcbf2'
+  - name: "phpcbf2"
+    path: "/tools/phpcbf2"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phpcbf3'
-    path: '/tools/phpcbf3'
+  - name: "phpcbf3"
+    path: "/tools/phpcbf3"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'xmllint'
-    path: '/tools/xmllint'
+  - name: "xmllint"
+    path: "/tools/xmllint"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'phplint'
-    path: '/tools/phplint'
+  - name: "phplint"
+    path: "/tools/phplint"
     shouldExist: true
-    isExecutableBy: 'group'
+    isExecutableBy: "group"
 
-  - name: 'codesniffer'
-    path: '/tools/codesniffer'
+  - name: "codesniffer"
+    path: "/tools/codesniffer"
     shouldExist: true
-    isExecutableBy: 'group'
-
-
+    isExecutableBy: "group"
 
 fileContentTests:
-  - name: 'php.ini'
-    path: '/usr/local/etc/php/conf.d/zz-php.ini'
+  - name: "php.ini"
+    path: "/usr/local/etc/php/conf.d/zz-php.ini"
     expectedContents:
       - 'sendmail_path \= "\/tools\/mhsendmail --smtp-addr=\\"mailhog:1025\\""'

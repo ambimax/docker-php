@@ -2,7 +2,7 @@ NAME	= ambimax/php7.2-cli-stretch
 TAG		= $(shell git rev-parse --short HEAD)
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
-
+ROOT 	= $(shell dirname $(shell dirname $(shell dirname "${PWD}")))
 
 build: build-image tag-main-version tag-version tag-latest
 
@@ -26,7 +26,15 @@ test:
 official-test:
 	~/official-images/test/run.sh "${IMG}"
 
-push:
+dockerhub-description:
+	@docker run --volume "${ROOT}:/workspace" \
+		--env DOCKERHUB_USERNAME='${DOCKER_USER}' \
+		--env DOCKERHUB_PASSWORD='${DOCKER_PASSWORD}' \
+		--env DOCKERHUB_REPOSITORY='${NAME}' \
+		--env README_FILEPATH='/workspace/README.md' \
+		peterevans/dockerhub-description:2
+
+push: dockerhub-description
 	@docker push ${NAME}
 
 login:

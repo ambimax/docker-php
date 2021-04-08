@@ -1,0 +1,7 @@
+{% if php.ext_configure|length > 0 %}
+##################################################################
+# Configure php extensions
+##################################################################
+RUN docker-php-ext-configure \
+	{{  php.ext_configure|join(" \\\n\t") }}
+{% endif %}

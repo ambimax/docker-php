@@ -1,0 +1,16 @@
+{% if pecl.packages|length > 0 %}
+##################################################################
+# Install pecl extensions
+##################################################################
+RUN pecl install \
+	{{  pecl.packages|join(" \\\n\t") }}
+
+{% endif %}
+{% if pecl.install_disabled|length > 0 %}
+##################################################################
+# Install disabled pecl extensions
+##################################################################
+RUN pecl install -o -f \
+	{{  pecl.install_disabled|join(" \\\n\t") }}
+
+{% endif %}

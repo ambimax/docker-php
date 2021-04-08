@@ -1,0 +1,32 @@
+{
+  "name": "ambimax/php-7.3-buster",
+  "base_image": "php:7.3-fpm-buster",
+  "distro": "buster",
+  "tag": "7.3",
+  "env": {},
+  "php": {
+    "version": "7.3",
+    "extensions": [
+      "apcu",
+      "bcmath",
+      "calendar",
+      "ctype",
+      "exif",
+      "igbinary",
+      "lzf",
+      "opcache",
+      "gd",
+      "gmp",
+      "gettext",
+      "intl",
+      "pdo_mysql",
+      "memcached",
+      "redis",
+      "xsl",
+      "soap",
+      "sockets",
+      "xmlrpc",
+      "zip"
+    ]
+  }
+}

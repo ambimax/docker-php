@@ -1,0 +1,7 @@
+{% if php.ext_enable|length > 0 %}
+##################################################################
+# Enable php extensions
+##################################################################
+RUN docker-php-ext-enable \
+	{{  php.ext_enable|join(" \\\n\t") }}
+{% endif %}

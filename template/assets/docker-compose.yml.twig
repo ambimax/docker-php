@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  fpm:
+    image: "{{ name }}:latest"
+    volumes:
+      - "${PWD}/src:/var/www/"
+    environment:
+      PHP_FPM_LISTEN_PORT: 9002
+      FCGI_CONNECT: "localhost:9002"
+      PHP_OPCACHE_ERROR_LOG: "/var/www/my.log"
+      PHP_OPCACHE_FAST_SHUTDOWN: 1
+      PHP_OPCACHE_MAX_WASTED_PERCENTAGE: 10
+      PHP_OPCACHE_ENABALE_FILE_OVERRIDE: 1
+    command: ["php-fpm", "-F"]
+    expose:
+      - 9002
+    networks:
+      backend:
+
+  nginx:
+    image: nginx:1.19-alpine
+    volumes:
+      - "${PWD}/config/nginx:/etc/nginx/templates"
+      - "${PWD}/src:/var/www/"
+    environment:
+      API_HOST: fpm:9002
+      TEST: {{ php.version }}
+    ports:
+      - "8800:80"
+    networks:
+      backend:
+
+  exporter:
+      image: hipages/php-fpm_exporter:latest
+      ports:
+          - "9253:9253"
+      environment:
+          PHP_FPM_SCRAPE_URI: "tcp://fpm:9002/status"
+          PHP_FPM_LOG_LEVEL: "debug"
+
+networks:
+  backend:

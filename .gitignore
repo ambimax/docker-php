@@ -3,3 +3,4 @@ dist/
 .trash
 .phpunit*
 orca.*
+composer.lock

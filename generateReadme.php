@@ -104,24 +104,28 @@ class generateReadme
 
     public function getDockerHubMatrix()
     {
-        // create instance of the table builder
-        $tableBuilder = new Builder();
+        $markdown = [];
+        foreach($this->distros as $distro => $name) {
+            $markdown[] = sprintf('### %s', $name);
 
-        $tableBuilder
-            ->headers(['Distribution', ...$this->phpVersions])
-            ->align(['L']);
+            // create instance of the table builder
+            $tableBuilder = new Builder();
 
-        foreach($this->distros as $distro => $distroName) {
-            $row = [$distroName];
+            $tableBuilder
+                ->headers(['PHP Version', 'Image'])
+                ->align(['L']);
+
             foreach($this->phpVersions as $phpVersion) {
                 $name = sprintf('ambimax/php-%s-%s', $phpVersion, $distro);
                 $url = sprintf('https://hub.docker.com/repository/docker/ambimax/php-%s-%s', $phpVersion, $distro);
-                $row[] = sprintf('[%s](%s)', $name, $url);
+                $link = sprintf('[%s](%s)', $name, $url);
+                $tableBuilder->row([$phpVersion, $link]);
             }
-            $tableBuilder->row($row);
+
+            $markdown[] = $tableBuilder->render();
         }
 
-        return $tableBuilder->render();
+        return implode(PHP_EOL, $markdown);
     }
 
     public function getEnvironmentVariablesMatrix()
@@ -132,15 +136,6 @@ class generateReadme
         $tableBuilder
             ->headers(['PHP Version', 'Link'])
             ->align(['L']);
-
-//        foreach($this->distros as $distro => $distroName) {
-//            $row = [$distroName];
-//            foreach($this->phpVersions as $phpVersion) {
-//                $url = sprintf('template/components/php/%s/assets/all.env', $phpVersion);
-//                $row[] = sprintf('[%s](%s)', $phpVersion, $url);
-//            }
-//            $tableBuilder->row($row);
-//        }
 
         foreach($this->phpVersions as $phpVersion) {
             $url = sprintf('template/components/php/%s/assets/all.env', $phpVersion);

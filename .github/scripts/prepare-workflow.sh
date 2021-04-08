@@ -15,5 +15,11 @@ wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-build
 curl -O https://orca-build.io/downloads/orca.zip \
     && unzip -o orca.zip
 
+# Install prettier
+npm install --save-dev --save-exact prettier
+
+# Install composer dependencies
+composer install --dev
+
 # Generate all files
 make generate

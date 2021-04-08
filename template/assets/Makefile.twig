@@ -35,8 +35,10 @@ dockerhub-description:
 		--env README_FILEPATH='/workspace/README.md' \
 		peterevans/dockerhub-description:2
 
-push: dockerhub-description
-	@docker push ${NAME}
+push-image:
+    @docker push ${NAME}
+
+push: push-image dockerhub-description
 
 login:
 	@docker login -u "${DOCKER_USER}" -p "${DOCKER_PASSWORD}"

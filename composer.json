@@ -1,0 +1,24 @@
+{
+  "name": "ambimax/k8s-php-docker-parser",
+  "description": "Helper to make php.ini usable with ENV variable",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tobias Schifftner",
+      "email": "ts@ambimax.de"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "",
+      "template/assets/helper/"
+    ]
+  },
+  "require-dev": {
+    "mikey179/vfsstream": "^1.6",
+    "phpunit/phpunit": "^9",
+    "twig/twig": "^3.3",
+    "maddhatter/markdown-table": "^1.0"
+  }
+}

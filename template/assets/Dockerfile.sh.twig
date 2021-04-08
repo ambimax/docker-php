@@ -1,0 +1,119 @@
+##################################################################
+# Official Ambimax PHP Dockerimage
+# Image: {{ orca.image }}
+# Tag: {{ orca.tag }}
+# Copyright 2021, Tobias Schifftner, Ambimax GmbH
+##################################################################
+
+FROM {{ base_image }}
+
+ARG HEALTHCHECK_SCRIPT_URL=https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck
+
+LABEL title="Ambimax PHP Dockerimage {{ orca.image }}:{{ orca.tag }}" \
+      maintainer="Ambimax GmbH"
+
+# remember build-date
+RUN date > /build.txt
+
+{% block apt_package_install %}
+{% include 'template/components/apt/install-packages.sh.twig' %}
+{% endblock %}
+
+{% block apk_package_install %}
+{% include 'template/components/apk/install-packages.sh.twig' %}
+{% endblock %}
+
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN curl $HEALTHCHECK_SCRIPT_URL > /usr/local/bin/php-fpm-healthcheck; \
+	chmod +x /usr/local/bin/php-fpm-healthcheck;
+
+RUN install-php-extensions {{  php.extensions|join(" \\\n\t") }}
+
+
+{% block pecl_package_install %}
+{% include 'template/components/pecl/install-packages.sh.twig' %}
+{% endblock %}
+
+{% block php_extensions_configure %}
+{% include 'template/components/php/configure-extensions.sh.twig' %}
+{% endblock %}
+
+{% block php_extensions_install %}
+{% include 'template/components/php/install-extensions.sh.twig' %}
+{% endblock %}
+
+{% block php_extensions_enable %}
+{% include 'template/components/php/enable-extensions.sh.twig' %}
+{% endblock %}
+
+{% if add.files|length > 0 %}
+##################################################
+##### Copy files
+##################################################
+
+{% for key, value in add.files %}
+COPY {{ key }} {{ value }}
+{% endfor %}
+
+{% endif %}
+
+##################################################
+##### Parse/generate ini files for ENV usage
+##################################################
+
+ENV PHP_INI_DIR="/usr/local/etc/php/"
+COPY helper/parseIniFiles.php "$PHP_INI_DIR/parseIniFiles.php"
+
+# Set default php variables before parsing
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/conf.d/php.ini"; \
+	php -f "$PHP_INI_DIR/parseIniFiles.php";
+
+COPY config/php/php-fpm.conf /usr/local/etc/php-fpm.conf
+
+RUN sed -i '/root/s/ash/bash/g' /etc/passwd; \
+	sed -i '/www-data/s/nologin/bash/g' /etc/passwd;
+
+##################################################
+##### All ENV variables for PHP configuration
+##################################################
+
+{% include 'template/components/php/' ~ php.version ~ '/assets/all.nonempty.env' %}
+
+{% for key in php.extensions %}
+{% include 'template/components/php/' ~ php.version ~ '/assets/' ~ key ~ '.nonempty.env' ignore missing only %}
+
+{% endfor %}
+
+# Defaults for PHP-FPM
+ENV PHP_FPM_SYSLOG_FACILITY=daemon
+ENV PHP_FPM_SYSLOG_IDENT=php-fpm
+ENV PHP_FPM_LOG_LEVEL=notice
+ENV PHP_FPM_LOG_LIMIT=4096
+ENV PHP_FPM_LOG_BUFFERING=yes
+ENV PHP_FPM_EVENTS_MECHANISM=epoll
+ENV PHP_FPM_PM=static
+ENV PHP_FPM_MAX_CHILDREN=20
+ENV PHP_FPM_MAX_REQUESTS=1000
+ENV PHP_FPM_START_SERVERS=2
+ENV PHP_FPM_MIN_SPARE_SERVERS=1
+ENV PHP_FPM_MAX_SPARE_SERVERS=3
+ENV PHP_FPM_PROCESS_IDLE_TIMEOUT=10
+ENV PHP_FPM_ACCESS_FORMAT %R - %u %t \\\"%m %r\\\" %s
+ENV PHP_FPM_ACCESS_LOG=/proc/self/fd/2
+ENV PHP_FPM_ERROR_LOG=/proc/self/fd/2
+ENV PHP_FPM_LISTEN_PORT=9000
+
+##################################################
+##### Customized ENV variables
+##################################################
+
+{% for key, value in env %}
+ENV {{ key }} {{ value }}
+{% endfor %}
+
+
+WORKDIR {{ docker.workdir }}
+
+# No command - otherwise env vars are not set!
+#CMD ["php-fpm", "-F"]

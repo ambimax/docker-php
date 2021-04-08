@@ -1,0 +1,32 @@
+{
+  "name": "ambimax/php-8.0-buster",
+  "base_image": "php:8.0-fpm-buster",
+  "distro": "buster",
+  "tag": "8.0",
+  "env": {},
+  "php": {
+    "version": "8.0",
+    "extensions": [
+      "apcu",
+      "bcmath",
+      "calendar",
+      "ctype",
+      "exif",
+      "igbinary",
+      "lzf",
+      "opcache",
+      "gd",
+      "gmp",
+      "gettext",
+      "intl",
+      "pdo_mysql",
+      "memcached",
+      "redis",
+      "xsl",
+      "soap",
+      "sockets",
+      "xmlrpc",
+      "zip"
+    ]
+  }
+}

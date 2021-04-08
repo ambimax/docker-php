@@ -1,0 +1,230 @@
+schemaVersion: "2.0.0"
+
+globalEnvVars:
+
+metadataTest:
+    env:
+{% block test_metadata_env_defaults %}
+        # Default ENV variables
+        - key: PHP_INI_DIR
+          value: '/usr/local/etc/php/'
+        - key: PHP_FPM_PM
+          value: 'static'
+        - key: PHP_FPM_MAX_CHILDREN
+          value: '20'
+        - key: PHP_FPM_MAX_REQUESTS
+          value: '1000'
+{% endblock %}
+
+{% block test_metadata_env %}
+        # PHP default values
+        - key: PHP_ALLOW_URL_FOPEN
+          value: '1'
+        - key: PHP_FILE_UPLOADS
+          value: '1'
+        - key: PHP_MAX_INPUT_VARS
+          value: '1000'
+        - key: PHP_MAX_EXECUTION_TIME
+          value: '0'
+        - key: PHP_MAX_FILE_UPLOADS
+          value: '20'
+        - key: PHP_MAX_INPUT_TIME
+          value: '-1'
+        - key: PHP_MEMORY_LIMIT
+          value: '128M'
+        - key: PHP_POST_MAX_SIZE
+          value: '8M'
+        - key: PHP_UPLOAD_MAX_FILESIZE
+          value: '2M'
+        - key: PHP_SESSION_AUTO_START
+          value: '0'
+        - key: PHP_OPCACHE_ENABLE
+          value: '1'
+{% endblock %}
+
+    labels:
+        - key: "maintainer"
+          value: "Ambimax GmbH"
+
+    exposedPorts: [ "9000" ]
+    workdir: "/var/www/"
+
+commandTests:
+    - name: "check php version"
+      command: "php"
+      args: [ "--version" ]
+      expectedOutput:
+          - PHP
+          - {{ php.version }}.
+          - cli
+          - OPcache
+
+    - name: "check php-fpm version"
+      command: "php-fpm"
+      args: [ "-v" ]
+      expectedOutput:
+          - PHP
+          - {{ php.version }}.
+          - fpm-fcgi
+          - OPcache
+
+    - name: "check php extensions"
+      command: "php"
+      args: [ "-m" ]
+      expectedOutput:
+            - '[PHP Modules]'
+            - apcu
+            - Core
+            - ctype
+            - curl
+            - date
+            - dom
+            - fileinfo
+            - filter
+            - ftp
+            - hash
+            - iconv
+            - json
+            - libxml
+            - mbstring
+            - mysqlnd
+            - openssl
+            - pcre
+            - PDO
+            - pdo_sqlite
+            - Phar
+            - posix
+            - readline
+            - Reflection
+            - session
+            - SimpleXML
+            - sodium
+            - SPL
+            - sqlite3
+            - standard
+            - tokenizer
+            - xml
+            - xmlreader
+            - xmlwriter
+            - Zend OPcache
+            - zlib
+            - '[Zend Modules]'
+            - Zend OPcache
+
+    - name: "check php sodium version"
+      command: php
+      args:
+          - -r
+          - "echo (SODIUM_LIBRARY_MAJOR_VERSION >= 10) ? 'true' : 'false';"
+      expectedOutput:
+          - true
+
+    - name: "check php-fpm extensions"
+      command: "php-fpm"
+      args: [ "-m" ]
+      expectedOutput:
+            - '[PHP Modules]'
+            - apcu
+            - cgi-fcgi
+            - Core
+            - ctype
+            - curl
+            - date
+            - dom
+            - fileinfo
+            - filter
+            - ftp
+            - hash
+            - iconv
+            - json
+            - libxml
+            - mbstring
+            - mysqlnd
+            - openssl
+            - pcre
+            - PDO
+            - pdo_sqlite
+            - Phar
+            - posix
+            - readline
+            - Reflection
+            - session
+            - SimpleXML
+            - sodium
+            - SPL
+            - sqlite3
+            - standard
+            - tokenizer
+            - xml
+            - xmlreader
+            - xmlwriter
+            - Zend OPcache
+            - zlib
+            - '[Zend Modules]'
+            - Zend OPcache
+
+    - name: "check php-fpm configuration"
+      command: "php-fpm"
+      args: ["--nodaemonize", "--test"]
+      expectedError:
+          - "configuration file /usr/local/etc/php-fpm.conf test is successful"
+
+    - name: "check php-fpm-healthcheck"
+      command: "php-fpm-healthcheck"
+      args: [ "-v" ]
+      exitCode: 111
+      expectedOutput:
+          - Trying to connect to php-fpm via
+
+fileContentTests:
+    - name: "php-fpm.conf"
+      path: "/usr/local/etc/php-fpm.conf"
+      expectedContents:
+          - 'daemonize = no'
+          - 'user = www-data'
+          - 'group = www-data'
+          - 'listen = \${PHP_FPM_LISTEN_PORT}'
+          - 'listen = \[::\]:\${PHP_FPM_LISTEN_PORT}'
+          - 'pm = \${PHP_FPM_PM}'
+          - 'pm.max_children = \${PHP_FPM_MAX_CHILDREN}'
+          - 'pm.status_path = /status'
+          - 'ping.path = /ping'
+          - 'clear_env = no'
+
+    - name: "php.ini"
+      path: "/usr/local/etc/php/conf.d/php.ini"
+      expectedContents:
+          - 'Defaults for php'
+          - 'allow_url_fopen=\${PHP_ALLOW_URL_FOPEN}'
+          - 'allow_url_include=\${PHP_ALLOW_URL_INCLUDE}'
+          - 'error_log=\${PHP_ERROR_LOG}'
+          - 'expose_php=\${PHP_EXPOSE_PHP}'
+          - 'file_uploads=\${PHP_FILE_UPLOADS}'
+          - 'log_errors=\${PHP_LOG_ERRORS}'
+          - 'max_input_vars=\${PHP_MAX_INPUT_VARS}'
+          - 'max_execution_time=\${PHP_MAX_EXECUTION_TIME}'
+          - 'max_file_uploads=\${PHP_MAX_FILE_UPLOADS}'
+          - 'max_input_time=\${PHP_MAX_INPUT_TIME}'
+          - 'memory_limit=\${PHP_MEMORY_LIMIT}'
+          - 'post_max_size=\${PHP_POST_MAX_SIZE}'
+          - 'upload_max_filesize=\${PHP_UPLOAD_MAX_FILESIZE}'
+          - 'upload_tmp_dir=\${PHP_UPLOAD_TMP_DIR}'
+
+    - name: "apc.ini"
+      path: "/usr/local/etc/php/conf.d/apc.ini"
+      expectedContents:
+          - 'apc.enable_cli=\${PHP_APC_ENABLE_CLI}'
+          - 'apc.gc_ttl=\${PHP_APC_GC_TTL}'
+          - 'apc.ttl=\${PHP_APC_TTL}'
+
+    - name: "date.ini"
+      path: "/usr/local/etc/php/conf.d/date.ini"
+      expectedContents:
+          - 'date.timezone=\${PHP_DATE_TIMEZONE}'
+
+    - name: "opcache.ini"
+      path: "/usr/local/etc/php/conf.d/opcache.ini"
+      expectedContents:
+          - 'opcache.enable=\${PHP_OPCACHE_ENABLE}'
+          - 'opcache.memory_consumption=\${PHP_OPCACHE_MEMORY_CONSUMPTION}'
+          - 'opcache.save_comments=\${PHP_OPCACHE_SAVE_COMMENTS}'

@@ -1,0 +1,30 @@
+{
+  "docker": {
+    "workdir": "/var/www/",
+    "command": ["php-fpm", "-F"]
+  },
+  "env": {},
+  "php": {
+    "extensions": [],
+    "ext_install": [],
+    "ext_enable": [],
+    "ext_configure": []
+  },
+  "apt": {
+    "packages": ["libfcgi-bin", "nano", "wget"]
+  },
+  "apk": {
+    "packages": ["fcgi", "bash", "nano", "wget", "nano-syntax"]
+  },
+  "pecl": {
+    "packages": [],
+    "install_disabled": []
+  },
+  "add": {
+    "files": {
+      "config/bash/.bashrc": "/etc/bash.bashrc",
+      "config/bash/DIR_COLORS": "/etc/DIR_COLORS",
+      "config/nano/nanorc": "/etc/nanorc"
+    }
+  }
+}

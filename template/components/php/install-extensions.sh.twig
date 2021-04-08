@@ -1,0 +1,7 @@
+{% if php.ext_install|length > 0 %}
+##################################################################
+# Install php extensions
+##################################################################
+RUN docker-php-ext-install -j$(nproc) \
+	{{  php.ext_install|join(" \\\n\t") }}
+{% endif %}

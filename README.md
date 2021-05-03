@@ -15,19 +15,19 @@ Currently supported Frameworks and Apps:
 
 ### Debian Buster
 
-| PHP Version | Image                                                                                     |
-| ----------- | ----------------------------------------------------------------------------------------- |
-| 7.3         | [ambimax/php-7.3-buster](https://hub.docker.com/repository/docker/ambimax/php-7.3-buster) |
-| 7.4         | [ambimax/php-7.4-buster](https://hub.docker.com/repository/docker/ambimax/php-7.4-buster) |
-| 8.0         | [ambimax/php-8.0-buster](https://hub.docker.com/repository/docker/ambimax/php-8.0-buster) |
+| PHP Version | Image                                                                     |
+| ----------- | ------------------------------------------------------------------------- |
+| 7.3         | [ambimax/php-7.3-buster](https://hub.docker.com/r/ambimax/php-7.3-buster) |
+| 7.4         | [ambimax/php-7.4-buster](https://hub.docker.com/r/ambimax/php-7.4-buster) |
+| 8.0         | [ambimax/php-8.0-buster](https://hub.docker.com/r/ambimax/php-8.0-buster) |
 
 ### Alpine 3.13
 
-| PHP Version | Image                                                                                             |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| 7.3         | [ambimax/php-7.3-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-7.3-alpine3.13) |
-| 7.4         | [ambimax/php-7.4-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-7.4-alpine3.13) |
-| 8.0         | [ambimax/php-8.0-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-8.0-alpine3.13) |
+| PHP Version | Image                                                                             |
+| ----------- | --------------------------------------------------------------------------------- |
+| 7.3         | [ambimax/php-7.3-alpine3.13](https://hub.docker.com/r/ambimax/php-7.3-alpine3.13) |
+| 7.4         | [ambimax/php-7.4-alpine3.13](https://hub.docker.com/r/ambimax/php-7.4-alpine3.13) |
+| 8.0         | [ambimax/php-8.0-alpine3.13](https://hub.docker.com/r/ambimax/php-8.0-alpine3.13) |
 
 ## Environment Variables
 
@@ -213,7 +213,7 @@ networks:
 
 ## Performance improvements
 
-Use igbinary for serizializion:
+Use igbinary for serialization:
 
 ```yaml
 PHP_SESSION_SERIALIZE_HANDLER: igbinary
@@ -236,12 +236,46 @@ PHP_APC_SERIALIZER: igbinary
     -   pgsql
     -   tidy
 
-## Tools
+## Tools used for image building
 
 -   [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test)
 -   [healthcheck](https://github.com/renatomefi/php-fpm-healthcheck)
 -   [Orca](https://github.com/orca-build/orca)
 -   [Docker PHP Extension Installer](https://github.com/mlocati/docker-php-extension-installer)
+
+## Updating this README.md
+
+Edit template file `template/README.md.twig` and run
+
+```bash
+make generate
+```
+
+If libraries are missing, use [composer](https://getcomposer.org/) for installation
+
+```bash
+composer install
+```
+
+## Adding new PHP version or PHP modules
+
+### Add PHP version
+
+1. Add variant to `manifest.json`
+2. Add variant template file to variants/
+3. Generate defaults
+
+### Generate defaults
+
+```bash
+make VERSION=8.0 VARIANT=alpine3.13 copybuild
+```
+
+What happens?
+
+1. Build new php variant image (ignoring errors)
+2. Copy generated files from new image to asset folder
+3. Rebuild image with generated configuration
 
 ## License
 

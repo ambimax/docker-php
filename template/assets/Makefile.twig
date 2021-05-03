@@ -4,6 +4,7 @@ TAG     = {{ tag }}
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
 ROOT 	= $(shell echo "${PWD}")
+SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variables."
 
 build: build-image tag-main-version tag-version tag-latest
 
@@ -32,6 +33,7 @@ dockerhub-description:
 		--env DOCKERHUB_USERNAME='${DOCKER_USER}' \
 		--env DOCKERHUB_PASSWORD='${DOCKER_PASSWORD}' \
 		--env DOCKERHUB_REPOSITORY='${NAME}' \
+		--env SHORT_DESCRIPTION='${SHORT_DESCRIPTION}' \
 		--env README_FILEPATH='/workspace/README.md' \
 		peterevans/dockerhub-description:2
 

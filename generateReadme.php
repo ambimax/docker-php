@@ -117,7 +117,7 @@ class generateReadme
 
             foreach($this->phpVersions as $phpVersion) {
                 $name = sprintf('ambimax/php-%s-%s', $phpVersion, $distro);
-                $url = sprintf('https://hub.docker.com/repository/docker/ambimax/php-%s-%s', $phpVersion, $distro);
+                $url = sprintf('https://hub.docker.com/r/ambimax/php-%s-%s', $phpVersion, $distro);
                 $link = sprintf('[%s](%s)', $name, $url);
                 $tableBuilder->row([$phpVersion, $link]);
             }

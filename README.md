@@ -15,19 +15,19 @@ Currently supported Frameworks and Apps:
 
 ### Debian Buster
 
-| PHP Version | Image                                                                                     |
-| ----------- | ----------------------------------------------------------------------------------------- |
-| 7.3         | [ambimax/php-7.3-buster](https://hub.docker.com/repository/docker/ambimax/php-7.3-buster) |
-| 7.4         | [ambimax/php-7.4-buster](https://hub.docker.com/repository/docker/ambimax/php-7.4-buster) |
-| 8.0         | [ambimax/php-8.0-buster](https://hub.docker.com/repository/docker/ambimax/php-8.0-buster) |
+| PHP Version | Image                                                                     |
+| ----------- | ------------------------------------------------------------------------- |
+| 7.3         | [ambimax/php-7.3-buster](https://hub.docker.com/r/ambimax/php-7.3-buster) |
+| 7.4         | [ambimax/php-7.4-buster](https://hub.docker.com/r/ambimax/php-7.4-buster) |
+| 8.0         | [ambimax/php-8.0-buster](https://hub.docker.com/r/ambimax/php-8.0-buster) |
 
 ### Alpine 3.13
 
-| PHP Version | Image                                                                                             |
-| ----------- | ------------------------------------------------------------------------------------------------- |
-| 7.3         | [ambimax/php-7.3-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-7.3-alpine3.13) |
-| 7.4         | [ambimax/php-7.4-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-7.4-alpine3.13) |
-| 8.0         | [ambimax/php-8.0-alpine3.13](https://hub.docker.com/repository/docker/ambimax/php-8.0-alpine3.13) |
+| PHP Version | Image                                                                             |
+| ----------- | --------------------------------------------------------------------------------- |
+| 7.3         | [ambimax/php-7.3-alpine3.13](https://hub.docker.com/r/ambimax/php-7.3-alpine3.13) |
+| 7.4         | [ambimax/php-7.4-alpine3.13](https://hub.docker.com/r/ambimax/php-7.4-alpine3.13) |
+| 8.0         | [ambimax/php-8.0-alpine3.13](https://hub.docker.com/r/ambimax/php-8.0-alpine3.13) |
 
 ## Environment Variables
 

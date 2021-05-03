@@ -61,7 +61,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_REG_PASSWORD }}
 
       - name: Update dockerhub description
-        if: github.ref == 'refs/heads/v2'
+        # if: github.ref == 'refs/heads/v2'
         working-directory: 'dist/images/${{ matrix.WORKDIR }}'
         run: make dockerhub-description
         env:

@@ -3,7 +3,7 @@ NAME	= {{ name }}
 TAG     = {{ tag }}
 IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
-ROOT 	= $(shell dirname $(shell dirname $(shell dirname "${PWD}")))
+ROOT 	= $(shell echo "${PWD}")
 
 build: build-image tag-main-version tag-version tag-latest
 
@@ -38,7 +38,7 @@ dockerhub-description:
 push-image:
 	@docker push ${NAME}
 
-push: push-image
+push: push-image dockerhub-description
 
 login:
 	@docker login -u "${DOCKER_USER}" -p "${DOCKER_PASSWORD}"

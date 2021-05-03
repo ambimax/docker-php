@@ -28,12 +28,7 @@ official-test:
 	~/official-images/test/run.sh "${IMG}"
 
 dockerhub-description:
-	@echo "volume: ${ROOT}:/workspace"
-	@echo "name: ${NAME}"
-	@echo "volume: ${ROOT}:/workspace"
-	ls -lah "${ROOT}"
-
-	docker run --volume "${ROOT}:/workspace" \
+	@docker run --volume "${ROOT}:/workspace" \
 		--env DOCKERHUB_USERNAME='${DOCKER_USER}' \
 		--env DOCKERHUB_PASSWORD='${DOCKER_PASSWORD}' \
 		--env DOCKERHUB_REPOSITORY='${NAME}' \
@@ -43,7 +38,7 @@ dockerhub-description:
 push-image:
 	@docker push ${NAME}
 
-push: push-image
+push: push-image dockerhub-description
 
 login:
 	@docker login -u "${DOCKER_USER}" -p "${DOCKER_PASSWORD}"

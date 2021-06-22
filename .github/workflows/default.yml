@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: v1
 
       - name: Prepare environment
         run: bash ${GITHUB_WORKSPACE}/.github/scripts/prepare-workflow.sh

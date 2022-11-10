@@ -10,7 +10,7 @@ FROM {{ base_image }}
 ARG HEALTHCHECK_SCRIPT_URL=https://raw.githubusercontent.com/renatomefi/php-fpm-healthcheck/v0.5.0/php-fpm-healthcheck
 
 LABEL title="Ambimax PHP Dockerimage {{ orca.image }}:{{ orca.tag }}" \
-      maintainer="Ambimax GmbH"
+	maintainer="Ambimax GmbH"
 
 # remember build-date
 RUN date > /build.txt
@@ -109,7 +109,7 @@ ENV PHP_FPM_LISTEN_PORT=9000
 ##################################################
 
 {% for key, value in env %}
-ENV {{ key }} {{ value }}
+ENV {{ key }}={{ value }}
 {% endfor %}
 
 

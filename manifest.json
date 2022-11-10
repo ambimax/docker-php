@@ -2,7 +2,8 @@
   "images": {
     "7.3": ["7.3/buster:buster", "7.3/alpine3.13:alpine3.13"],
     "7.4": ["7.4/buster:buster", "7.4/alpine3.13:alpine3.13"],
-    "8.0": ["8.0/buster:buster", "8.0/alpine3.13:alpine3.13"]
+    "8.0": ["8.0/buster:buster", "8.0/alpine3.13:alpine3.13"],
+    "8.1": ["8.1/bullseye:bullseye", "8.1/alpine3.16:alpine3.16"]
   },
   "shared_assets": "template/assets",
   "shared_variables": "template/variables.json",

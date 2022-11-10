@@ -1,6 +1,6 @@
-{% if distro == 'alpine3.13' and apk.packages|length > 0 %}
+{% if distro starts with 'alpine' and apk.packages|length > 0 %}
 ##################################################################
-# Install apt packages
+# Install apk packages
 ##################################################################
 RUN apk add --no-cache \
 	{{  apk.packages|join(" \\\n\t") }}

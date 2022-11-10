@@ -1,0 +1,32 @@
+{
+  "name": "ambimax/php-8.1-alpine3.16",
+  "base_image": "php:8.1-fpm-alpine3.16",
+  "distro": "alpine3.13",
+  "tag": "8.1",
+  "env": {},
+  "php": {
+    "version": "8.1",
+    "extensions": [
+      "apcu",
+      "bcmath",
+      "calendar",
+      "ctype",
+      "exif",
+      "igbinary",
+      "lzf",
+      "opcache",
+      "gd",
+      "gmp",
+      "gettext",
+      "intl",
+      "pdo_mysql",
+      "memcached",
+      "redis",
+      "xsl",
+      "soap",
+      "sockets",
+      "xmlrpc",
+      "zip"
+    ]
+  }
+}

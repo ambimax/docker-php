@@ -19,7 +19,7 @@ services:
       backend:
 
   nginx:
-    image: nginx:1.19-alpine
+    image: nginx:1.23-alpine
     volumes:
       - "${PWD}/config/nginx:/etc/nginx/templates"
       - "${PWD}/src:/var/www/"

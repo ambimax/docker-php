@@ -19,6 +19,8 @@ jobs:
           - 7.4/buster
           - 8.0/alpine3.13
           - 8.0/buster
+          - 8.1/alpine3.16
+          - 8.1/bullseye
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

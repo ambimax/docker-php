@@ -3,7 +3,9 @@
     "workdir": "/var/www/",
     "command": ["php-fpm", "-F"]
   },
-  "env": {},
+  "env": {
+    "PHP_VARIABLES_ORDER": "EGPCS"
+  },
   "php": {
     "extensions": [],
     "ext_install": [],

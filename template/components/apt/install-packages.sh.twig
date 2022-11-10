@@ -1,4 +1,4 @@
-{% if distro == 'buster' and apt.packages|length > 0 %}
+{% if distro in ['buster', 'bullseye'] and apt.packages|length > 0 %}
 ##################################################################
 # Install apt packages
 ##################################################################

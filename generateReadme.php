@@ -10,30 +10,46 @@ class generateReadme
 {
     private $twig;
 
-    private $modules = '';
+    private array $phpVersions;
+    private array $images;
+    private array $distros = [];
 
-    private $distros = [
-        'buster' => 'Debian Buster',
-        'alpine3.13' => 'Alpine 3.13',
+    private array $extensions = [];
+
+    private array $debianVersions = [
+        'Bullseye' => 11,
+        'Buster' => 10,
     ];
-
-    private $phpVersions = ['7.3', '7.4', '8.0'];
-
-    private $extensions = [];
 
     /**
      * All available extensions on any php version
-     *
-     * @var array
      */
-    private $availableExtensions = [];
+    private array $availableExtensions = [];
 
     public function __construct()
     {
         $loader = new FilesystemLoader('template');
         $this->twig = new Environment($loader);
 
+        $this->_parseManifest();
         $this->_setExtensions();
+    }
+
+    protected function _parseManifest()
+    {
+        $json = (array) json_decode(file_get_contents('manifest.json'), true);
+        $this->phpVersions = array_keys($json['images']);
+        $this->images = $json['images'];
+
+        foreach($this->images as $phpVersion => $distroString) {
+            foreach($distroString as $slag) {
+                list($k, $distro) = explode(':', $slag);
+                if(!array_key_exists($distro, $this->distros)) {
+                    $this->distros[$distro] = ucfirst($distro);
+                }
+            }
+        }
+        sort($this->distros);
     }
 
     protected function _setExtensions()
@@ -105,21 +121,24 @@ class generateReadme
     public function getDockerHubMatrix()
     {
         $markdown = [];
-        foreach($this->distros as $distro => $name) {
-            $markdown[] = sprintf('### %s', $name);
+        foreach($this->images as $phpVersion => $distroString) {
+
+            $markdown[] = sprintf('### PHP %s', $phpVersion);
 
             // create instance of the table builder
             $tableBuilder = new Builder();
 
             $tableBuilder
-                ->headers(['PHP Version', 'Image'])
-                ->align(['L']);
+                 ->headers(['Distro', 'Image'])
+                 ->align(['L']);
 
-            foreach($this->phpVersions as $phpVersion) {
+            foreach($distroString as $slag) {
+                list($k, $distro) = explode(':', $slag);
+
                 $name = sprintf('ambimax/php-%s-%s', $phpVersion, $distro);
                 $url = sprintf('https://hub.docker.com/r/ambimax/php-%s-%s', $phpVersion, $distro);
                 $link = sprintf('[%s](%s)', $name, $url);
-                $tableBuilder->row([$phpVersion, $link]);
+                $tableBuilder->row([ucfirst($distro), $link]);
             }
 
             $markdown[] = $tableBuilder->render();
@@ -149,12 +168,67 @@ class generateReadme
         return $tableBuilder->render();
     }
 
+    public function getEndOfLifeTemplate()
+    {
+        // create instance of the table builder
+        $tableBuilder = new Builder();
+
+        $tableBuilder
+            ->headers(['Name', 'End Of Life'])
+            ->align(['L']);
+
+        $matrix = [];
+
+        // PHP
+        foreach($this->phpVersions as $version) {
+            $matrix[] = [
+                'product' => 'php',
+                'cycle' => $version,
+                'label' => sprintf('PHP %s', $version)
+            ];
+        }
+
+        foreach($this->distros as $name) {
+            switch($name) {
+                case preg_match('/alpine(.*)/i', $name, $match) ? true : false:
+                    $matrix[] = [
+                        'product' => 'alpine',
+                        'cycle' => $match[1],
+                        'label' => sprintf('Alpine %s',$match[1])
+                    ];
+                    break;
+                default:
+                    $cycle = $this->debianVersions[$name];
+                    $matrix[] = [
+                        'product' => 'debian',
+                        'cycle' => $cycle,
+                        'label' => sprintf('Debian %s', $name),
+                    ];
+                    break;
+            }
+        }
+
+        foreach($matrix as $product) {
+            $url = sprintf('https://endoflife.date/api/%s/%s.json', $product['product'], $product['cycle']);
+            $api = (array) json_decode(file_get_contents($url));
+            $row = [
+                $product['label'],
+                $api['eol']
+            ];
+            $tableBuilder->row($row);
+        }
+
+
+        return $tableBuilder->render();
+    }
+
     public function renderTemplate()
     {
         return $this->twig->render('README.md.twig', [
             'php_modules' => $this->getPhpModulesMatrix(),
             'docker_hub_matrix' => $this->getDockerHubMatrix(),
             'environment_variables_matrix' => $this->getEnvironmentVariablesMatrix(),
+            'endoflife' => $this->getEndOfLifeTemplate()
         ]);
     }
 

@@ -41,6 +41,8 @@ Currently supported Frameworks and Apps:
 | Bullseye   | [ambimax/php-8.1-bullseye](https://hub.docker.com/r/ambimax/php-8.1-bullseye)     |
 | Alpine3.16 | [ambimax/php-8.1-alpine3.16](https://hub.docker.com/r/ambimax/php-8.1-alpine3.16) |
 
+**Older images** can be found on https://hub.docker.com/u/ambimax
+
 ## Environment Variables
 
 | PHP Version | Link                                                                                     |
@@ -180,7 +182,7 @@ networks:
     backend:
 ```
 
-**Important:** Command (CMD) must be defined!
+**Important:** Command `command: ['php-fpm', '-F']` must be defined!
 
 Extended setup example:
 

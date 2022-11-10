@@ -15,6 +15,8 @@ Currently supported Frameworks and Apps:
 
 {{ docker_hub_matrix }}
 
+**Older images** can be found on https://hub.docker.com/u/ambimax
+
 ## Environment Variables
 
 {{ environment_variables_matrix }}
@@ -87,7 +89,7 @@ networks:
     backend:
 ```
 
-**Important:** Command (CMD) must be defined!
+**Important:** Command `command: ['php-fpm', '-F']` must be defined!
 
 Extended setup example:
 

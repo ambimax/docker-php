@@ -1,11 +1,11 @@
 {
-  "name": "ambimax/php-8.1-alpine3.16",
-  "base_image": "php:8.1-fpm-alpine3.16",
-  "distro": "alpine3.16",
-  "tag": "8.1",
+  "name": "ambimax/php-8.2-alpine3.17",
+  "base_image": "php:8.2-fpm-alpine3.17",
+  "distro": "alpine3.17",
+  "tag": "8.2",
   "env": {},
   "php": {
-    "version": "8.1",
+    "version": "8.2",
     "extensions": [
       "apcu",
       "bcmath",

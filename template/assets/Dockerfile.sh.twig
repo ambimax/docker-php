@@ -2,7 +2,7 @@
 # Official Ambimax PHP Dockerimage
 # Image: {{ orca.image }}
 # Tag: {{ orca.tag }}
-# Copyright 2021, Tobias Schifftner, Ambimax GmbH
+# Copyright 2021 - 2023, Tobias Schifftner, Ambimax GmbH
 ##################################################################
 
 FROM {{ base_image }}
@@ -64,12 +64,11 @@ COPY {{ key }} {{ value }}
 
 ENV PHP_INI_DIR="/usr/local/etc/php/"
 COPY helper/parseIniFiles.php "$PHP_INI_DIR/parseIniFiles.php"
+COPY config/php/php-fpm.conf /usr/local/etc/php-fpm.conf
+COPY config/php/{{ orca.image }}/conf.d /usr/local/etc/php/conf.d
 
 # Set default php variables before parsing
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/conf.d/php.ini"; \
-	php -f "$PHP_INI_DIR/parseIniFiles.php";
-
-COPY config/php/php-fpm.conf /usr/local/etc/php-fpm.conf
+RUN test -s "$PHP_INI_DIR/conf.d/php.ini" || { mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/conf.d/php.ini"; php -f "$PHP_INI_DIR/parseIniFiles.php"; }
 
 RUN sed -i '/root/s/ash/bash/g' /etc/passwd; \
 	sed -i '/www-data/s/nologin/bash/g' /etc/passwd;

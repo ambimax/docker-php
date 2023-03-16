@@ -13,33 +13,26 @@ Currently supported Frameworks and Apps:
 
 ## Docker Images on hub.docker.com
 
-### PHP 7.3
-
-| Distro     | Image                                                                             |
-| ---------- | --------------------------------------------------------------------------------- |
-| Buster     | [ambimax/php-7.3-buster](https://hub.docker.com/r/ambimax/php-7.3-buster)         |
-| Alpine3.13 | [ambimax/php-7.3-alpine3.13](https://hub.docker.com/r/ambimax/php-7.3-alpine3.13) |
-
-### PHP 7.4
-
-| Distro     | Image                                                                             |
-| ---------- | --------------------------------------------------------------------------------- |
-| Buster     | [ambimax/php-7.4-buster](https://hub.docker.com/r/ambimax/php-7.4-buster)         |
-| Alpine3.13 | [ambimax/php-7.4-alpine3.13](https://hub.docker.com/r/ambimax/php-7.4-alpine3.13) |
-
 ### PHP 8.0
 
 | Distro     | Image                                                                             |
 | ---------- | --------------------------------------------------------------------------------- |
 | Buster     | [ambimax/php-8.0-buster](https://hub.docker.com/r/ambimax/php-8.0-buster)         |
-| Alpine3.13 | [ambimax/php-8.0-alpine3.13](https://hub.docker.com/r/ambimax/php-8.0-alpine3.13) |
+| Alpine3.16 | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
 
 ### PHP 8.1
 
 | Distro     | Image                                                                             |
 | ---------- | --------------------------------------------------------------------------------- |
 | Bullseye   | [ambimax/php-8.1-bullseye](https://hub.docker.com/r/ambimax/php-8.1-bullseye)     |
-| Alpine3.16 | [ambimax/php-8.1-alpine3.16](https://hub.docker.com/r/ambimax/php-8.1-alpine3.16) |
+| Alpine3.17 | [ambimax/php-8.1-alpine3.17](https://hub.docker.com/r/ambimax/php-8.1-alpine3.17) |
+
+### PHP 8.2
+
+| Distro     | Image                                                                             |
+| ---------- | --------------------------------------------------------------------------------- |
+| Bullseye   | [ambimax/php-8.2-bullseye](https://hub.docker.com/r/ambimax/php-8.2-bullseye)     |
+| Alpine3.17 | [ambimax/php-8.2-alpine3.17](https://hub.docker.com/r/ambimax/php-8.2-alpine3.17) |
 
 **Older images** can be found on https://hub.docker.com/u/ambimax
 
@@ -47,80 +40,79 @@ Currently supported Frameworks and Apps:
 
 | PHP Version | Link                                                                                     |
 | ----------- | ---------------------------------------------------------------------------------------- |
-| 7.3         | [template/components/php/7.3/assets/all.env](template/components/php/7.3/assets/all.env) |
-| 7.4         | [template/components/php/7.4/assets/all.env](template/components/php/7.4/assets/all.env) |
 | 8.0         | [template/components/php/8.0/assets/all.env](template/components/php/8.0/assets/all.env) |
 | 8.1         | [template/components/php/8.1/assets/all.env](template/components/php/8.1/assets/all.env) |
+| 8.2         | [template/components/php/8.2/assets/all.env](template/components/php/8.2/assets/all.env) |
 
 ## End Of Life
 
 | Name            | End Of Life |
 | --------------- | ----------- |
-| PHP 7.3         | 2021-12-06  |
-| PHP 7.4         | 2022-11-28  |
 | PHP 8.0         | 2023-11-26  |
 | PHP 8.1         | 2024-11-25  |
-| Alpine 3.13     | 2022-11-01  |
+| PHP 8.2         | 2025-12-08  |
 | Alpine 3.16     | 2024-05-23  |
-| Debian Bullseye | 2026-08-15  |
-| Debian Buster   | 2024-06-01  |
+| Alpine 3.17     | 2024-11-22  |
+| Debian Bullseye | 2024-07-01  |
+| Debian Buster   | 2022-09-10  |
 
 ## Installed php extensions
 
-| PHP Module   | 7.3 | 7.4 | 8.0 | 8.1 |
-| ------------ | --- | --- | --- | --- |
-| Core         | ✓   | ✓   | ✓   | ✓   |
-| PDO          | ✓   | ✓   | ✓   | ✓   |
-| Phar         | ✓   | ✓   | ✓   | ✓   |
-| Reflection   | ✓   | ✓   | ✓   | ✓   |
-| SPL          | ✓   | ✓   | ✓   | ✓   |
-| SimpleXML    | ✓   | ✓   | ✓   | ✓   |
-| Zend OPcache | ✓   | ✓   | ✓   | ✓   |
-| apcu         | ✓   | ✓   | ✓   | ✓   |
-| bcmath       | ✓   | ✓   | ✓   | ✓   |
-| calendar     | ✓   | ✓   | ✓   | ✓   |
-| ctype        | ✓   | ✓   | ✓   | ✓   |
-| curl         | ✓   | ✓   | ✓   | ✓   |
-| date         | ✓   | ✓   | ✓   | ✓   |
-| dom          | ✓   | ✓   | ✓   | ✓   |
-| exif         | ✓   | ✓   | ✓   | ✓   |
-| fileinfo     | ✓   | ✓   | ✓   | ✓   |
-| filter       | ✓   | ✓   | ✓   | ✓   |
-| ftp          | ✓   | ✓   | ✓   | ✓   |
-| gd           | ✓   | ✓   | ✓   | ✓   |
-| gettext      | ✓   | ✓   | ✓   | ✓   |
-| gmp          | ✓   | ✓   | ✓   | ✓   |
-| hash         | ✓   | ✓   | ✓   | ✓   |
-| iconv        | ✓   | ✓   | ✓   | ✓   |
-| igbinary     | ✓   | ✓   | ✓   | ✓   |
-| intl         | ✓   | ✓   | ✓   | ✓   |
-| json         | ✓   | ✓   | ✓   | ✓   |
-| libxml       | ✓   | ✓   | ✓   | ✓   |
-| lzf          | ✓   | ✓   | ✓   | ✓   |
-| mbstring     | ✓   | ✓   | ✓   | ✓   |
-| memcached    | ✓   | ✓   | ✓   | ✓   |
-| mysqlnd      | ✓   | ✓   | ✓   | ✓   |
-| openssl      | ✓   | ✓   | ✓   | ✓   |
-| pcre         | ✓   | ✓   | ✓   | ✓   |
-| pdo_mysql    | ✓   | ✓   | ✓   | ✓   |
-| pdo_sqlite   | ✓   | ✓   | ✓   | ✓   |
-| posix        | ✓   | ✓   | ✓   | ✓   |
-| readline     | ✓   | ✓   | ✓   | ✓   |
-| redis        | ✓   | ✓   | ✓   | ✓   |
-| session      | ✓   | ✓   | ✓   | ✓   |
-| soap         | ✓   | ✓   | ✓   | ✓   |
-| sockets      | ✓   | ✓   | ✓   | ✓   |
-| sodium       | ✓   | ✓   | ✓   | ✓   |
-| sqlite3      | ✓   | ✓   | ✓   | ✓   |
-| standard     | ✓   | ✓   | ✓   | ✓   |
-| tokenizer    | ✓   | ✓   | ✓   | ✓   |
-| xml          | ✓   | ✓   | ✓   | ✓   |
-| xmlreader    | ✓   | ✓   | ✓   | ✓   |
-| xmlrpc       | ✓   | ✓   | ✓   | ✓   |
-| xmlwriter    | ✓   | ✓   | ✓   | ✓   |
-| xsl          | ✓   | ✓   | ✓   | ✓   |
-| zip          | ✓   | ✓   | ✓   | ✓   |
-| zlib         | ✓   | ✓   | ✓   | ✓   |
+| PHP Module   | 8.0 | 8.1 | 8.2 |
+| ------------ | --- | --- | --- |
+| Core         | ✓   | ✓   | ✓   |
+| PDO          | ✓   | ✓   | ✓   |
+| Phar         | ✓   | ✓   | ✓   |
+| Reflection   | ✓   | ✓   | ✓   |
+| SPL          | ✓   | ✓   | ✓   |
+| SimpleXML    | ✓   | ✓   | ✓   |
+| Zend OPcache | ✓   | ✓   | ✓   |
+| apcu         | ✓   | ✓   | ✓   |
+| bcmath       | ✓   | ✓   | ✓   |
+| calendar     | ✓   | ✓   | ✓   |
+| ctype        | ✓   | ✓   | ✓   |
+| curl         | ✓   | ✓   | ✓   |
+| date         | ✓   | ✓   | ✓   |
+| dom          | ✓   | ✓   | ✓   |
+| exif         | ✓   | ✓   | ✓   |
+| fileinfo     | ✓   | ✓   | ✓   |
+| filter       | ✓   | ✓   | ✓   |
+| ftp          | ✓   | ✓   | ✓   |
+| gd           | ✓   | ✓   | ✓   |
+| gettext      | ✓   | ✓   | ✓   |
+| gmp          | ✓   | ✓   | ✓   |
+| hash         | ✓   | ✓   | ✓   |
+| iconv        | ✓   | ✓   | ✓   |
+| igbinary     | ✓   | ✓   | ✓   |
+| intl         | ✓   | ✓   | ✓   |
+| json         | ✓   | ✓   | ✓   |
+| libxml       | ✓   | ✓   | ✓   |
+| lzf          | ✓   | ✓   | ✓   |
+| mbstring     | ✓   | ✓   | ✓   |
+| memcached    | ✓   | ✓   | ✓   |
+| mysqlnd      | ✓   | ✓   | ✓   |
+| openssl      | ✓   | ✓   | ✓   |
+| pcre         | ✓   | ✓   | ✓   |
+| pdo_mysql    | ✓   | ✓   | ✓   |
+| pdo_sqlite   | ✓   | ✓   | ✓   |
+| posix        | ✓   | ✓   | ✓   |
+| random       |     |     | ✓   |
+| readline     | ✓   | ✓   | ✓   |
+| redis        | ✓   | ✓   | ✓   |
+| session      | ✓   | ✓   | ✓   |
+| soap         | ✓   | ✓   | ✓   |
+| sockets      | ✓   | ✓   | ✓   |
+| sodium       | ✓   | ✓   | ✓   |
+| sqlite3      | ✓   | ✓   | ✓   |
+| standard     | ✓   | ✓   | ✓   |
+| tokenizer    | ✓   | ✓   | ✓   |
+| xml          | ✓   | ✓   | ✓   |
+| xmlreader    | ✓   | ✓   | ✓   |
+| xmlrpc       | ✓   | ✓   | ✓   |
+| xmlwriter    | ✓   | ✓   | ✓   |
+| xsl          | ✓   | ✓   | ✓   |
+| zip          | ✓   | ✓   | ✓   |
+| zlib         | ✓   | ✓   | ✓   |
 
 ## Docker Examples
 

@@ -17,8 +17,8 @@ class generateReadme
     private array $extensions = [];
 
     private array $debianVersions = [
-        'Bullseye' => 11,
         'Buster' => 10,
+        'Bullseye' => 11,
     ];
 
     /**

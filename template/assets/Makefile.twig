@@ -38,7 +38,7 @@ dockerhub-description:
 		peterevans/dockerhub-description:2
 
 push-image:
-	@docker push ${NAME}
+	@docker push --all-tags ${NAME}
 
 push: push-image dockerhub-description
 

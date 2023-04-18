@@ -48,14 +48,14 @@ class generateReadme
                 }
             }
         }
-        sort($this->distros);
+        sort($this->distros, SORT_NATURAL | SORT_FLAG_CASE);
     }
 
     protected function _setExtensions()
     {
         foreach($this->phpVersions as $phpVersion) {
             $this->extensions[$phpVersion] = $this->getModules($phpVersion);
-            sort($this->extensions[$phpVersion]);
+            sort($this->extensions[$phpVersion], SORT_NATURAL | SORT_FLAG_CASE);
         }
 
         foreach($this->extensions as $phpVersion => $extensions) {
@@ -66,7 +66,7 @@ class generateReadme
             }
         }
 
-        sort($this->availableExtensions);
+        sort($this->availableExtensions, SORT_NATURAL | SORT_FLAG_CASE);
     }
 
     public function getPhpAssetFileContent($filename, $phpVersion)
@@ -123,6 +123,7 @@ class generateReadme
         foreach($this->images as $phpVersion => $distroString) {
 
             $markdown[] = sprintf('### PHP %s', $phpVersion);
+            sort($distroString, SORT_NATURAL | SORT_FLAG_CASE);
 
             // create instance of the table builder
             $tableBuilder = new Builder();
@@ -137,7 +138,7 @@ class generateReadme
                 $name = sprintf('ambimax/php-%s-%s', $phpVersion, $distro);
                 $url = sprintf('https://hub.docker.com/r/ambimax/php-%s-%s', $phpVersion, $distro);
                 $link = sprintf('[%s](%s)', $name, $url);
-                $tableBuilder->row([ucfirst($distro), $link]);
+                $tableBuilder->row([$this->getDistroName($distro), $link]);
             }
 
             $markdown[] = $tableBuilder->render();
@@ -234,6 +235,18 @@ class generateReadme
     public function render()
     {
         file_put_contents('README.md', $this->renderTemplate());
+    }
+
+    public function getDistroName($distro): string {
+        switch(strtolower($distro)) {
+            case preg_match('/alpine(.*)/i', $distro, $match) ? true : false:
+                return sprintf('Alpine %s',$match[1]);
+
+            default:
+                return sprintf('Debian %s', ucfirst($distro));
+        }
+
+        return $distro;
     }
 }
 

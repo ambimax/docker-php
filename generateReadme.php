@@ -109,7 +109,7 @@ class generateReadme
             $row = [$module];
 
             foreach ($this->phpVersions as $phpVersion) {
-                $row[] = in_array($module, $this->extensions[$phpVersion]) ? ' ✓ ' : ' ';
+                $row[] = in_array($module, $this->extensions[$phpVersion]) ? ' ✓ ' : '';
             }
 
             $tableBuilder->row($row);

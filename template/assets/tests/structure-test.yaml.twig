@@ -73,43 +73,10 @@ commandTests:
       args: [ "-m" ]
       expectedOutput:
             - '[PHP Modules]'
-            - apcu
-            - Core
-            - ctype
-            - curl
-            - date
-            - dom
-            - fileinfo
-            - filter
-            - ftp
-            - hash
-            - iconv
-            - json
-            - libxml
-            - mbstring
-            - mysqlnd
-            - openssl
-            - pcre
-            - PDO
-            - pdo_sqlite
-            - Phar
-            - posix
-            - readline
-            - Reflection
-            - session
-            - SimpleXML
-            - sodium
-            - SPL
-            - sqlite3
-            - standard
-            - tokenizer
-            - xml
-            - xmlreader
-            - xmlwriter
-            - Zend OPcache
-            - zlib
             - '[Zend Modules]'
-            - Zend OPcache
+{% for key, value in php.extensions %}
+            - {{ value }}
+{% endfor %}
 
     - name: "check php sodium version"
       command: php
@@ -124,44 +91,11 @@ commandTests:
       args: [ "-m" ]
       expectedOutput:
             - '[PHP Modules]'
-            - apcu
-            - cgi-fcgi
-            - Core
-            - ctype
-            - curl
-            - date
-            - dom
-            - fileinfo
-            - filter
-            - ftp
-            - hash
-            - iconv
-            - json
-            - libxml
-            - mbstring
-            - mysqlnd
-            - openssl
-            - pcre
-            - PDO
-            - pdo_sqlite
-            - Phar
-            - posix
-            - readline
-            - Reflection
-            - session
-            - SimpleXML
-            - sodium
-            - SPL
-            - sqlite3
-            - standard
-            - tokenizer
-            - xml
-            - xmlreader
-            - xmlwriter
-            - Zend OPcache
-            - zlib
             - '[Zend Modules]'
-            - Zend OPcache
+            - cgi-fcgi
+{% for key, value in php.extensions %}
+            - {{ value }}
+{% endfor %}
 
     - name: "check php-fpm configuration"
       command: "php-fpm"

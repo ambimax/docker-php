@@ -1,7 +1,7 @@
 {
-  "name": "ambimax/php-8.0-buster",
-  "base_image": "php:8.0-fpm-buster",
-  "distro": "buster",
+  "name": "ambimax/php-8.0-bullseye",
+  "base_image": "php:8.0-fpm-bullseye",
+  "distro": "bullseye",
   "tag": "8.0",
   "env": {},
   "php": {

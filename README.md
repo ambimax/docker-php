@@ -15,25 +15,25 @@ Currently supported Frameworks and Apps:
 
 ### PHP 8.0
 
-| Distro     | Image                                                                             |
-| ---------- | --------------------------------------------------------------------------------- |
-| Buster     | [ambimax/php-8.0-buster](https://hub.docker.com/r/ambimax/php-8.0-buster)         |
-| Alpine3.16 | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
+| Distro          | Image                                                                             |
+| --------------- | --------------------------------------------------------------------------------- |
+| Alpine 3.16     | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
+| Debian Bullseye | [ambimax/php-8.0-bullseye](https://hub.docker.com/r/ambimax/php-8.0-bullseye)     |
 
 ### PHP 8.1
 
-| Distro     | Image                                                                             |
-| ---------- | --------------------------------------------------------------------------------- |
-| Bullseye   | [ambimax/php-8.1-bullseye](https://hub.docker.com/r/ambimax/php-8.1-bullseye)     |
-| Alpine3.16 | [ambimax/php-8.1-alpine3.16](https://hub.docker.com/r/ambimax/php-8.1-alpine3.16) |
-| Alpine3.17 | [ambimax/php-8.1-alpine3.17](https://hub.docker.com/r/ambimax/php-8.1-alpine3.17) |
+| Distro          | Image                                                                             |
+| --------------- | --------------------------------------------------------------------------------- |
+| Alpine 3.16     | [ambimax/php-8.1-alpine3.16](https://hub.docker.com/r/ambimax/php-8.1-alpine3.16) |
+| Alpine 3.17     | [ambimax/php-8.1-alpine3.17](https://hub.docker.com/r/ambimax/php-8.1-alpine3.17) |
+| Debian Bullseye | [ambimax/php-8.1-bullseye](https://hub.docker.com/r/ambimax/php-8.1-bullseye)     |
 
 ### PHP 8.2
 
-| Distro     | Image                                                                             |
-| ---------- | --------------------------------------------------------------------------------- |
-| Bullseye   | [ambimax/php-8.2-bullseye](https://hub.docker.com/r/ambimax/php-8.2-bullseye)     |
-| Alpine3.17 | [ambimax/php-8.2-alpine3.17](https://hub.docker.com/r/ambimax/php-8.2-alpine3.17) |
+| Distro          | Image                                                                             |
+| --------------- | --------------------------------------------------------------------------------- |
+| Alpine 3.17     | [ambimax/php-8.2-alpine3.17](https://hub.docker.com/r/ambimax/php-8.2-alpine3.17) |
+| Debian Bullseye | [ambimax/php-8.2-bullseye](https://hub.docker.com/r/ambimax/php-8.2-bullseye)     |
 
 **Older images** can be found on https://hub.docker.com/u/ambimax
 
@@ -55,22 +55,15 @@ Currently supported Frameworks and Apps:
 | Alpine 3.16     | 2024-05-23  |
 | Alpine 3.17     | 2024-11-22  |
 | Debian Bullseye | 2024-07-01  |
-| Debian Buster   | 2022-09-10  |
 
 ## Installed php extensions
 
 | PHP Module   | 8.0 | 8.1 | 8.2 |
 | ------------ | --- | --- | --- |
-| Core         | ✓   | ✓   | ✓   |
-| PDO          | ✓   | ✓   | ✓   |
-| Phar         | ✓   | ✓   | ✓   |
-| Reflection   | ✓   | ✓   | ✓   |
-| SPL          | ✓   | ✓   | ✓   |
-| SimpleXML    | ✓   | ✓   | ✓   |
-| Zend OPcache | ✓   | ✓   | ✓   |
 | apcu         | ✓   | ✓   | ✓   |
 | bcmath       | ✓   | ✓   | ✓   |
 | calendar     | ✓   | ✓   | ✓   |
+| Core         | ✓   | ✓   | ✓   |
 | ctype        | ✓   | ✓   | ✓   |
 | curl         | ✓   | ✓   | ✓   |
 | date         | ✓   | ✓   | ✓   |
@@ -94,16 +87,21 @@ Currently supported Frameworks and Apps:
 | mysqlnd      | ✓   | ✓   | ✓   |
 | openssl      | ✓   | ✓   | ✓   |
 | pcre         | ✓   | ✓   | ✓   |
+| PDO          | ✓   | ✓   | ✓   |
 | pdo_mysql    | ✓   | ✓   | ✓   |
 | pdo_sqlite   | ✓   | ✓   | ✓   |
+| Phar         | ✓   | ✓   | ✓   |
 | posix        | ✓   | ✓   | ✓   |
 | random       |     |     | ✓   |
 | readline     | ✓   | ✓   | ✓   |
 | redis        | ✓   | ✓   | ✓   |
+| Reflection   | ✓   | ✓   | ✓   |
 | session      | ✓   | ✓   | ✓   |
+| SimpleXML    | ✓   | ✓   | ✓   |
 | soap         | ✓   | ✓   | ✓   |
 | sockets      | ✓   | ✓   | ✓   |
 | sodium       | ✓   | ✓   | ✓   |
+| SPL          | ✓   | ✓   | ✓   |
 | sqlite3      | ✓   | ✓   | ✓   |
 | standard     | ✓   | ✓   | ✓   |
 | tokenizer    | ✓   | ✓   | ✓   |
@@ -112,6 +110,7 @@ Currently supported Frameworks and Apps:
 | xmlrpc       | ✓   | ✓   | ✓   |
 | xmlwriter    | ✓   | ✓   | ✓   |
 | xsl          | ✓   | ✓   | ✓   |
+| Zend OPcache | ✓   | ✓   | ✓   |
 | zip          | ✓   | ✓   | ✓   |
 | zlib         | ✓   | ✓   | ✓   |
 

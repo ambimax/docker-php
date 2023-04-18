@@ -14,7 +14,8 @@ jobs:
       matrix:
         WORKDIR:
           - 8.0/alpine3.16
-          - 8.0/buster
+          - 8.0/alpine3.17
+          - 8.0/bullseye
           - 8.1/alpine3.16
           - 8.1/alpine3.17
           - 8.1/bullseye

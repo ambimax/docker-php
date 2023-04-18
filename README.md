@@ -17,8 +17,9 @@ Currently supported Frameworks and Apps:
 
 | Distro     | Image                                                                             |
 | ---------- | --------------------------------------------------------------------------------- |
-| Buster     | [ambimax/php-8.0-buster](https://hub.docker.com/r/ambimax/php-8.0-buster)         |
+| Bullseye   | [ambimax/php-8.0-bullseye](https://hub.docker.com/r/ambimax/php-8.0-bullseye)     |
 | Alpine3.16 | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
+| Alpine3.17 | [ambimax/php-8.0-alpine3.17](https://hub.docker.com/r/ambimax/php-8.0-alpine3.17) |
 
 ### PHP 8.1
 
@@ -55,7 +56,6 @@ Currently supported Frameworks and Apps:
 | Alpine 3.16     | 2024-05-23  |
 | Alpine 3.17     | 2024-11-22  |
 | Debian Bullseye | 2024-07-01  |
-| Debian Buster   | 2022-09-10  |
 
 ## Installed php extensions
 

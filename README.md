@@ -18,7 +18,6 @@ Currently supported Frameworks and Apps:
 | Distro          | Image                                                                             |
 | --------------- | --------------------------------------------------------------------------------- |
 | Alpine 3.16     | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
-| Alpine 3.17     | [ambimax/php-8.0-alpine3.17](https://hub.docker.com/r/ambimax/php-8.0-alpine3.17) |
 | Debian Bullseye | [ambimax/php-8.0-bullseye](https://hub.docker.com/r/ambimax/php-8.0-bullseye)     |
 
 ### PHP 8.1

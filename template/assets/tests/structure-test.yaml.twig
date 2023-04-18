@@ -72,10 +72,47 @@ commandTests:
       command: "php"
       args: [ "-m" ]
       expectedOutput:
+            ### Default php extensions
             - '[PHP Modules]'
-            - '[Zend Modules]'
+            - Core
+            - curl
+            - date
+            - dom
+            - fileinfo
+            - filter
+            - ftp
+            - hash
+            - iconv
+            - json
+            - libxml
+            - mbstring
+            - mysqlnd
+            - openssl
+            - pcre
+            - PDO
+            - pdo_sqlite
+            - Phar
+            - posix
+            - readline
+            - Reflection
+            - session
+            - SimpleXML
+            - sodium
+            - SPL
+            - sqlite3
+            - standard
+            - tokenizer
+            - xml
+            - xmlreader
+            - xmlwriter
+            - zlib
+            ### Custom php extensions
 {% for key, value in php.extensions %}
+{% if value == "opcache" %}
+            - Zend OPcache
+{% else %}
             - {{ value }}
+{% endif %}
 {% endfor %}
 
     - name: "check php sodium version"
@@ -90,11 +127,48 @@ commandTests:
       command: "php-fpm"
       args: [ "-m" ]
       expectedOutput:
+            ### Default php extensions
             - '[PHP Modules]'
-            - '[Zend Modules]'
             - cgi-fcgi
+            - Core
+            - curl
+            - date
+            - dom
+            - fileinfo
+            - filter
+            - ftp
+            - hash
+            - iconv
+            - json
+            - libxml
+            - mbstring
+            - mysqlnd
+            - openssl
+            - pcre
+            - PDO
+            - pdo_sqlite
+            - Phar
+            - posix
+            - readline
+            - Reflection
+            - session
+            - SimpleXML
+            - sodium
+            - SPL
+            - sqlite3
+            - standard
+            - tokenizer
+            - xml
+            - xmlreader
+            - xmlwriter
+            - zlib
+            ### Custom php extensions
 {% for key, value in php.extensions %}
+{% if value == "opcache" %}
+            - Zend OPcache
+{% else %}
             - {{ value }}
+{% endif %}
 {% endfor %}
 
     - name: "check php-fpm configuration"

@@ -15,10 +15,16 @@ All environment variables can be found on [https://github.com/ambimax/docker-php
 
 ## End Of Life
 
-|Name| End Of Life |
-|:---:|:---:|
-|Debian Buster| June, 2024 |
-|Alpine 3.6 | November, 2022 |
+| Name            | End Of Life |
+| --------------- | ----------- |
+| PHP 7.3         | 2021-12-06  |
+| PHP 7.4         | 2022-11-28  |
+| PHP 8.0         | 2023-11-26  |
+| PHP 8.1         | 2024-11-25  |
+| Alpine 3.13     | 2022-11-01  |
+| Alpine 3.16     | 2024-05-23  |
+| Debian Bullseye | 2026-08-15  |
+| Debian Buster   | 2024-06-01  |
 
 ## Installed php extensions
 
@@ -69,7 +75,7 @@ services:
             backend:
 
     nginx:
-        image: nginx:1.19-alpine
+        image: nginx:1.23-alpine
         volumes:
             - "${PWD}/config/nginx:/etc/nginx/templates"
             - "${PWD}/src:/var/www/"

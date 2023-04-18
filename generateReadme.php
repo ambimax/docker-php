@@ -17,8 +17,8 @@ class generateReadme
     private array $extensions = [];
 
     private array $debianVersions = [
-        'Bullseye' => 11,
         'Buster' => 10,
+        'Bullseye' => 11,
     ];
 
     /**
@@ -109,7 +109,7 @@ class generateReadme
             $row = [$module];
 
             foreach ($this->phpVersions as $phpVersion) {
-                $row[] = in_array($module, $this->extensions[$phpVersion]) ? ' ✓ ' : ' ';
+                $row[] = in_array($module, $this->extensions[$phpVersion]) ? ' ✓ ' : '';
             }
 
             $tableBuilder->row($row);

@@ -1,7 +1,7 @@
 {
-  "name": "ambimax/php-8.1-alpine3.16",
-  "base_image": "php:8.1-fpm-alpine3.16",
-  "distro": "alpine3.16",
+  "name": "ambimax/php-8.1-alpine3.17",
+  "base_image": "php:8.1-fpm-alpine3.17",
+  "distro": "alpine3.17",
   "tag": "8.1",
   "env": {},
   "php": {

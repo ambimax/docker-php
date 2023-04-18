@@ -15,7 +15,7 @@ setup:
 	rm -f orca.zip
 
 generate: prepare ## Generates all artifacts for this image
-	@php orca.phar --directory=.
+	docker run -v ${PWD}:/opt/project orcabuilder/orca:latest
 	@php generateReadme.php
 	$(MAKE) prettier
 
@@ -27,19 +27,25 @@ prettier:
 # Matrix build
 #
 # Examples:
-#   make VERSION=8.0 VARIANT=alpine3.13 build
-#   make VERSION=7.4 VARIANT=buster test
+#   make VERSION=8.1 VARIANT=alpine3.17 build
+#   make VERSION=8.2 VARIANT=bullseye test
 #
 ##################################################
-VERSION?=8.1
+VERSION?=8.2
 VARIANT?=bullseye
 
 prepare: ## Create missing files for new variants
-	-d template/components/php/$(VERSION)/assets || mkdir -p template/components/php/$(VERSION)/assets
-	-f template/components/php/$(VERSION)/assets/all.nonempty.env || touch template/components/php/$(VERSION)/assets/all.nonempty.env
+	test -d template/components/php/$(VERSION)/assets || mkdir -p template/components/php/$(VERSION)/assets
+	test -f template/components/php/$(VERSION)/assets/all.nonempty.env || touch template/components/php/$(VERSION)/assets/all.nonempty.env
+	test -f template/components/php/$(VERSION)/assets/modules.list || touch template/components/php/$(VERSION)/assets/modules.list
+	test -d template/assets/config/php/$(VERSION)/conf.d || mkdir -p template/assets/config/php/$(VERSION)/conf.d
+	test -f template/assets/config/php/$(VERSION)/conf.d/php.ini || touch template/assets/config/php/$(VERSION)/conf.d/php.ini
 
 build: generate ## Build variant (set env vars VERSION and VARIANT)
 	(cd dist/images/$(VERSION)/$(VARIANT)/ && make build )
+
+force-build: generate ## Build variant (set env vars VERSION and VARIANT)
+	(cd dist/images/$(VERSION)/$(VARIANT)/ && make force-build )
 
 copybuild: generate ## Build image, copy files and rebuild with new files (set env vars VERSION and VARIANT)
 	(cd dist/images/$(VERSION)/$(VARIANT)/ && make build )
@@ -82,6 +88,6 @@ simple-test: ## Test env variables
 		ambimax/php-$(VERSION)-$(VARIANT):latest \
 		php -r 'phpinfo();' | egrep 'error_reporting|display_errors|date.timezone|opcache.error_log'
 
-copy: ## Copy default ENVs from variant for generation (set env vars VERSION and VARIANT)
+copy: prepare ## Copy default ENVs from variant for generation (set env vars VERSION and VARIANT)
 	docker run --rm -v $(PWD):/config ambimax/php-$(VERSION)-$(VARIANT):latest bash -c \
-		"cp -r /usr/local/etc/php/{conf.d,assets} /config/template/components/php/$(VERSION)/"
+		"cp -r /usr/local/etc/php/conf.d /config/template/assets/config/php/$(VERSION)/; cp -r /usr/local/etc/php/assets /config/template/components/php/$(VERSION)/"

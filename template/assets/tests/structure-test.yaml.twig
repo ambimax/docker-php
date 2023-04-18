@@ -72,10 +72,9 @@ commandTests:
       command: "php"
       args: [ "-m" ]
       expectedOutput:
+            ### Default php extensions
             - '[PHP Modules]'
-            - apcu
             - Core
-            - ctype
             - curl
             - date
             - dom
@@ -106,10 +105,15 @@ commandTests:
             - xml
             - xmlreader
             - xmlwriter
-            - Zend OPcache
             - zlib
-            - '[Zend Modules]'
+            ### Custom php extensions
+{% for key, value in php.extensions %}
+{% if value == "opcache" %}
             - Zend OPcache
+{% else %}
+            - {{ value }}
+{% endif %}
+{% endfor %}
 
     - name: "check php sodium version"
       command: php
@@ -123,11 +127,10 @@ commandTests:
       command: "php-fpm"
       args: [ "-m" ]
       expectedOutput:
+            ### Default php extensions
             - '[PHP Modules]'
-            - apcu
             - cgi-fcgi
             - Core
-            - ctype
             - curl
             - date
             - dom
@@ -158,10 +161,15 @@ commandTests:
             - xml
             - xmlreader
             - xmlwriter
-            - Zend OPcache
             - zlib
-            - '[Zend Modules]'
+            ### Custom php extensions
+{% for key, value in php.extensions %}
+{% if value == "opcache" %}
             - Zend OPcache
+{% else %}
+            - {{ value }}
+{% endif %}
+{% endfor %}
 
     - name: "check php-fpm configuration"
       command: "php-fpm"

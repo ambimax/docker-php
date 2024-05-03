@@ -12,6 +12,7 @@
       "calendar",
       "ctype",
       "exif",
+      "ftp",
       "igbinary",
       "lzf",
       "opcache",

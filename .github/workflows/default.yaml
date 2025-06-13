@@ -51,13 +51,13 @@ jobs:
           # We push to the default registry currently. If you want to push to a different registry,
           # uncomment the line below.
           # login-server: ${{ secrets.DOCKER_REGISTRY }}
-          username: ${{ secrets.DOCKER_REG_USERNAME }}
-          password: ${{ secrets.DOCKER_REG_PASSWORD }}
+          username: ${{ secrets.AMBIMAX_DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}
 
       - name: Push image
         if: github.ref == 'refs/heads/v2'
         working-directory: 'dist/images/${{ matrix.WORKDIR }}'
         run: make push
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_REG_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_REG_PASSWORD }}
+          DOCKER_USER: ${{ secrets.AMBIMAX_DOCKER_HUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}

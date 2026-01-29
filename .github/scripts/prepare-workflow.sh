@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Install container structure test
-curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 \
-    && chmod +x container-structure-test-linux-amd64 \
-    && sudo mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
+#curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 \
+#    && chmod +x container-structure-test-linux-amd64 \
+#    && sudo mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
 
 # Clone official docker repo for docker test suite
 git clone https://github.com/docker-library/official-images.git ~/official-images
@@ -13,7 +13,8 @@ wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-build
 
 # Install orca.phar
 curl -O https://orca-build.io/downloads/orca.zip \
-    && unzip -o orca.zip
+    && unzip -o orca.zip \
+    && chmod +x orca.phar
 
 # Install prettier
 npm install --save-dev --save-exact prettier

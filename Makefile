@@ -15,9 +15,7 @@ setup:
 	rm -f orca.zip
 
 generate: prepare ## Generates all artifacts for this image
-	@echo $(PWD)
-	@exit 1
-	@php orca.phar --directory=${PWD}
+	@php orca.phar
 	@php generateReadme.php
 	$(MAKE) prettier
 

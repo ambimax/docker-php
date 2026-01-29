@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-PWD := $(CURDIR)
+PWD := $(shell cd -P -- '$(shell dirname -- "$0")' && pwd -P)
 
 .PHONY: help build
 .DEFAULT_GOAL := help
@@ -15,7 +15,9 @@ setup:
 	rm -f orca.zip
 
 generate: prepare ## Generates all artifacts for this image
-	@php orca.phar --directory=$(PWD)
+	@echo $(PWD)
+	@exit 1
+	@php orca.phar --directory=${PWD}
 	@php generateReadme.php
 	$(MAKE) prettier
 

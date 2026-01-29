@@ -6,8 +6,8 @@ LATEST	= ${NAME}:latest
 ROOT 	= $(shell echo "${PWD}")
 SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variables."
 
-build: create-builder build-image tag-main-version tag-version tag-latest
-force-build: create-builder force-build-image tag-main-version tag-version tag-latest
+build: build-image tag-main-version tag-version tag-latest
+force-build: force-build-image tag-main-version tag-version tag-latest
 
 build-image:
 	@docker buildx build --platform linux/amd64,linux/arm64 --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .

@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-PWD := $(shell cd -P -- '$(shell dirname -- "$0")' && pwd -P)
+PWD := $(CURDIR)
 
 .PHONY: help build
 .DEFAULT_GOAL := help

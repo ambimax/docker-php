@@ -9,10 +9,6 @@ SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variable
 build: create-builder build-image tag-main-version tag-version tag-latest
 force-build: create-builder force-build-image tag-main-version tag-version tag-latest
 
-create-builder:
-	@docker buildx create --name mybuilder
-	@docker buildx use mybuilder
-
 build-image:
 	@docker buildx build --platform linux/amd64,linux/arm64 --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
 

@@ -12,7 +12,6 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        os: [ arm64-runner, ubuntu-latest ]
         WORKDIR:
           - 8.0/alpine3.16
           - 8.0/bullseye
@@ -21,7 +20,7 @@ jobs:
           - 8.1/bullseye
           - 8.2/alpine3.17
           - 8.2/bullseye
-    runs-on: ${{ matrix.os }}
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

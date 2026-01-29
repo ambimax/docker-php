@@ -15,7 +15,7 @@ setup:
 	rm -f orca.zip
 
 generate: prepare ## Generates all artifacts for this image
-	@php orca.phar --directory=${PWD}
+	docker run -v ${PWD}:/opt/project orcabuilder/orca:latest
 	@php generateReadme.php
 	$(MAKE) prettier
 

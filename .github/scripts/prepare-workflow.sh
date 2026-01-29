@@ -14,6 +14,7 @@ wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-build
 # Install orca.phar
 curl -O https://orca-build.io/downloads/orca.zip \
     && unzip -o orca.zip
+    && chmod +x orca.phar
 
 # Install prettier
 npm install --save-dev --save-exact prettier

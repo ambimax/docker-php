@@ -58,7 +58,7 @@ jobs:
       - name: Push image
         #        if: github.ref == 'refs/heads/v2'
         working-directory: 'dist/images/${{ matrix.WORKDIR }}'
-        run: make push
+        run: make push-image
         env:
           DOCKER_USER: ${{ secrets.AMBIMAX_DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}

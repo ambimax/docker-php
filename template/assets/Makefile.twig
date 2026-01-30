@@ -11,10 +11,10 @@ build: build-image tag-main-version tag-version
 force-build: force-build-image tag-main-version tag-version
 
 build-image:
-	@docker build --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
+	@docker build --provenance=false --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
 
 force-build-image:
-	@docker build --no-cache --pull --progress plain -t "${IMG}" .
+	@docker build --provenance=false --no-cache --pull --progress plain -t "${IMG}" .
 
 tag-latest:
 	docker tag ${IMG} ${LATEST}

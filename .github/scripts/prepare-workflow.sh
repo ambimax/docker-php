@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo $RUNNER_NAME
+echo $RUNNER_ARCH
+
+exit 0
 # Install container structure test
 curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-arm64 \
     && chmod +x container-structure-test-linux-arm64 \

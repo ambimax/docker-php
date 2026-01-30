@@ -13,13 +13,13 @@ jobs:
     strategy:
       matrix:
         WORKDIR:
-          #          - 8.0/alpine3.16
+                    - 8.0/alpine3.16
           #          - 8.0/bullseye
           #          - 8.1/alpine3.16
           #          - 8.1/alpine3.17
           #          - 8.1/bullseye
           #          - 8.2/alpine3.17
-          - 8.2/bullseye
+          #          - 8.2/bullseye
         os: [ubuntu-latest, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:

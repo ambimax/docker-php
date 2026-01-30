@@ -20,7 +20,8 @@ jobs:
 #          - 8.1/bullseye
 #          - 8.2/alpine3.17
           - 8.2/bullseye
-    runs-on: [ubuntu-latest, self-hosted]
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

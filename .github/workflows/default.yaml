@@ -20,7 +20,7 @@ jobs:
           - 8.1/bullseye
           - 8.2/alpine3.17
           - 8.2/bullseye
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

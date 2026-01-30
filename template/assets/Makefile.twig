@@ -1,3 +1,4 @@
+ARCH 	= $(shell uname -m)
 NAME	= {{ name }}
 {# TAG		= $(shell git rev-parse --short HEAD) #}
 TAG     = {{ tag }}
@@ -5,13 +6,9 @@ IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
 ROOT 	= $(shell echo "${PWD}")
 SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variables."
-ARCH 	= $(shell uname -m)
 
-build: build-image tag-main-version tag-version tag-latest
-force-build: force-build-image tag-main-version tag-version tag-latest
-
-show-arch:
-	echo ${ARCH}
+build: build-image tag-main-version tag-version
+force-build: force-build-image tag-main-version tag-version
 
 build-image:
 	@docker build --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
@@ -24,11 +21,11 @@ tag-latest:
 
 tag-version:
 	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6))
-	docker tag "${IMG}" "$($@_PHP_TAG)"
+	docker tag "${IMG}" "$($@_PHP_TAG)-${ARCH}"
 
 tag-main-version:
 	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3))
-	docker tag "${IMG}" "$($@_PHP_TAG)"
+	docker tag "${IMG}" "$($@_PHP_TAG)-${ARCH}"
 
 test:
 	container-structure-test test --image "${IMG}" --config tests/structure-test.yaml

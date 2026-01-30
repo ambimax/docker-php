@@ -5,9 +5,13 @@ IMG		= ${NAME}:${TAG}
 LATEST	= ${NAME}:latest
 ROOT 	= $(shell echo "${PWD}")
 SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variables."
+ARCH 	= $(shell uname -m)
 
 build: build-image tag-main-version tag-version tag-latest
 force-build: force-build-image tag-main-version tag-version tag-latest
+
+show-arch:
+	echo ${ARCH}
 
 build-image:
 	@docker build --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .

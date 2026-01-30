@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-echo $RUNNER_NAME
-echo $RUNNER_ARCH
+SYSTEM=$([ "$RUNNER_ARCH" = "ARM64" ] && echo "arm64" || echo "amd64")
 
-exit 0
 # Install container structure test
-curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-arm64 \
-    && chmod +x container-structure-test-linux-arm64 \
-    && sudo mv container-structure-test-linux-arm64 /usr/local/bin/container-structure-test
+curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-"${SYSTEM}" \
+    && chmod +x container-structure-test-linux-"${SYSTEM}" \
+    && sudo mv container-structure-test-linux-"${SYSTEM}" /usr/local/bin/container-structure-test
 
 # Clone official docker repo for docker test suite
 git clone https://github.com/docker-library/official-images.git ~/official-images

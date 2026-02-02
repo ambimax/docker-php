@@ -65,6 +65,7 @@ jobs:
 
   build-manifests:
     runs-on: ubuntu-latest
+    continue-on-error: true
     strategy:
       matrix:
         REPOSITORY:

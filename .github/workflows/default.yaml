@@ -3,24 +3,22 @@ name: Test Suite
 on:
   push:
   workflow_dispatch:
-  schedule:
-    # Update docker images at 04:25 on Mondays
-    - cron: '25 4 * * 1'
 
 jobs:
-  dockerfile-test:
+  build-images:
     timeout-minutes: 20
     strategy:
       matrix:
         WORKDIR:
-          - 8.0/alpine3.16
-          - 8.0/bullseye
-          - 8.1/alpine3.16
-          - 8.1/alpine3.17
-          - 8.1/bullseye
-          - 8.2/alpine3.17
-          - 8.2/bullseye
-    runs-on: ubuntu-latest
+            - 8.0/alpine3.16
+            - 8.0/bullseye
+            - 8.1/alpine3.16
+            - 8.1/alpine3.17
+            - 8.1/bullseye
+            - 8.2/alpine3.17
+            - 8.2/bullseye
+        os: [ubuntu-latest, self-hosted]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -57,7 +55,65 @@ jobs:
       - name: Push image
         if: github.ref == 'refs/heads/v2'
         working-directory: 'dist/images/${{ matrix.WORKDIR }}'
-        run: make push
+        run: make push-image
         env:
           DOCKER_USER: ${{ secrets.AMBIMAX_DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}
+
+  build-manifests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: true
+    needs: build-images
+    if: github.ref == 'refs/heads/v2'
+    strategy:
+      matrix:
+        REPOSITORY:
+          - php-8.0-alpine3.16
+          - php-8.0-bullseye
+          - php-8.1-alpine3.16
+          - php-8.1-alpine3.17
+          - php-8.1-bullseye
+          - php-8.2-alpine3.17
+          - php-8.2-bullseye
+    steps:
+      - name: Login to Docker Registry
+        uses: docker/login-action@v1
+        with:
+          # We push to the default registry currently. If you want to push to a different registry,
+          # uncomment the line below.
+          # login-server: ${{ secrets.DOCKER_REGISTRY }}
+          username: ${{ secrets.AMBIMAX_DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}
+
+      - name: Build and push artifact
+        env:
+          REGISTRY: ambimax/${{ matrix.REPOSITORY }}
+        run: |
+          PHP_VERSION=$(echo "$REGISTRY" | awk -F'-' '{print $2}')
+
+          while read -r TAG; do
+            case "$TAG" in
+              *arm64|*aarch64)
+                ARM_TAG="$TAG"
+                ;;
+              *amd64|*x86_64)
+                AMD_TAG="$TAG"
+                ;;
+            esac
+          done < <(
+            curl -s "https://registry.hub.docker.com/v2/repositories/${REGISTRY}/tags?page_size=100" \
+            | jq -r '.results[].name' \
+            | grep "^$VERSION"
+          )
+
+          if [[ -z "$AMD_TAG" || -z "$ARM_TAG" ]]; then
+            echo "Missing docker images for artifact, registry: $REGISTRY"
+            exit 1
+          fi
+
+          docker manifest create --amend ${REGISTRY}:latest \
+          ${REGISTRY}:${AMD_TAG} \
+          ${REGISTRY}:${ARM_TAG}
+
+          docker manifest push ${REGISTRY}:latest

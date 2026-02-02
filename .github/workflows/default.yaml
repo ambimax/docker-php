@@ -3,10 +3,7 @@ name: Test Suite
 on:
   push:
   workflow_dispatch:
-  schedule:
-    # Update docker images at 04:25 on Mondays
-    - cron: '25 4 * * 1'
-
+  
 jobs:
   dockerfile-test:
     timeout-minutes: 20

@@ -28,8 +28,13 @@ tag-main-version:
 	docker tag "${IMG}" "$($@_PHP_TAG)-${ARCH}"
 
 create-version-manifest:
-	echo ${ARCH}
-	$(eval VERSION := $(shell docker run --rm ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6))
+	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6))
+
+	docker manifest create --amend $($@_PHP_TAG) \
+	$($@_PHP_TAG)-arm \
+	$($@_PHP_TAG)-amd \
+
+	docker manifest push $($@_PHP_TAG)
 
 
 show-version:

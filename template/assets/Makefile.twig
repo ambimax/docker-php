@@ -1,4 +1,4 @@
-ARCH 	= $(shell uname -m)
+ARCH := $(shell uname -m | grep -qE 'x86_64|amd64' && echo amd || echo arm)
 NAME	= {{ name }}
 {# TAG		= $(shell git rev-parse --short HEAD) #}
 TAG     = {{ tag }}
@@ -9,6 +9,7 @@ SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variable
 
 build: build-image tag-main-version tag-version
 force-build: force-build-image tag-main-version tag-version
+create-manifests: create-version-manifest create-latest-manifest
 
 build-image:
 	@docker build --provenance=false --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
@@ -26,6 +27,24 @@ tag-version:
 tag-main-version:
 	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3))
 	docker tag "${IMG}" "$($@_PHP_TAG)-${ARCH}"
+
+create-version-manifest:
+	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6))
+
+	docker manifest create --amend $($@_PHP_TAG) \
+	$($@_PHP_TAG)-arm \
+	$($@_PHP_TAG)-amd \
+
+	docker manifest push $($@_PHP_TAG)
+
+create-latest-manifest:
+	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3))
+
+	docker manifest create --amend ${LATEST} \
+	$($@_PHP_TAG)-arm \
+	$($@_PHP_TAG)-amd \
+
+	docker manifest push ${LATEST}
 
 test:
 	container-structure-test test --image "${IMG}" --config tests/structure-test.yaml

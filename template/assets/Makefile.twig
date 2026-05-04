@@ -9,6 +9,7 @@ SHORT_DESCRIPTION = "PHP Docker Image fully configurable by environment variable
 
 build: build-image tag-main-version tag-version
 force-build: force-build-image tag-main-version tag-version
+create-manifests: create-version-manifest create-latest-manifest
 
 build-image:
 	@docker build --provenance=false --pull --cache-from "${NAME}" --progress plain -t "${IMG}" .
@@ -36,25 +37,14 @@ create-version-manifest:
 
 	docker manifest push $($@_PHP_TAG)
 
+create-latest-manifest:
+	$(eval $@_PHP_TAG := ${NAME}:$(shell docker run ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-3))
 
-show-version:
-	echo $ARCH
-	$(eval VERSION := $(shell docker run --rm ${IMG} php --version | head -n 1 | cut -d ' ' -f2 | cut -c1-6))
-	@ARM_TAG=""; AMD_TAG=""; \
-	TAG_LIST=$$(curl -s "https://registry.hub.docker.com/v2/repositories/${NAME}/tags?page_size=100" | jq -r '.results[].name' | grep "^$(VERSION)"); \
-		for TAG in $$TAG_LIST; do \
-			case "$$TAG" in \
-			*arm64|*aarch64) ARM_TAG="$$TAG" ;; \
-			*amd64|*x86_64) AMD_TAG="$$TAG" ;; \
-		esac; \
-	done; \
-	if [ -n "$$ARM_TAG" ] && [ -n "$$AMD_TAG" ]; then \
-		echo "$$ARM_TAG"; \
-		echo "$$AMD_TAG"; \
-	else \
-		echo "Fehler: Tags nicht vollständig gefunden (ARM: $$ARM_TAG, AMD: $$AMD_TAG)"; \
-		exit 1; \
-	fi
+	docker manifest create --amend ${LATEST} \
+	$($@_PHP_TAG)-arm \
+	$($@_PHP_TAG)-amd \
+	
+	docker manifest push ${LATEST}
 
 test:
 	container-structure-test test --image "${IMG}" --config tests/structure-test.yaml

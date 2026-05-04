@@ -43,7 +43,7 @@ create-latest-manifest:
 	docker manifest create --amend ${LATEST} \
 	$($@_PHP_TAG)-arm \
 	$($@_PHP_TAG)-amd \
-	
+
 	docker manifest push ${LATEST}
 
 test:

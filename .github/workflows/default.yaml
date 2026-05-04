@@ -11,9 +11,9 @@ jobs:
       matrix:
         WORKDIR:
           - 8.1/alpine3.22
-        #          - 8.1/bullseye
-        #          - 8.2/alpine3.23
-        #          - 8.2/bullseye
+          - 8.1/bullseye
+          - 8.2/alpine3.23
+          - 8.2/bullseye
         os: [ubuntu-latest, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
@@ -40,7 +40,7 @@ jobs:
         run: docker images
 
       - name: Login to Docker Registry
-       # if: github.ref == 'refs/heads/v2'
+        if: github.ref == 'refs/heads/v2'
         uses: docker/login-action@v1
         with:
           # We push to the default registry currently. If you want to push to a different registry,
@@ -50,7 +50,7 @@ jobs:
           password: ${{ secrets.AMBIMAX_DOCKER_HUB_PASSWORD }}
 
       - name: Push image
-       # if: github.ref == 'refs/heads/v2'
+        if: github.ref == 'refs/heads/v2'
         working-directory: 'dist/images/${{ matrix.WORKDIR }}'
         run: make push-image
         env:
@@ -60,13 +60,14 @@ jobs:
   push-manifests:
     runs-on: ubuntu-latest
     needs: build-images
+    if: github.ref == 'refs/heads/v2'
     strategy:
       matrix:
         WORKDIR:
           - 8.1/alpine3.22
-        #          - 8.1/bullseye
-        #          - 8.2/alpine3.23
-        #          - 8.2/bullseye
+          - 8.1/bullseye
+          - 8.2/alpine3.23
+          - 8.2/bullseye
     timeout-minutes: 20
     steps:
       - name: Checkout repository

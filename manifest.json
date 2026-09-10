@@ -1,7 +1,7 @@
 {
   "images": {
-    "8.1": ["8.1/bullseye:bullseye", "8.1/alpine3.22:alpine3.22"],
-    "8.2": ["8.2/bullseye:bullseye", "8.2/alpine3.23:alpine3.23", "8.2/trixie:trixie"]
+    "8.1": ["8.1/alpine3.22:alpine3.22"],
+    "8.2": ["8.2/alpine3.23:alpine3.23", "8.2/trixie:trixie"]
   },
   "shared_assets": "template/assets",
   "shared_variables": "template/variables.json",

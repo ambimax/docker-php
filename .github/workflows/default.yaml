@@ -10,7 +10,6 @@ jobs:
     strategy:
       matrix:
         WORKDIR:
-          - 8.1/alpine3.22
           - 8.2/alpine3.23
           - 8.2/trixie
         os: [ubuntu-latest, self-hosted]
@@ -63,7 +62,6 @@ jobs:
     strategy:
       matrix:
         WORKDIR:
-          - 8.1/alpine3.22
           - 8.2/alpine3.23
           - 8.2/trixie
     timeout-minutes: 20

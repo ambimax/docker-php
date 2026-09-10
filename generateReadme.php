@@ -18,6 +18,7 @@ class generateReadme
 
     private array $debianVersions = [
         'Bullseye' => 11,
+        'Trixie' => 13
     ];
 
     /**

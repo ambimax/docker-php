@@ -10,10 +10,8 @@ jobs:
     strategy:
       matrix:
         WORKDIR:
-          - 8.1/alpine3.22
-          - 8.1/bullseye
           - 8.2/alpine3.23
-          - 8.2/bullseye
+          - 8.2/trixie
         os: [ubuntu-latest, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
@@ -64,10 +62,8 @@ jobs:
     strategy:
       matrix:
         WORKDIR:
-          - 8.1/alpine3.22
-          - 8.1/bullseye
           - 8.2/alpine3.23
-          - 8.2/bullseye
+          - 8.2/trixie
     timeout-minutes: 20
     steps:
       - name: Checkout repository

@@ -14,9 +14,11 @@ git clone https://github.com/docker-library/official-images.git ~/official-image
 wget -qO- 'https://github.com/tianon/pgp-happy-eyeballs/raw/master/hack-my-builds.sh' | bash
 
 # Install orca.phar
-curl -O https://orca-build.io/downloads/orca.zip \
-    && unzip -o orca.zip \
-    && chmod +x orca.phar
+#curl -O https://orca-build.io/downloads/orca.zip \
+#    && unzip -o orca.zip \
+#    && chmod +x orca.phar
+
+unzip -o orca.zip && chmod +x orca.phar
 
 # Install prettier
 npm install --save-dev --save-exact prettier

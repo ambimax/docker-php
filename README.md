@@ -13,11 +13,6 @@ Currently supported Frameworks and Apps:
 
 ## Docker Images on hub.docker.com
 
-### PHP 8.1
-| Distro      | Image                                                                             |
-|-------------|-----------------------------------------------------------------------------------|
-| Alpine 3.22 | [ambimax/php-8.1-alpine3.22](https://hub.docker.com/r/ambimax/php-8.1-alpine3.22) |
-
 ### PHP 8.2
 | Distro        | Image                                                                             |
 |---------------|-----------------------------------------------------------------------------------|
@@ -36,7 +31,6 @@ Currently supported Frameworks and Apps:
 
 | PHP Version | Link                                                                                     |
 |-------------|------------------------------------------------------------------------------------------|
-| 8.1         | [template/components/php/8.1/assets/all.env](template/components/php/8.1/assets/all.env) |
 | 8.2         | [template/components/php/8.2/assets/all.env](template/components/php/8.2/assets/all.env) |
 | 8.3         | [template/components/php/8.3/assets/all.env](template/components/php/8.3/assets/all.env) |
 
@@ -45,71 +39,69 @@ Currently supported Frameworks and Apps:
 
 | Name          | End Of Life |
 |---------------|-------------|
-| PHP 8.1       | 2025-12-31  |
 | PHP 8.2       | 2026-12-31  |
 | PHP 8.3       | 2027-12-31  |
-| Alpine 3.22   | 2027-05-01  |
 | Alpine 3.23   | 2027-11-01  |
 | Debian Trixie | 2030-06-30  |
 
 
 ## Installed php extensions
 
-| PHP Module   | 8.1   | 8.2   | 8.3   |
-|--------------|-------|-------|-------|
-| apcu         |  ✓  |  ✓  |  ✓  |
-| bcmath       |  ✓  |  ✓  |  ✓  |
-| calendar     |  ✓  |  ✓  |  ✓  |
-| Core         |  ✓  |  ✓  |  ✓  |
-| ctype        |  ✓  |  ✓  |  ✓  |
-| curl         |  ✓  |  ✓  |  ✓  |
-| date         |  ✓  |  ✓  |  ✓  |
-| dom          |  ✓  |  ✓  |  ✓  |
-| exif         |  ✓  |  ✓  |  ✓  |
-| fileinfo     |  ✓  |  ✓  |  ✓  |
-| filter       |  ✓  |  ✓  |  ✓  |
-| ftp          |  ✓  |  ✓  |  ✓  |
-| gd           |  ✓  |  ✓  |  ✓  |
-| gettext      |  ✓  |  ✓  |  ✓  |
-| gmp          |  ✓  |  ✓  |  ✓  |
-| hash         |  ✓  |  ✓  |  ✓  |
-| iconv        |  ✓  |  ✓  |  ✓  |
-| igbinary     |  ✓  |  ✓  |  ✓  |
-| intl         |  ✓  |  ✓  |  ✓  |
-| json         |  ✓  |  ✓  |  ✓  |
-| libxml       |  ✓  |  ✓  |  ✓  |
-| lzf          |  ✓  |  ✓  |  ✓  |
-| mbstring     |  ✓  |  ✓  |  ✓  |
-| memcached    |  ✓  |  ✓  |  ✓  |
-| mysqlnd      |  ✓  |  ✓  |  ✓  |
-| openssl      |  ✓  |  ✓  |  ✓  |
-| pcre         |  ✓  |  ✓  |  ✓  |
-| PDO          |  ✓  |  ✓  |  ✓  |
-| pdo_mysql    |  ✓  |  ✓  |  ✓  |
-| pdo_sqlite   |  ✓  |  ✓  |  ✓  |
-| Phar         |  ✓  |  ✓  |  ✓  |
-| posix        |  ✓  |  ✓  |  ✓  |
-| random       |       |  ✓  |  ✓  |
-| readline     |  ✓  |  ✓  |  ✓  |
-| redis        |  ✓  |  ✓  |  ✓  |
-| Reflection   |  ✓  |  ✓  |  ✓  |
-| session      |  ✓  |  ✓  |  ✓  |
-| SimpleXML    |  ✓  |  ✓  |  ✓  |
-| soap         |  ✓  |  ✓  |  ✓  |
-| sockets      |  ✓  |  ✓  |  ✓  |
-| sodium       |  ✓  |  ✓  |  ✓  |
-| SPL          |  ✓  |  ✓  |  ✓  |
-| sqlite3      |  ✓  |  ✓  |  ✓  |
-| standard     |  ✓  |  ✓  |  ✓  |
-| tokenizer    |  ✓  |  ✓  |  ✓  |
-| xml          |  ✓  |  ✓  |  ✓  |
-| xmlreader    |  ✓  |  ✓  |  ✓  |
-| xmlrpc       |  ✓  |  ✓  |  ✓  |
-| xmlwriter    |  ✓  |  ✓  |  ✓  |
-| xsl          |  ✓  |  ✓  |  ✓  |
-| Zend OPcache |  ✓  |  ✓  |  ✓  |
-| zip          |  ✓  |  ✓  |  ✓  |
-| zlib         |  ✓  |  ✓  |  ✓  |
+| PHP Module   | 8.2   | 8.3   |
+|--------------|-------|-------|
+| apcu         |  ✓  |  ✓  |
+| bcmath       |  ✓  |  ✓  |
+| calendar     |  ✓  |  ✓  |
+| Core         |  ✓  |  ✓  |
+| ctype        |  ✓  |  ✓  |
+| curl         |  ✓  |  ✓  |
+| date         |  ✓  |  ✓  |
+| dom          |  ✓  |  ✓  |
+| exif         |  ✓  |  ✓  |
+| fileinfo     |  ✓  |  ✓  |
+| filter       |  ✓  |  ✓  |
+| ftp          |  ✓  |  ✓  |
+| gd           |  ✓  |  ✓  |
+| gettext      |  ✓  |  ✓  |
+| gmp          |  ✓  |  ✓  |
+| hash         |  ✓  |  ✓  |
+| iconv        |  ✓  |  ✓  |
+| igbinary     |  ✓  |  ✓  |
+| intl         |  ✓  |  ✓  |
+| json         |  ✓  |  ✓  |
+| libxml       |  ✓  |  ✓  |
+| lzf          |  ✓  |  ✓  |
+| mbstring     |  ✓  |  ✓  |
+| memcached    |  ✓  |  ✓  |
+| mysqlnd      |  ✓  |  ✓  |
+| openssl      |  ✓  |  ✓  |
+| pcre         |  ✓  |  ✓  |
+| PDO          |  ✓  |  ✓  |
+| pdo_mysql    |  ✓  |  ✓  |
+| pdo_sqlite   |  ✓  |  ✓  |
+| Phar         |  ✓  |  ✓  |
+| posix        |  ✓  |  ✓  |
+| random       |  ✓  |  ✓  |
+| readline     |  ✓  |  ✓  |
+| redis        |  ✓  |  ✓  |
+| Reflection   |  ✓  |  ✓  |
+| session      |  ✓  |  ✓  |
+| SimpleXML    |  ✓  |  ✓  |
+| soap         |  ✓  |  ✓  |
+| sockets      |  ✓  |  ✓  |
+| sodium       |  ✓  |  ✓  |
+| SPL          |  ✓  |  ✓  |
+| sqlite3      |  ✓  |  ✓  |
+| standard     |  ✓  |  ✓  |
+| tokenizer    |  ✓  |  ✓  |
+| xml          |  ✓  |  ✓  |
+| xmlreader    |  ✓  |  ✓  |
+| xmlrpc       |  ✓  |  ✓  |
+| xmlwriter    |  ✓  |  ✓  |
+| xsl          |  ✓  |  ✓  |
+| Zend OPcache |  ✓  |  ✓  |
+| zip          |  ✓  |  ✓  |
+| zlib         |  ✓  |  ✓  |
 
 
 ## Docker Examples

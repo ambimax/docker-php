@@ -6,113 +6,103 @@ New generation of php containers. All settings can be adjusted on the fly by ENV
 
 Currently supported Frameworks and Apps:
 
--   Symfony
--   Shopware 6
--   Open Mage / Magento 1
--   Magento 2
+- Symfony
+- Shopware 6
+- Open Mage / Magento 1
+- Magento 2
 
 ## Docker Images on hub.docker.com
 
-### PHP 8.0
-
-| Distro          | Image                                                                             |
-| --------------- | --------------------------------------------------------------------------------- |
-| Alpine 3.16     | [ambimax/php-8.0-alpine3.16](https://hub.docker.com/r/ambimax/php-8.0-alpine3.16) |
-| Debian Bullseye | [ambimax/php-8.0-bullseye](https://hub.docker.com/r/ambimax/php-8.0-bullseye)     |
-
-### PHP 8.1
-
-| Distro          | Image                                                                             |
-| --------------- | --------------------------------------------------------------------------------- |
-| Alpine 3.16     | [ambimax/php-8.1-alpine3.16](https://hub.docker.com/r/ambimax/php-8.1-alpine3.16) |
-| Alpine 3.17     | [ambimax/php-8.1-alpine3.17](https://hub.docker.com/r/ambimax/php-8.1-alpine3.17) |
-| Debian Bullseye | [ambimax/php-8.1-bullseye](https://hub.docker.com/r/ambimax/php-8.1-bullseye)     |
-
 ### PHP 8.2
+| Distro        | Image                                                                             |
+|---------------|-----------------------------------------------------------------------------------|
+| Alpine 3.23   | [ambimax/php-8.2-alpine3.23](https://hub.docker.com/r/ambimax/php-8.2-alpine3.23) |
+| Debian Trixie | [ambimax/php-8.2-trixie](https://hub.docker.com/r/ambimax/php-8.2-trixie)         |
 
-| Distro          | Image                                                                             |
-| --------------- | --------------------------------------------------------------------------------- |
-| Alpine 3.17     | [ambimax/php-8.2-alpine3.17](https://hub.docker.com/r/ambimax/php-8.2-alpine3.17) |
-| Debian Bullseye | [ambimax/php-8.2-bullseye](https://hub.docker.com/r/ambimax/php-8.2-bullseye)     |
+### PHP 8.3
+| Distro        | Image                                                                     |
+|---------------|---------------------------------------------------------------------------|
+| Debian Trixie | [ambimax/php-8.3-trixie](https://hub.docker.com/r/ambimax/php-8.3-trixie) |
+
 
 **Older images** can be found on https://hub.docker.com/u/ambimax
 
 ## Environment Variables
 
 | PHP Version | Link                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| 8.0         | [template/components/php/8.0/assets/all.env](template/components/php/8.0/assets/all.env) |
-| 8.1         | [template/components/php/8.1/assets/all.env](template/components/php/8.1/assets/all.env) |
+|-------------|------------------------------------------------------------------------------------------|
 | 8.2         | [template/components/php/8.2/assets/all.env](template/components/php/8.2/assets/all.env) |
+| 8.3         | [template/components/php/8.3/assets/all.env](template/components/php/8.3/assets/all.env) |
+
 
 ## End Of Life
 
-| Name            | End Of Life |
-| --------------- | ----------- |
-| PHP 8.0         | 2023-11-26  |
-| PHP 8.1         | 2024-11-25  |
-| PHP 8.2         | 2025-12-08  |
-| Alpine 3.16     | 2024-05-23  |
-| Alpine 3.17     | 2024-11-22  |
-| Debian Bullseye | 2024-07-01  |
+| Name          | End Of Life |
+|---------------|-------------|
+| PHP 8.2       | 2026-12-31  |
+| PHP 8.3       | 2027-12-31  |
+| Alpine 3.23   | 2027-11-01  |
+| Debian Trixie | 2030-06-30  |
+
 
 ## Installed php extensions
 
-| PHP Module   | 8.0 | 8.1 | 8.2 |
-| ------------ | --- | --- | --- |
-| apcu         | ✓   | ✓   | ✓   |
-| bcmath       | ✓   | ✓   | ✓   |
-| calendar     | ✓   | ✓   | ✓   |
-| Core         | ✓   | ✓   | ✓   |
-| ctype        | ✓   | ✓   | ✓   |
-| curl         | ✓   | ✓   | ✓   |
-| date         | ✓   | ✓   | ✓   |
-| dom          | ✓   | ✓   | ✓   |
-| exif         | ✓   | ✓   | ✓   |
-| fileinfo     | ✓   | ✓   | ✓   |
-| filter       | ✓   | ✓   | ✓   |
-| ftp          | ✓   | ✓   | ✓   |
-| gd           | ✓   | ✓   | ✓   |
-| gettext      | ✓   | ✓   | ✓   |
-| gmp          | ✓   | ✓   | ✓   |
-| hash         | ✓   | ✓   | ✓   |
-| iconv        | ✓   | ✓   | ✓   |
-| igbinary     | ✓   | ✓   | ✓   |
-| intl         | ✓   | ✓   | ✓   |
-| json         | ✓   | ✓   | ✓   |
-| libxml       | ✓   | ✓   | ✓   |
-| lzf          | ✓   | ✓   | ✓   |
-| mbstring     | ✓   | ✓   | ✓   |
-| memcached    | ✓   | ✓   | ✓   |
-| mysqlnd      | ✓   | ✓   | ✓   |
-| openssl      | ✓   | ✓   | ✓   |
-| pcre         | ✓   | ✓   | ✓   |
-| PDO          | ✓   | ✓   | ✓   |
-| pdo_mysql    | ✓   | ✓   | ✓   |
-| pdo_sqlite   | ✓   | ✓   | ✓   |
-| Phar         | ✓   | ✓   | ✓   |
-| posix        | ✓   | ✓   | ✓   |
-| random       |     |     | ✓   |
-| readline     | ✓   | ✓   | ✓   |
-| redis        | ✓   | ✓   | ✓   |
-| Reflection   | ✓   | ✓   | ✓   |
-| session      | ✓   | ✓   | ✓   |
-| SimpleXML    | ✓   | ✓   | ✓   |
-| soap         | ✓   | ✓   | ✓   |
-| sockets      | ✓   | ✓   | ✓   |
-| sodium       | ✓   | ✓   | ✓   |
-| SPL          | ✓   | ✓   | ✓   |
-| sqlite3      | ✓   | ✓   | ✓   |
-| standard     | ✓   | ✓   | ✓   |
-| tokenizer    | ✓   | ✓   | ✓   |
-| xml          | ✓   | ✓   | ✓   |
-| xmlreader    | ✓   | ✓   | ✓   |
-| xmlrpc       | ✓   | ✓   | ✓   |
-| xmlwriter    | ✓   | ✓   | ✓   |
-| xsl          | ✓   | ✓   | ✓   |
-| Zend OPcache | ✓   | ✓   | ✓   |
-| zip          | ✓   | ✓   | ✓   |
-| zlib         | ✓   | ✓   | ✓   |
+| PHP Module   | 8.2   | 8.3   |
+|--------------|-------|-------|
+| apcu         |  ✓  |  ✓  |
+| bcmath       |  ✓  |  ✓  |
+| calendar     |  ✓  |  ✓  |
+| Core         |  ✓  |  ✓  |
+| ctype        |  ✓  |  ✓  |
+| curl         |  ✓  |  ✓  |
+| date         |  ✓  |  ✓  |
+| dom          |  ✓  |  ✓  |
+| exif         |  ✓  |  ✓  |
+| fileinfo     |  ✓  |  ✓  |
+| filter       |  ✓  |  ✓  |
+| ftp          |  ✓  |  ✓  |
+| gd           |  ✓  |  ✓  |
+| gettext      |  ✓  |  ✓  |
+| gmp          |  ✓  |  ✓  |
+| hash         |  ✓  |  ✓  |
+| iconv        |  ✓  |  ✓  |
+| igbinary     |  ✓  |  ✓  |
+| intl         |  ✓  |  ✓  |
+| json         |  ✓  |  ✓  |
+| libxml       |  ✓  |  ✓  |
+| lzf          |  ✓  |  ✓  |
+| mbstring     |  ✓  |  ✓  |
+| memcached    |  ✓  |  ✓  |
+| mysqlnd      |  ✓  |  ✓  |
+| openssl      |  ✓  |  ✓  |
+| pcre         |  ✓  |  ✓  |
+| PDO          |  ✓  |  ✓  |
+| pdo_mysql    |  ✓  |  ✓  |
+| pdo_sqlite   |  ✓  |  ✓  |
+| Phar         |  ✓  |  ✓  |
+| posix        |  ✓  |  ✓  |
+| random       |  ✓  |  ✓  |
+| readline     |  ✓  |  ✓  |
+| redis        |  ✓  |  ✓  |
+| Reflection   |  ✓  |  ✓  |
+| session      |  ✓  |  ✓  |
+| SimpleXML    |  ✓  |  ✓  |
+| soap         |  ✓  |  ✓  |
+| sockets      |  ✓  |  ✓  |
+| sodium       |  ✓  |  ✓  |
+| SPL          |  ✓  |  ✓  |
+| sqlite3      |  ✓  |  ✓  |
+| standard     |  ✓  |  ✓  |
+| tokenizer    |  ✓  |  ✓  |
+| xml          |  ✓  |  ✓  |
+| xmlreader    |  ✓  |  ✓  |
+| xmlrpc       |  ✓  |  ✓  |
+| xmlwriter    |  ✓  |  ✓  |
+| xsl          |  ✓  |  ✓  |
+| Zend OPcache |  ✓  |  ✓  |
+| zip          |  ✓  |  ✓  |
+| zlib         |  ✓  |  ✓  |
+
 
 ## Docker Examples
 
@@ -236,25 +226,25 @@ PHP_APC_SERIALIZER: igbinary
 
 ## Improvements
 
--   Syntaxhighlighting in nano
--   Colored bash prompt (not yet in alpine)
+- Syntaxhighlighting in nano
+- Colored bash prompt (not yet in alpine)
 
 ## Changelog to v1 docker images
 
--   No cli container
--   No /tools
--   Removed php modules
-    -   mysqli
-    -   pdo_pgsql
-    -   pgsql
-    -   tidy
+- No cli container
+- No /tools
+- Removed php modules
+    - mysqli
+    - pdo_pgsql
+    - pgsql
+    - tidy
 
 ## Tools used for image building
 
--   [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test)
--   [healthcheck](https://github.com/renatomefi/php-fpm-healthcheck)
--   [Orca](https://github.com/orca-build/orca)
--   [Docker PHP Extension Installer](https://github.com/mlocati/docker-php-extension-installer)
+- [Container Structure Test](https://github.com/GoogleContainerTools/container-structure-test)
+- [healthcheck](https://github.com/renatomefi/php-fpm-healthcheck)
+- [Orca](https://github.com/orca-build/orca)
+- [Docker PHP Extension Installer](https://github.com/mlocati/docker-php-extension-installer)
 
 ## Updating this README.md
 

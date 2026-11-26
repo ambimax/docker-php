@@ -12,6 +12,7 @@ jobs:
         WORKDIR:
           - 8.2/alpine3.23
           - 8.2/trixie
+          - 8.3/trixie
         os: [ubuntu-latest, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
@@ -64,6 +65,7 @@ jobs:
         WORKDIR:
           - 8.2/alpine3.23
           - 8.2/trixie
+          - 8.3/trixie
     timeout-minutes: 20
     steps:
       - name: Checkout repository
